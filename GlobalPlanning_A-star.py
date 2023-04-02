@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-A* grid planning
-author: Atsushi Sakai(@Atsushi_twi)
-        Nikos Kanargias (nkana@tee.gr)
-See Wikipedia article (https://en.wikipedia.org/wiki/A*_search_algorithm)
-""" 
-
 
 import math
 
@@ -282,8 +275,8 @@ def main(args=None):
     print(__file__ + " start!!")
     rclpy.init(args=args)
     # start and goal position
-    sx = 70.0  # [m]
-    sy = 70.0  # [m]
+    sx = 3.95/0.05000000074505806  # [m]
+    sy = 3.8/0.05000000074505806 # [m]
     gx = 20.0  # [m]
     gy = 60.0  # [m]
 
