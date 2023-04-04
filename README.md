@@ -1,5 +1,4 @@
-# FRA532-MobileRobot
-Gatekeeper's mission: Stop the rescu robot.
+# Navigation System
 
 ## Navigate with static environment
 Run Gazebo with environment:
