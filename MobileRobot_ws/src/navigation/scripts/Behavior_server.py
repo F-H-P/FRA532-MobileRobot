@@ -19,7 +19,7 @@ class BehaviorServer(Node):
 
         self.cx = 0.0
         self.cy = 0.0
-        self.gx = 0.0
+        self.gx = 2.0
         self.gy = 1.0
 
         self.init = False
