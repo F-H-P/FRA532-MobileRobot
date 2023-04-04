@@ -1,0 +1,1 @@
+/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/SendPoint_Request.msg

@@ -1,0 +1,1 @@
+/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_py/msg_interfaces/__init__.py

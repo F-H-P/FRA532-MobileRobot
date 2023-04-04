@@ -1,0 +1,1 @@
+/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/goal_path.h

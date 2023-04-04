@@ -1,0 +1,4 @@
+source;share/megarover_samples_ros2/local_setup.bash
+source;share/megarover_samples_ros2/local_setup.dsv
+source;share/megarover_samples_ros2/local_setup.sh
+source;share/megarover_samples_ros2/local_setup.zsh

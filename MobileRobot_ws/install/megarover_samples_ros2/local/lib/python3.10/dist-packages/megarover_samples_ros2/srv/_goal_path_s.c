@@ -1,0 +1,1 @@
+/home/fhp/MobileRobot_ws/build/megarover_samples_ros2/rosidl_generator_py/megarover_samples_ros2/srv/_goal_path_s.c

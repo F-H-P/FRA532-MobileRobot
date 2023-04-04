@@ -1,0 +1,1 @@
+/home/fhp/MobileRobot_ws/src/navigation/scripts/grid_mapping.py
