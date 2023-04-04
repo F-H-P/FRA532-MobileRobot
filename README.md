@@ -10,7 +10,15 @@ Run NAV2 package:
 ```
 ros2 launch megarover_samples_ros2 vmegarover_navigation.launch.py
 ```
-Run navigate robot:
+Run path tracking:
 ```
-ros2 launch
+ros2 run navigation path_tracking.py
+```
+Run global path planner:
+```
+ros2 run navigation GlobalPlanning_A-star.py
+```
+Run behavior server:
+```
+ros2 run navigation Behavior_server.py
 ```
