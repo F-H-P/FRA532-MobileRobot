@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/GoalPath_Response.msg
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/GoalPath_Response.msg

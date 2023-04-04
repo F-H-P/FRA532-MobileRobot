@@ -1,1 +1,0 @@
-/home/fhp/MobileRobot_ws/src/robot_description/scripts/create_fix_urdf.py

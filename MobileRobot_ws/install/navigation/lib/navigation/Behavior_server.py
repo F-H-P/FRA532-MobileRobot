@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/src/navigation/scripts/Behavior_server.py
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation/scripts/Behavior_server.py

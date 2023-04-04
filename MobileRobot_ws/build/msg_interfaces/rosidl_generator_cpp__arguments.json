@@ -1,10 +1,10 @@
 {
   "package_name": "msg_interfaces",
-  "output_dir": "/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_cpp/msg_interfaces",
+  "output_dir": "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_cpp/msg_interfaces",
   "template_dir": "/opt/ros/humble/share/rosidl_generator_cpp/cmake/../resource",
   "idl_tuples": [
-    "/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/GoalPath.idl",
-    "/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/SendPoint.idl"
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/GoalPath.idl",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/SendPoint.idl"
   ],
   "ros_interface_dependencies": [
     "std_msgs:/opt/ros/humble/share/std_msgs/msg/Bool.idl",
@@ -56,8 +56,8 @@
     "/opt/ros/humble/share/rosidl_generator_cpp/cmake/../resource/srv__builder.hpp.em",
     "/opt/ros/humble/share/rosidl_generator_cpp/cmake/../resource/srv__struct.hpp.em",
     "/opt/ros/humble/share/rosidl_generator_cpp/cmake/../resource/srv__traits.hpp.em",
-    "/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/GoalPath.idl",
-    "/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/SendPoint.idl",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/GoalPath.idl",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/SendPoint.idl",
     "/opt/ros/humble/share/std_msgs/msg/Bool.idl",
     "/opt/ros/humble/share/std_msgs/msg/Byte.idl",
     "/opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl",

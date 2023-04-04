@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/navigation/ament_cmake_core/navigationConfig-version.cmake
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation/ament_cmake_core/navigationConfig-version.cmake

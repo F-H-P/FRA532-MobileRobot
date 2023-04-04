@@ -1,1 +1,0 @@
-/home/fhp/MobileRobot_ws/build/megarover_samples_ros2/rosidl_cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake

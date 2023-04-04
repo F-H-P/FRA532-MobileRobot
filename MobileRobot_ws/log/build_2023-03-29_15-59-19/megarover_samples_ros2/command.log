@@ -1,1 +1,0 @@
-Invoking command in '/home/fhp/MobileRobot_ws/build/megarover_samples_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/fhp/MobileRobot_ws/src/megarover_samples_ros2 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/fhp/MobileRobot_ws/install/megarover_samples_ros2

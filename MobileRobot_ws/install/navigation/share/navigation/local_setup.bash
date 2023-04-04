@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/navigation/ament_cmake_environment_hooks/local_setup.bash
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation/ament_cmake_environment_hooks/local_setup.bash

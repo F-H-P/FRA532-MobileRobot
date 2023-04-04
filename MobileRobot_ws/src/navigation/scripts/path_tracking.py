@@ -73,8 +73,6 @@ class PathTracking(Node):
                     plt.grid(True)
                     plt.title("delta theta[rad]:" + str(self.d_theta)[:4])
                     plt.pause(0.001)
-            elif self.arrive:
-                print("arrive!!!")
 
             self.cmd_vel_pub.publish(cmd_vel)
 
@@ -107,7 +105,7 @@ class PathTracking(Node):
     def calc_theta_new(self,tx,ty,cx,cy):
         dx = tx-cx
         dy = ty-cy
-        theta_new = math.atan(dy/dx)
+        theta_new = math.atan2(dy,dx)
         return theta_new
     
     def plot_arrow(self,x, y, yaw, length=1.0, width=0.5, fc="r", ec="k"):
@@ -131,8 +129,7 @@ class PathTracking(Node):
             self.ty = self.path_y[self.ind]
         else:
             d = self.calc_distance(self.tx,self.ty,self.cx,self.cy)
-            if d < dp:
-                print("Update target!!")
+            if np.linalg.norm(d) < dp:
                 if self.ind < len(self.path_x)-1:
                     self.ind += 1
                     self.tx = self.path_x[self.ind]
@@ -143,17 +140,13 @@ class PathTracking(Node):
                     self.arrive = True
                     self.tx = None
                     self.ty = None
+                    print("arrive!!!")
             else:
                 cmd_vel.linear.x = velo_max
 
         if self.arrive is False:
             theta_new = self.calc_theta_new(self.tx,self.ty,self.cx,self.cy)
-            if theta_new - self.theta > 0.001:
-                cmd_vel.angular.z = omega_max
-            elif theta_new - self.theta < -0.001:
-                cmd_vel.angular.z = -omega_max
-            else:
-                cmd_vel.angular.z = 0.0
+            cmd_vel.angular.z = np.arctan2(np.sin(theta_new - self.theta),np.cos(theta_new - self.theta))
         elif self.arrive is True:
             cmd_vel.angular.z = 0.0
     

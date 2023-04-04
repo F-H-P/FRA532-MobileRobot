@@ -1,8 +1,0 @@
-setup.py
-megarover_samples_ros2/__init__.py
-megarover_samples_ros2.egg-info/PKG-INFO
-megarover_samples_ros2.egg-info/SOURCES.txt
-megarover_samples_ros2.egg-info/dependency_links.txt
-megarover_samples_ros2.egg-info/top_level.txt
-megarover_samples_ros2/srv/__init__.py
-megarover_samples_ros2/srv/_goal_path.py

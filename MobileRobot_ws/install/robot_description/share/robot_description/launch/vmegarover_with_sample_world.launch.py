@@ -1,1 +1,0 @@
-/home/fhp/MobileRobot_ws/src/robot_description/launch/vmegarover_with_sample_world.launch.py

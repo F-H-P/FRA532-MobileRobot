@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/send_point.h
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/send_point.h

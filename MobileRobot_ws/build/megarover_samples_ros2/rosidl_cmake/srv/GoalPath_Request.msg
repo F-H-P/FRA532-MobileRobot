@@ -1,2 +1,0 @@
-std_msgs/Float64MultiArray x_path
-std_msgs/Float64MultiArray y_path

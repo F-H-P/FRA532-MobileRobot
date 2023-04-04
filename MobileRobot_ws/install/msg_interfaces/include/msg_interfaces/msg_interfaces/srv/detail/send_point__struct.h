@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/send_point__struct.h
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/send_point__struct.h

@@ -1,6 +1,0 @@
-Invoking command in '/home/fhp/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/fhp/MobileRobot_ws/src/navigation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/fhp/MobileRobot_ws/install/navigation
-Invoked command in '/home/fhp/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/fhp/MobileRobot_ws/src/navigation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/fhp/MobileRobot_ws/install/navigation
-Invoking command in '/home/fhp/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/MobileRobot_ws/build/navigation -- -j12 -l12
-Invoked command in '/home/fhp/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/MobileRobot_ws/build/navigation -- -j12 -l12
-Invoking command in '/home/fhp/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/MobileRobot_ws/build/navigation
-Invoked command in '/home/fhp/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/MobileRobot_ws/build/navigation

@@ -1,8 +1,8 @@
-# Install script for directory: /home/fhp/MobileRobot_ws/build/msg_interfaces/msg_interfaces__py
+# Install script for directory: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/msg_interfaces__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/fhp/MobileRobot_ws/install/msg_interfaces")
+  set(CMAKE_INSTALL_PREFIX "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

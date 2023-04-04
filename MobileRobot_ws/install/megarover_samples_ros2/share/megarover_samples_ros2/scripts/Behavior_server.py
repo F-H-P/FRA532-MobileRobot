@@ -1,1 +1,0 @@
-/home/fhp/MobileRobot_ws/src/megarover_samples_ros2/scripts/Behavior_server.py

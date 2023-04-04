@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/src/megarover_samples_ros2/launch/robot_state_publisher.launch.py
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/megarover_samples_ros2/launch/robot_state_publisher.launch.py

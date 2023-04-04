@@ -1,1 +1,1 @@
-/home/fhp/MobileRobot_ws/build/msg_interfaces/rosidl_generator_py/msg_interfaces/srv/_goal_path.py
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_py/msg_interfaces/srv/_goal_path.py
