@@ -8,6 +8,7 @@ from kivy.animation import Animation
 from kivy.uix.popup import Popup
 from kivy.uix.gridlayout import GridLayout
 from kivy.core.window import Window
+from kivy.clock import Clock
 # from kivy.lang.builder import Builder
 # from kivymd.app import MDApp
 
@@ -48,11 +49,38 @@ class popup1_Screen(Screen):
 
 class connectingScreen(Screen):
     def on_enter(self):
-        self.clear_widgets()
         Text = "[size=60]Connecting...[/size]"
         self.connect = Label(text=Text, markup=True)
         self.add_widget(self.connect)
+        Clock.schedule_once(self.change_screen, 3)  # Change screen after 5 seconds
+    
+    def change_screen(self, dt):
+        self.manager.current = 'mainS'
 
+class mainScreen(Screen):
+    def on_enter(self):
+        print('this is the mainscreen of the game')
+        mainLayout = GridLayout(cols=1, rows=3, padding=10)
+        Text = "[size=20]A HENCHMAN's MISSION:[/size]\n[size=40]STOP THE RESCUE ROBOT![/size]"
+        self.gameNameLabel = Label(text=Text, markup=True)
+        mainLayout.add_widget(self.gameNameLabel)
+
+        self.playmodeBut = Button(text='PLAY MODE')
+        self.playmodeBut.bind(on_press=self.playmode_callback)
+        mainLayout.add_widget(self.playmodeBut)
+
+        self.htpBut = Button(text='HOW TO PLAY')
+        self.htpBut.bind(on_release=self.htp_callback)
+        mainLayout.add_widget(self.htpBut)
+
+        self.add_widget(mainLayout)
+
+    def playmode_callback(self, instance):
+        print("play mode button's clicked")
+
+    def htp_callback(self, instance):
+        print("how to play button's clicked")
+        # self.manager.current = 'playModeS
 
 class HMmission_stoptheRescueRobot(App):
     def build(self):
@@ -61,6 +89,7 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(openingScreen(name='openS'))
         self.sm.add_widget(popup1_Screen(name='pop1'))
         self.sm.add_widget(connectingScreen(name='connectS'))
+        self.sm.add_widget(mainScreen(name='mainS'))
         return self.sm
     
 if __name__ == '__main__':
