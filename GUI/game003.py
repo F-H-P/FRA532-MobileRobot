@@ -77,15 +77,39 @@ class mainScreen(Screen):
         self.add_widget(mainLayout)
 
     def playmode_callback(self, instance):
+        self.manager.current = 'popPlaymode'
         print("play mode button's clicked")
+
 
     def htp_callback(self, instance):
         print("how to play button's clicked")
 
-# class popup_playmode(Screen):
-#     def on_enter(self):
-#         playmodePopLayout = GridLayout(cols = 1,rows =4 padding = 10)
+class popup_playmode(Screen):
+    def on_enter(self):
+        print('play mode PAGE')
+        playmodePopLayout = GridLayout(cols = 1,rows = 3, padding = 10)
+        self.staticButton = Button(text='STATIC MODE',size_hint=(None, None), size=(300, 100))
+        self.staticButton.bind(on_release = self.static_callback)
+        self.dynamicButton = Button(text='DYNAMIC MODE',size_hint=(None, None), size=(300, 100))
+        self.dynamicButton.bind(on_release = self.dynamic_callback)
+        self.closeButton = Button(text ='X',size_hint=(None, None), size=(50, 50))
+        self.closeButton.bind(on_release = self.closePop)
+        playmodePopLayout.add_widget(self.closeButton)
+        playmodePopLayout.add_widget(self.staticButton)
+        playmodePopLayout.add_widget(self.dynamicButton)
+        self.popup = Popup(title='Select Play Mode',content= playmodePopLayout, size_hint=(None, None), size=(400, 600))
+        self.popup.open()
 
+    def static_callback(self, instance):
+        print('u r playing in STATIC MODE')
+
+    def dynamic_callback(self, instance):
+        print('u r plaing in DYNAMIC MODE')
+
+    def closePop(self, instance):
+        print('pop-up closed')
+        self.popup.dismiss()
+        self.manager.current = 'mainS'
 
 class HMmission_stoptheRescueRobot(App):
     def build(self):
@@ -95,6 +119,7 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(popup1_Screen(name='pop1'))
         self.sm.add_widget(connectingScreen(name='connectS'))
         self.sm.add_widget(mainScreen(name='mainS'))
+        self.sm.add_widget(popup_playmode(name='popPlaymode'))
         return self.sm
     
 if __name__ == '__main__':
