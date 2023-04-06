@@ -25,6 +25,7 @@ class openingScreen(Screen):
 
     def on_click(self, window, mouse_x, mouse_y, *args):
         # create pop-up box with message
+        Window.unbind(on_mouse_down=self.on_click)
         self.clear_widgets()
         print("window's clicked")
         self.manager.current = 'pop1'
@@ -65,11 +66,11 @@ class mainScreen(Screen):
         self.gameNameLabel = Label(text=Text, markup=True)
         mainLayout.add_widget(self.gameNameLabel)
 
-        self.playmodeBut = Button(text='PLAY MODE')
-        self.playmodeBut.bind(on_press=self.playmode_callback)
+        self.playmodeBut = Button(text='PLAY MODE', size_hint=(None, None), size=(300, 100))
+        self.playmodeBut.bind(on_release=self.playmode_callback)
         mainLayout.add_widget(self.playmodeBut)
 
-        self.htpBut = Button(text='HOW TO PLAY')
+        self.htpBut = Button(text='HOW TO PLAY', size_hint=(None, None), size=(300, 100))
         self.htpBut.bind(on_release=self.htp_callback)
         mainLayout.add_widget(self.htpBut)
 
@@ -80,7 +81,11 @@ class mainScreen(Screen):
 
     def htp_callback(self, instance):
         print("how to play button's clicked")
-        # self.manager.current = 'playModeS
+
+# class popup_playmode(Screen):
+#     def on_enter(self):
+#         playmodePopLayout = GridLayout(cols = 1,rows =4 padding = 10)
+
 
 class HMmission_stoptheRescueRobot(App):
     def build(self):
