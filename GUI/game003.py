@@ -9,6 +9,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.gridlayout import GridLayout
 from kivy.core.window import Window
 from kivy.clock import Clock
+from kivy.graphics import Color, Rectangle
 # from kivy.lang.builder import Builder
 # from kivymd.app import MDApp
 
@@ -83,6 +84,7 @@ class mainScreen(Screen):
 
     def htp_callback(self, instance):
         print("how to play button's clicked")
+        self.manager.current = 'htp'
 
 class popup_playmode(Screen):
     def on_enter(self):
@@ -97,7 +99,7 @@ class popup_playmode(Screen):
         playmodePopLayout.add_widget(self.closeButton)
         playmodePopLayout.add_widget(self.staticButton)
         playmodePopLayout.add_widget(self.dynamicButton)
-        self.popup = Popup(title='Select Play Mode',content= playmodePopLayout, size_hint=(None, None), size=(400, 600))
+        self.popup = Popup(title='Select Play Mode',content= playmodePopLayout, size_hint=(None, None), size=(400, 500))
         self.popup.open()
 
     def static_callback(self, instance):
@@ -111,6 +113,27 @@ class popup_playmode(Screen):
         self.popup.dismiss()
         self.manager.current = 'mainS'
 
+class howtoplay(Screen):
+    def on_enter(self):
+        print('This is HOW TO PLAY page')
+        htpLayout = GridLayout(cols = 1, rows = 3, padding = 10)
+        
+        headLable = Label(text = "HOW TO PLAY",font_size = 48)
+        description = Label(text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription")
+        backBut = Button(text ='<--',size_hint=(None, None), size=(100, 50))
+        backBut.bind(on_release = self.backtomain)
+
+        htpLayout.add_widget(headLable)
+        htpLayout.add_widget(description)
+        htpLayout.add_widget(backBut)
+
+        self.add_widget(htpLayout)
+
+    def backtomain(self,instance):
+        print('back to main button pressed')
+        self.manager.current = 'mainS'
+        
+
 class HMmission_stoptheRescueRobot(App):
     def build(self):
         self.sm = ScreenManager()
@@ -120,6 +143,7 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(connectingScreen(name='connectS'))
         self.sm.add_widget(mainScreen(name='mainS'))
         self.sm.add_widget(popup_playmode(name='popPlaymode'))
+        self.sm.add_widget(howtoplay(name='htp'))
         return self.sm
     
 if __name__ == '__main__':
