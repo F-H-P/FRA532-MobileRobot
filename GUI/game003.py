@@ -7,9 +7,11 @@ from kivy.uix.screenmanager import ScreenManager,Screen
 from kivy.animation import Animation
 from kivy.uix.popup import Popup
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.clock import Clock
-from kivy.graphics import Color, Rectangle
+from kivy.graphics import *
+from kivy.uix.progressbar import ProgressBar
 # from kivy.lang.builder import Builder
 # from kivymd.app import MDApp
 
@@ -62,16 +64,16 @@ class connectingScreen(Screen):
 class mainScreen(Screen):
     def on_enter(self):
         print('this is the mainscreen of the game')
-        mainLayout = GridLayout(cols=1, rows=3, padding=10)
+        mainLayout = FloatLayout()
         Text = "[size=20]A HENCHMAN's MISSION:[/size]\n[size=40]STOP THE RESCUE ROBOT![/size]"
-        self.gameNameLabel = Label(text=Text, markup=True)
+        self.gameNameLabel = Label(text=Text, markup=True, pos_hint = {'center_x': 0.5,'y':0.2})
         mainLayout.add_widget(self.gameNameLabel)
 
-        self.playmodeBut = Button(text='PLAY MODE', size_hint=(None, None), size=(300, 100))
+        self.playmodeBut = Button(text='PLAY MODE', size_hint=(None, None), size=(300, 100), pos_hint = {'center_x':0.5,'y':0.35})
         self.playmodeBut.bind(on_release=self.playmode_callback)
         mainLayout.add_widget(self.playmodeBut)
 
-        self.htpBut = Button(text='HOW TO PLAY', size_hint=(None, None), size=(300, 100))
+        self.htpBut = Button(text='HOW TO PLAY', size_hint=(None, None), size=(300, 100), pos_hint = {'center_x':0.5,'y':0.15})
         self.htpBut.bind(on_release=self.htp_callback)
         mainLayout.add_widget(self.htpBut)
 
@@ -89,12 +91,12 @@ class mainScreen(Screen):
 class popup_playmode(Screen):
     def on_enter(self):
         print('play mode PAGE')
-        playmodePopLayout = GridLayout(cols = 1,rows = 3, padding = 10)
-        self.staticButton = Button(text='STATIC MODE',size_hint=(None, None), size=(300, 100))
+        playmodePopLayout = FloatLayout()
+        self.staticButton = Button(text='STATIC MODE',size_hint=(None, None), size=(300, 100), pos_hint = {'center_x':0.5,'top':0.85})
         self.staticButton.bind(on_release = self.static_callback)
-        self.dynamicButton = Button(text='DYNAMIC MODE',size_hint=(None, None), size=(300, 100))
+        self.dynamicButton = Button(text='DYNAMIC MODE',size_hint=(None, None), size=(300, 100),pos_hint = {'center_x':0.5,'top':0.55})
         self.dynamicButton.bind(on_release = self.dynamic_callback)
-        self.closeButton = Button(text ='X',size_hint=(None, None), size=(50, 50))
+        self.closeButton = Button(text ='X',size_hint=(None, None), size=(50, 50),pos_hint = {'center_x':0.93,'top':1})
         self.closeButton.bind(on_release = self.closePop)
         playmodePopLayout.add_widget(self.closeButton)
         playmodePopLayout.add_widget(self.staticButton)
@@ -104,9 +106,28 @@ class popup_playmode(Screen):
 
     def static_callback(self, instance):
         print('u r playing in STATIC MODE')
+        self.clear_widgets()
+        self.popup.dismiss()
+        Text = "[size=60]LEVEL 1[/size]\n[size=11](static)[/size]"
+        self.connect = Label(text=Text, markup=True)
+        self.add_widget(self.connect)
+        Clock.schedule_once(self.static_game, 3)  # Change screen after 5 seconds
 
     def dynamic_callback(self, instance):
         print('u r plaing in DYNAMIC MODE')
+        self.clear_widgets()
+        self.popup.dismiss()
+        Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
+        self.connect = Label(text=Text, markup=True)
+        self.add_widget(self.connect)
+        Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
+    
+    def static_game(self, dt):
+        print('go to game LEVEL 1 static')
+        self.manager.current = 'L1S'
+
+    def dynamic_game(self, dt):
+        print('go to game LEVEL 1 dynamic')
 
     def closePop(self, instance):
         print('pop-up closed')
@@ -116,10 +137,10 @@ class popup_playmode(Screen):
 class howtoplay(Screen):
     def on_enter(self):
         print('This is HOW TO PLAY page')
-        htpLayout = GridLayout(cols = 1, rows = 3, padding = 10)
+        htpLayout = FloatLayout()
         
-        headLable = Label(text = "HOW TO PLAY",font_size = 48)
-        description = Label(text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription")
+        headLable = Label(text = "HOW TO PLAY",font_size = 48,pos_hint = {'center_x':0.5,'center_y':0.7})
+        description = Label(text = "DescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription\nDescriptionDescriptionDescriptionDescriptionDescriptionDescription",pos_hint = {'center_x':0.5,'top':1})
         backBut = Button(text ='<--',size_hint=(None, None), size=(100, 50))
         backBut.bind(on_release = self.backtomain)
 
@@ -132,7 +153,62 @@ class howtoplay(Screen):
     def backtomain(self,instance):
         print('back to main button pressed')
         self.manager.current = 'mainS'
+
+class L1_static(Screen):       
+    def on_enter(self):
+        l1_layout = FloatLayout()
+        with self.canvas:
+            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
+            Color(0,1,0,0.8)
+            Rectangle(size = (192,8),pos = (202,264))
+            Rectangle(size = (192,8),pos = (406,404))
+            Color(1,0.8,0.45,1)
+            Ellipse(size=(32,32),pos=(186,252))
+            Ellipse(size=(32,32),pos=(582,392))
+        self.moriaValue = 100
+        Clock.schedule_interval(self.lowerStamina, 1.5)
+        moriaLabel = Label(text = 'Moria',pos_hint={'x':-0.45,'y':0.48})
+        moriaStamina = ProgressBar(max=100,value=self.moriaValue,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
+
+        pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         
+
+        l1_layout.add_widget(moriaStamina)
+        l1_layout.add_widget(moriaLabel)
+        l1_layout.add_widget(pauseBut)
+
+
+        self.add_widget(l1_layout)
+
+    def lowerStamina(self,dt):
+        self.moriaValue = self.moriaValue - 10
+        print('moria stamina = ', self.moriaValue)
+        if self.moriaValue <= 0:
+            print('YOU WIN!!')
+        return self.moriaValue
+            
+class L1_dynamic(Screen):
+    def on_enter(self):
+        l1_layout = FloatLayout()
+        with self.canvas:
+            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
+            Color(0,1,0,0.8)
+            Rectangle(size = (192,8),pos = (202,264))
+            Rectangle(size = (192,8),pos = (406,404))
+            Color(1,0.8,0.45,1)
+            Ellipse(size=(32,32),pos=(186,252))
+            Ellipse(size=(32,32),pos=(582,392))
+        moriaStamina = ProgressBar(max=100,value=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
+        playerStamina = ProgressBar(max=100,value=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.43})
+        playerLabel = Label(text = 'You',pos_hint={'x':-0.45,'y':0.44})
+        moriaLabel = Label(text = 'Moria',pos_hint={'x':-0.45,'y':0.48})
+        l1_layout.add_widget(moriaStamina)
+        l1_layout.add_widget(playerStamina)
+        l1_layout.add_widget(moriaLabel)
+        l1_layout.add_widget(playerLabel)
+
+        self.add_widget(l1_layout)
+
 
 class HMmission_stoptheRescueRobot(App):
     def build(self):
@@ -144,6 +220,8 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(mainScreen(name='mainS'))
         self.sm.add_widget(popup_playmode(name='popPlaymode'))
         self.sm.add_widget(howtoplay(name='htp'))
+        self.sm.add_widget(L1_static(name='L1S'))
+        self.sm.add_widget(L1_dynamic(name='L1D'))
         return self.sm
     
 if __name__ == '__main__':
