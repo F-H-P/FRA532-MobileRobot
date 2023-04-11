@@ -165,27 +165,117 @@ class L1_static(Screen):
             Color(1,0.8,0.45,1)
             Ellipse(size=(32,32),pos=(186,252))
             Ellipse(size=(32,32),pos=(582,392))
-        self.moriaValue = 100
-        Clock.schedule_interval(self.lowerStamina, 1.5)
+
         moriaLabel = Label(text = 'Moria',pos_hint={'x':-0.45,'y':0.48})
-        moriaStamina = ProgressBar(max=100,value=self.moriaValue,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
+        self.moriaStamina = ProgressBar(max=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
+        self.moriaStamina.value = 100
 
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
-        
+        pauseBut.bind(on_release = self.pause_callback)
 
-        l1_layout.add_widget(moriaStamina)
+        l1_layout.add_widget(self.moriaStamina)
         l1_layout.add_widget(moriaLabel)
         l1_layout.add_widget(pauseBut)
 
+        self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
         self.add_widget(l1_layout)
 
     def lowerStamina(self,dt):
-        self.moriaValue = self.moriaValue - 10
-        print('moria stamina = ', self.moriaValue)
-        if self.moriaValue <= 0:
+        self.moriaStamina.value = self.moriaStamina.value - 30
+        print('moria stamina = ', self.moriaStamina.value)
+        if self.moriaStamina.value <= 0:
             print('YOU WIN!!')
-        return self.moriaValue
+            if self.clock_event:
+                Clock.unschedule(self.clock_event)
+                self.clock_event = None
+            self.manager.current = 'vicpop'
+            # self.moriaStamina.value = 100
+        # return self.moriaStamina.value
+
+
+    def pause_callback(self, *args):
+        print('pause')
+        if self.clock_event:
+            Clock.unschedule(self.clock_event)
+            self.clock_event = None
+
+        pausePopLayout = FloatLayout()
+        resumeBut = Button(text = 'RESUME',size_hint=(None, None),size=(300, 100), pos_hint = {'center_x':0.5,'top':0.85})
+        resumeBut.bind(on_release = self.resume_callback)
+        backHome = Button(text = 'HOME',size_hint=(None, None),size=(300, 100), pos_hint = {'center_x':0.5,'top':0.45})
+        backHome.bind(on_release = self.home_callback)
+        pausePopLayout.add_widget(resumeBut)
+        pausePopLayout.add_widget(backHome)
+        self.pausepopup = Popup(title='PAUSE',content= pausePopLayout, size_hint=(None, None), size=(400, 350))
+        self.pausepopup.open()
+    
+    def resume_callback(self, instance):
+        print('resume dai jaaa')
+        self.pausepopup.dismiss()
+        if not self.clock_event:
+            self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
+
+    def home_callback(self,instance):
+        print('go back home')
+        homeconfirmPopLayout = FloatLayout()
+        homeLabel = Label(text = 'HOME ?',font_size = 60,pos_hint = {'center_x':0.5,'y':0.25})
+        okBut = Button(text = 'OK',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.25,'top':0.45})
+        cancleBut = Button(text = 'CANCLE',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.75,'top':0.45})
+        okBut.bind(on_release = self.gotomain)
+        cancleBut.bind(on_release = self.cancleCB)
+        homeconfirmPopLayout.add_widget(homeLabel)
+        homeconfirmPopLayout.add_widget(okBut)
+        homeconfirmPopLayout.add_widget(cancleBut)
+        self.homepopup = Popup(title='',content= homeconfirmPopLayout, size_hint=(None, None), size=(400, 300))
+        self.homepopup.open()
+
+    def gotomain(self,instance):
+        print('go to main')
+        self.pausepopup.dismiss()
+        self.homepopup.dismiss()
+        self.manager.current = 'mainS'
+
+    def cancleCB(self,instance):
+        print('cancle')
+        self.homepopup.dismiss()
+
+class vicpop(Screen):
+    def on_enter(self):
+        victoryPopLayout = FloatLayout()
+        vicLabel = Label(text = 'VICTORY !!',font_size = 60,pos_hint = {'center_x':0.5,'y':0.3})
+        vicLabel2 = Label(text = "You've saved my princess.",font_size = 22,pos_hint = {'center_x':0.5,'y':0.1})
+        backHome = Button(text = 'HOME',size_hint=(None, None),size=(300, 100), pos_hint = {'center_x':0.5,'top':0.45})
+        backHome.bind(on_release = self.home_callback)
+        victoryPopLayout.add_widget(vicLabel)
+        victoryPopLayout.add_widget(vicLabel2)
+        victoryPopLayout.add_widget(backHome)
+        self.vicpopup = Popup(title='',content= victoryPopLayout, size_hint=(None, None), size=(400, 300))
+        self.vicpopup.open()
+
+    def home_callback(self,instance):
+        print('go back home')
+        homeconfirmPopLayout = FloatLayout()
+        homeLabel = Label(text = 'HOME ?',font_size = 60,pos_hint = {'center_x':0.5,'y':0.25})
+        okBut = Button(text = 'OK',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.25,'top':0.45})
+        cancleBut = Button(text = 'CANCLE',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.75,'top':0.45})
+        okBut.bind(on_release = self.gotomain)
+        cancleBut.bind(on_release = self.cancleCB)
+        homeconfirmPopLayout.add_widget(homeLabel)
+        homeconfirmPopLayout.add_widget(okBut)
+        homeconfirmPopLayout.add_widget(cancleBut)
+        self.homepopup = Popup(title='',content= homeconfirmPopLayout, size_hint=(None, None), size=(400, 300))
+        self.homepopup.open()
+
+    def gotomain(self,instance):
+        print('go to main')
+        self.vicpopup.dismiss()
+        self.homepopup.dismiss()
+        self.manager.current = 'mainS'
+
+    def cancleCB(self,instance):
+        print('cancle')
+        self.homepopup.dismiss()
             
 class L1_dynamic(Screen):
     def on_enter(self):
@@ -222,6 +312,7 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(howtoplay(name='htp'))
         self.sm.add_widget(L1_static(name='L1S'))
         self.sm.add_widget(L1_dynamic(name='L1D'))
+        self.sm.add_widget(vicpop(name='vicpop'))
         return self.sm
     
 if __name__ == '__main__':
