@@ -128,6 +128,7 @@ class popup_playmode(Screen):
 
     def dynamic_game(self, dt):
         print('go to game LEVEL 1 dynamic')
+        self.manager.current = 'L1D'
 
     def closePop(self, instance):
         print('pop-up closed')
@@ -190,9 +191,6 @@ class L1_static(Screen):
                 Clock.unschedule(self.clock_event)
                 self.clock_event = None
             self.manager.current = 'vicpop'
-            # self.moriaStamina.value = 100
-        # return self.moriaStamina.value
-
 
     def pause_callback(self, *args):
         print('pause')
@@ -279,6 +277,7 @@ class vicpop(Screen):
             
 class L1_dynamic(Screen):
     def on_enter(self):
+        print('Level 1 Dynamic mode game start')
         l1_layout = FloatLayout()
         with self.canvas:
             Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
@@ -288,18 +287,132 @@ class L1_dynamic(Screen):
             Color(1,0.8,0.45,1)
             Ellipse(size=(32,32),pos=(186,252))
             Ellipse(size=(32,32),pos=(582,392))
-        moriaStamina = ProgressBar(max=100,value=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
-        playerStamina = ProgressBar(max=100,value=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.43})
+        self.moriaStamina = ProgressBar(max=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.47})
+        self.playerStamina = ProgressBar(max=100,size_hint_x=0.2,pos_hint={'x':0.1,'y':0.43})
         playerLabel = Label(text = 'You',pos_hint={'x':-0.45,'y':0.44})
         moriaLabel = Label(text = 'Moria',pos_hint={'x':-0.45,'y':0.48})
-        l1_layout.add_widget(moriaStamina)
-        l1_layout.add_widget(playerStamina)
-        l1_layout.add_widget(moriaLabel)
+        self.moriaStamina.value = 100
+        self.playerStamina.value = 100
+
+        leftaimming = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
+        rightaimming = Button(text = 'aim Right',size_hint=(None,None),size=(100,50),pos = (540,50))
+        leftaimming.bind(state = self.leftaimCB)
+        rightaimming.bind(state = self.rightaimCB)
+
+        pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
+        pauseBut.bind(on_release = self.pause_callback)
+
+        l1_layout.add_widget(self.moriaStamina)
+        l1_layout.add_widget(self.playerStamina)
         l1_layout.add_widget(playerLabel)
+        l1_layout.add_widget(moriaLabel)
+        l1_layout.add_widget(pauseBut)
+        l1_layout.add_widget(leftaimming)
+        l1_layout.add_widget(rightaimming)
+
+        self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
         self.add_widget(l1_layout)
 
+    def lowerStamina(self,dt):
+        self.moriaStamina.value = self.moriaStamina.value - 10
+        # print('moria stamina = ', self.moriaStamina.value)
+        if self.moriaStamina.value <= 0:
+            print('YOU WIN!!')
+            if self.clock_event:
+                Clock.unschedule(self.clock_event)
+                self.clock_event = None
+            self.manager.current = 'vicpop'
 
+    def pause_callback(self, *args):
+        print('pause')
+        if self.clock_event:
+            Clock.unschedule(self.clock_event)
+            self.clock_event = None
+
+        pausePopLayout = FloatLayout()
+        resumeBut = Button(text = 'RESUME',size_hint=(None, None),size=(300, 100), pos_hint = {'center_x':0.5,'top':0.85})
+        resumeBut.bind(on_release = self.resume_callback)
+        backHome = Button(text = 'HOME',size_hint=(None, None),size=(300, 100), pos_hint = {'center_x':0.5,'top':0.45})
+        backHome.bind(on_release = self.home_callback)
+        pausePopLayout.add_widget(resumeBut)
+        pausePopLayout.add_widget(backHome)
+        self.pausepopup = Popup(title='PAUSE',content= pausePopLayout, size_hint=(None, None), size=(400, 350))
+        self.pausepopup.open()
+    
+    def resume_callback(self, instance):
+        print('resume dai jaaa')
+        self.pausepopup.dismiss()
+        if not self.clock_event:
+            self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
+
+    def home_callback(self,instance):
+        print('go back home')
+        homeconfirmPopLayout = FloatLayout()
+        homeLabel = Label(text = 'HOME ?',font_size = 60,pos_hint = {'center_x':0.5,'y':0.25})
+        okBut = Button(text = 'OK',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.25,'top':0.45})
+        cancleBut = Button(text = 'CANCLE',size_hint=(None, None),size=(150, 100), pos_hint = {'center_x':0.75,'top':0.45})
+        okBut.bind(on_release = self.gotomain)
+        cancleBut.bind(on_release = self.cancleCB)
+        homeconfirmPopLayout.add_widget(homeLabel)
+        homeconfirmPopLayout.add_widget(okBut)
+        homeconfirmPopLayout.add_widget(cancleBut)
+        self.homepopup = Popup(title='',content= homeconfirmPopLayout, size_hint=(None, None), size=(400, 300))
+        self.homepopup.open()
+
+    def gotomain(self,instance):
+        print('go to main')
+        self.pausepopup.dismiss()
+        self.homepopup.dismiss()
+        self.manager.current = 'mainS'
+
+    def cancleCB(self,instance):
+        print('cancle')
+        self.homepopup.dismiss()
+
+    def leftaimCB(self,button,value):
+        print('aimming left')
+        print('player stamina = ', self.playerStamina.value)
+
+        if self.playerStamina.value <= 0:
+            print("player's stamina is out!!")
+        else:
+            if value == 'down':
+                # Code to be executed when the button is pressed
+                print("left DOWN!")
+            elif value == 'normal':
+                # Code to be executed when the button is released
+                self.playerStamina.value = self.playerStamina.value - 10
+                print("left UP!")
+            elif value == 'disabled':
+                # Code to be executed when the button is disabled
+                print("left disabled!")
+
+
+    def rightaimCB(self,button,value):
+        print('aimming right') 
+        print('player stamina = ', self.playerStamina.value)
+
+        if self.playerStamina.value <= 0:
+            print("player's stamina is out!!")
+        else:
+            if value == 'down':
+                # Code to be executed when the button is pressed
+                print("right DOWN!")
+            elif value == 'normal':
+                # Code to be executed when the button is released
+                self.playerStamina.value = self.playerStamina.value - 10
+                print("right UP!")
+            elif value == 'disabled':
+                # Code to be executed when the button is disabled
+                print("right disabled!")
+
+class tryScreen(Screen):
+    def on_enter(self):
+        user_input = input("Goal?: ")
+        print(user_input)
+
+        
 class HMmission_stoptheRescueRobot(App):
     def build(self):
         self.sm = ScreenManager()
@@ -313,6 +426,9 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(L1_static(name='L1S'))
         self.sm.add_widget(L1_dynamic(name='L1D'))
         self.sm.add_widget(vicpop(name='vicpop'))
+
+
+        self.sm.add_widget(tryScreen(name='ts'))
         return self.sm
     
 if __name__ == '__main__':
