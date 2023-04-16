@@ -14,7 +14,7 @@ from kivy.graphics import *
 from kivy.uix.progressbar import ProgressBar
 # from kivy.lang.builder import Builder
 # from kivymd.app import MDApp
-
+# Pin
 
 class openingScreen(Screen):
     def __init__(self, **kw):
