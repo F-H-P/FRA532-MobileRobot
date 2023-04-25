@@ -9,13 +9,14 @@ from std_msgs.msg import Float64MultiArray
 from msg_interfaces.srv import GoalPath
 from geometry_msgs.msg import Twist
 
+#get location
 from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
-from tf2_ros.transform_listener import TransformListener
+from tf2_ros.transform_listener import TransformListener 
 
+ 
 
-
-show_animation = False
+show_animation = True
 cmd_vel = Twist()
 cmd_vel.linear.x = 0.0
 cmd_vel.angular.z = 0.0
@@ -27,10 +28,11 @@ omega_max = 1.0
 class PathTracking(Node):
     def __init__(self):
         super().__init__('path_tracking')
-        self.timer = self.create_timer(0.1,self.timer_callback)
+        self.timer = self.create_timer(0.7,self.timer_callback)
         self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.cmd_vel_pub = self.create_publisher(Twist,"/cmd_vel",10)
 
+        #get location
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
@@ -49,8 +51,8 @@ class PathTracking(Node):
         self.d_theta = 0.0
 
     def timer_callback(self):
-        toggle = self.listener_post()
-        if toggle is True:
+        toggle = self.listener_post()#get location
+        if toggle is True:#get location
             self.cx = self.tf_listener.transform.translation.x
             self.cy = self.tf_listener.transform.translation.y
             self.theta = self.euler_from_quaternion(self.tf_listener.transform.rotation.x,
@@ -76,7 +78,7 @@ class PathTracking(Node):
 
             self.cmd_vel_pub.publish(cmd_vel)
 
-    def listener_post(self):
+    def listener_post(self): #get location
         try:
             self.tf_listener = self.tf_buffer.lookup_transform('map','base_link',rclpy.time.Time())
             return True
@@ -91,7 +93,7 @@ class PathTracking(Node):
         return response
     
 
-    def euler_from_quaternion(self,x, y, z, w):
+    def euler_from_quaternion(self,x, y, z, w):#get location
             t1 = +2.0 * (w * z + x * y)
             t2 = +1.0 - 2.0 * (y * y + z * z)
             yaw_z = math.atan2(t1, t2)
@@ -108,7 +110,7 @@ class PathTracking(Node):
         theta_new = math.atan2(dy,dx)
         return theta_new
     
-    def plot_arrow(self,x, y, yaw, length=1.0, width=0.5, fc="r", ec="k"):
+    def plot_arrow(self,x, y, yaw, length=0.1, width=0.1, fc="b", ec="k"):
         """
         Plot arrow
         """
@@ -141,6 +143,7 @@ class PathTracking(Node):
                     self.tx = None
                     self.ty = None
                     print("arrive!!!")
+                    print("Error:",d)
             else:
                 cmd_vel.linear.x = velo_max
 

@@ -27,6 +27,7 @@ install(PROGRAMS
   scripts/GlobalPlanning_A-star.py
   scripts/path_tracking.py
   scripts/Behavior_server.py
+  scripts/LocalPlanning_PotentialField.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

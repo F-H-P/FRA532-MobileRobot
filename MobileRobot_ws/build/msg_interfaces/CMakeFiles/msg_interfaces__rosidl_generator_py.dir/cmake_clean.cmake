@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c.o"
+  "CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c.o.d"
   "CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_goal_path_s.c.o"
   "CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_goal_path_s.c.o.d"
   "CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_send_point_s.c.o"

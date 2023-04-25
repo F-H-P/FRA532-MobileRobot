@@ -6,6 +6,8 @@ from msg_interfaces.srv import SendPoint
 from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
+from msg_interfaces.srv import CommandGUI
+from std_msgs.msg import String,Int64
 
 class BehaviorServer(Node):
     def __init__(self):
@@ -19,12 +21,44 @@ class BehaviorServer(Node):
 
         self.cx = 0.0
         self.cy = 0.0
-        self.gx = 2.0
+        self.gx = 3.0
         self.gy = 1.0
 
         self.init = False
         self.send_toggle = True
         
+    #     self.command_server = self.create_service(CommandGUI,"/command_state",self.command_callback)
+    #     # self.command_client = self.create_client(CommandGUI,"/command_state")
+    #     self.receive_command = String()
+
+    #     self.command_client = self.create_client(CommandGUI,"/command_finnish")        
+    #     # self.command_server = self.create_service(CommandGUI,"/command_finnish",self.command_callback)
+    #     self.send_command = String()
+    #     self.send_command_res = Int64()
+    #     self.send_command_res = self.command_req()
+    #     if self.send_command_res.data == 1:
+    #         pass
+
+    #     self.send_command.data = "start"
+
+    # def command_callback(self,request,response):
+    #     self.receive_command = request.command
+    #     response.res.data = 1
+
+    # def command_req(self):
+    #     future_command = self.command_client.call_async(self.send_command)
+    #     rclpy.spin_until_future_complete(self, future_command)
+    #     print("command_finish response success!!!!")
+    #     return self.future_command.result()
+    
+    # def command2navigate(self):
+    #     i = False
+    #     if i == True:
+    #         self.send_command.data = "start"
+    #         self.send_command_res = self.command_req()
+    #     elif False:
+    #         self.send_command.data = "pause"
+
     def timer_callback(self):
         self.send_point()
 

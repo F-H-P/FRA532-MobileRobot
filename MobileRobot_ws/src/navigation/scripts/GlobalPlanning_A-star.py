@@ -13,7 +13,7 @@ from std_msgs.msg import Float64MultiArray,Float64
 from msg_interfaces.srv import GoalPath
 from msg_interfaces.srv import SendPoint
  
-show_animation = True
+show_animation = False
 
 
 class AStarPlanner(Node):

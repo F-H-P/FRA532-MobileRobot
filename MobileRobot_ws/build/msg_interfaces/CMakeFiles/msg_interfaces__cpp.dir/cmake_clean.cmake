@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/msg_interfaces__cpp"
+  "rosidl_generator_cpp/msg_interfaces/srv/command_gui.hpp"
+  "rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__builder.hpp"
+  "rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__struct.hpp"
+  "rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__traits.hpp"
   "rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__builder.hpp"
   "rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__struct.hpp"
   "rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__traits.hpp"
