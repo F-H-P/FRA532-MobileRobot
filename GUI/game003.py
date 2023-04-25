@@ -12,6 +12,8 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.graphics import *
 from kivy.uix.progressbar import ProgressBar
+
+import paho.mqtt.client as mqtt
 # from kivy.lang.builder import Builder
 # from kivymd.app import MDApp
 # Pin
@@ -56,10 +58,27 @@ class connectingScreen(Screen):
         Text = "[size=60]Connecting...[/size]"
         self.connect = Label(text=Text, markup=True)
         self.add_widget(self.connect)
-        Clock.schedule_once(self.change_screen, 3)  # Change screen after 5 seconds
+    #     Clock.schedule_once(self.change_screen, 3)  # Change screen after 5 seconds
     
-    def change_screen(self, dt):
-        self.manager.current = 'mainS'
+    # def change_screen(self, dt):
+    #     self.manager.current = 'mainS'
+
+class connectFailed(Screen):
+    def on_enter(self):
+        print("connection failed")
+        popLayout = FloatLayout
+        Text = "[size=40]Connection Failed[/size]\n[size=20]Please check your robot and the filed.[/size]"
+        l1 = Label(text = Text, markup=True)
+        okBut = Button(text = 'OK')
+        okBut.bind(on_release = self.butCB)
+
+        pop = Popup()
+
+        self.pop = Popup(title='',content= popLayout, size_hint=(None, None), size=(400, 200))
+    
+    def butCB(self, instance):
+        print("reconnect")
+        self.manager.current = 'pop1'
 
 class mainScreen(Screen):
     def on_enter(self):
@@ -91,6 +110,9 @@ class mainScreen(Screen):
 class popup_playmode(Screen):
     def on_enter(self):
         print('play mode PAGE')
+
+        self.app = App.get_running_app()
+
         playmodePopLayout = FloatLayout()
         self.staticButton = Button(text='STATIC MODE',size_hint=(None, None), size=(300, 100), pos_hint = {'center_x':0.5,'top':0.85})
         self.staticButton.bind(on_release = self.static_callback)
@@ -104,37 +126,59 @@ class popup_playmode(Screen):
         self.popup = Popup(title='Select Play Mode',content= playmodePopLayout, size_hint=(None, None), size=(400, 500))
         self.popup.open()
 
+    def on_message():
+        pass
+
     def static_callback(self, instance):
-        print('u r playing in STATIC MODE')
         self.clear_widgets()
         self.popup.dismiss()
-        Text = "[size=60]LEVEL 1[/size]\n[size=11](static)[/size]"
-        self.connect = Label(text=Text, markup=True)
-        self.add_widget(self.connect)
-        Clock.schedule_once(self.static_game, 3)  # Change screen after 5 seconds
+        self.manager.current = 'l1sB'
+        # print('u r playing in STATIC MODE')
+        # self.clear_widgets()
+        # self.popup.dismiss()
+        # Text = "[size=60]LEVEL 1[/size]\n[size=11](static)[/size]"
+        # self.connect = Label(text=Text, markup=True)
+        # self.add_widget(self.connect)
+        
+        # Clock.schedule_once(self.static_game, 3)  # Change screen after 5 seconds
 
     def dynamic_callback(self, instance):
-        print('u r plaing in DYNAMIC MODE')
         self.clear_widgets()
         self.popup.dismiss()
-        Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
-        self.connect = Label(text=Text, markup=True)
-        self.add_widget(self.connect)
-        Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
+        self.manager.current = 'l1dB'
+        # print('u r plaing in DYNAMIC MODE')
+        # Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
+        # self.connect = Label(text=Text, markup=True)
+        # self.add_widget(self.connect)
+        # Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
     
-    def static_game(self, dt):
-        print('go to game LEVEL 1 static')
-        self.manager.current = 'L1S'
+    # def static_game(self, dt):
+    #     print('go to game LEVEL 1 static')
+    #     self.manager.current = 'L1S'
 
-    def dynamic_game(self, dt):
-        print('go to game LEVEL 1 dynamic')
-        self.manager.current = 'L1D'
+    # def dynamic_game(self, dt):
+    #     print('go to game LEVEL 1 dynamic')
+    #     self.manager.current = 'L1D'
 
     def closePop(self, instance):
         print('pop-up closed')
         self.popup.dismiss()
         self.manager.current = 'mainS'
 
+class l1Sbut(Screen):
+    def on_enter(self):
+        print('u r playing in STATIC MODE')
+        Text = "[size=60]LEVEL 1[/size]\n[size=11](static)[/size]"
+        self.connect = Label(text=Text, markup=True)
+        self.add_widget(self.connect)
+
+class l1Dbut(Screen):
+    def on_enter(self):
+        print('u r plaing in DYNAMIC MODE')
+        Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
+        self.connect = Label(text=Text, markup=True)
+        self.add_widget(self.connect)
+        
 class howtoplay(Screen):
     def on_enter(self):
         print('This is HOW TO PLAY page')
@@ -155,7 +199,7 @@ class howtoplay(Screen):
         print('back to main button pressed')
         self.manager.current = 'mainS'
 
-class L1_static(Screen):       
+class L1_static(Screen): 
     def on_enter(self):
         print('l1 static game start')
         l1_layout = FloatLayout()
@@ -179,9 +223,6 @@ class L1_static(Screen):
 
         self.goal_var = 0
         print(self.goal_var)
-        testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
-        testBut.bind(on_release = self.reachgoal)
-        l1_layout.add_widget(testBut)
 
         l1_layout.add_widget(self.moriaStamina)
         l1_layout.add_widget(l1Label)
@@ -190,24 +231,13 @@ class L1_static(Screen):
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
-
         self.add_widget(l1_layout)
 
-    def reachgoal(self,instance):
-        print(self.goal_var)
-        self.goal_var = 1
-        if self.goal_var == 1:
-            self.clear_widgets()
-            if self.clock_event:
-                Clock.unschedule(self.clock_event)
-                self.clock_event = None
-            self.canvas.clear()
-            Text = "[size=60]LEVEL 2[/size]\n[size=11](static)[/size]"
-            self.connect = Label(text=Text, markup=True)
-            self.add_widget(self.connect)
-            self.goal_var = 0
-            Clock.schedule_once(self.static_game, 3)  # Change screen after 5 seconds
-
+    def on_leave(self):
+        if self.clock_event:  # if clock event is scheduled
+            self.clock_event.cancel()  # cancel it
+        self.clock_event = None 
+        
     def lowerStamina(self,dt):
         self.moriaStamina.value = self.moriaStamina.value - 30
         print('moria stamina = ', self.moriaStamina.value)
@@ -336,11 +366,11 @@ class L1_dynamic(Screen):
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
 
-        self.goal_var = 0
-        print(self.goal_var)
-        testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
-        testBut.bind(on_release = self.reachgoal)
-        l1_layout.add_widget(testBut)
+        # self.goal_var = 0
+        # print(self.goal_var)
+        # testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
+        # testBut.bind(on_release = self.reachgoal)
+        # l1_layout.add_widget(testBut)
 
         l1_layout.add_widget(self.moriaStamina)
         l1_layout.add_widget(self.playerStamina)
@@ -355,6 +385,11 @@ class L1_dynamic(Screen):
 
         self.add_widget(l1_layout)
 
+    def on_leave(self):
+        if self.clock_event:  # if clock event is scheduled
+            self.clock_event.cancel()  # cancel it
+        self.clock_event = None 
+
     def lowerStamina(self,dt):
         self.moriaStamina.value = self.moriaStamina.value - 10
         # print('moria stamina = ', self.moriaStamina.value)
@@ -365,20 +400,20 @@ class L1_dynamic(Screen):
                 self.clock_event = None
             self.manager.current = 'vicpop'
 
-    def reachgoal(self,instance):
-        print(self.goal_var)
-        self.goal_var = 1
-        if self.goal_var == 1:
-            self.clear_widgets()
-            if self.clock_event:
-                Clock.unschedule(self.clock_event)
-                self.clock_event = None
-            self.canvas.clear()
-            Text = "[size=60]LEVEL 2[/size]\n[size=11](dynamic)[/size]"
-            self.connect = Label(text=Text, markup=True)
-            self.add_widget(self.connect)
-            self.goal_var = 0
-            Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
+    # def reachgoal(self,instance):
+    #     print(self.goal_var)
+    #     self.goal_var = 1
+    #     if self.goal_var == 1:
+    #         self.clear_widgets()
+    #         if self.clock_event:
+    #             Clock.unschedule(self.clock_event)
+    #             self.clock_event = None
+    #         self.canvas.clear()
+    #         Text = "[size=60]LEVEL 2[/size]\n[size=11](dynamic)[/size]"
+    #         self.connect = Label(text=Text, markup=True)
+    #         self.add_widget(self.connect)
+    #         self.goal_var = 0
+    #         Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
 
     def dynamic_game(self,dt):
         print("L1 ending")
@@ -763,6 +798,11 @@ class tryScreen(Screen):
 
         
 class HMmission_stoptheRescueRobot(App):
+    def __init__(self, **kwargs):
+        super(HMmission_stoptheRescueRobot, self).__init__(**kwargs)
+        self.mq = mqtt.Client(client_id="", clean_session=True, userdata=None)
+        self.topic = ""
+        self.playload = ""
     def build(self):
         self.sm = ScreenManager()
 
@@ -771,6 +811,8 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(connectingScreen(name='connectS'))
         self.sm.add_widget(mainScreen(name='mainS'))
         self.sm.add_widget(popup_playmode(name='popPlaymode'))
+        self.sm.add_widget(l1Sbut(name='l1sB'))
+        self.sm.add_widget(l1Dbut(name='l1dB'))
         self.sm.add_widget(howtoplay(name='htp'))
         self.sm.add_widget(L1_static(name='L1S'))
         self.sm.add_widget(L1_dynamic(name='L1D'))
@@ -779,9 +821,66 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(vicpop(name='vicpop'))
         self.sm.add_widget(loserPopup(name='loserpop'))
 
-
         self.sm.add_widget(tryScreen(name='ts'))
+
+        #-----------------MQTT config-------------------
+        self.mq.on_message=self.on_message 
+        self.mq.username_pw_set("iotproject","fra503xfra532")
+        self.mq.on_connect = self.on_connect
+        self.mq.on_message = self.on_message
+        self.mq.on_publish = self.on_publish
+        self.mq.connect('10.61.7.25',1883)
+        self.mq.loop_start()
+        
+        self.mq.publish("iotPro/start","MQTT Start")
+        self.mq.subscribe([("iotPro/field_connecR",0),("iotPro/prox1",0),("iotPro/prox2",0)],)
         return self.sm
     
+    def on_connect(self,client,userdata,flags,rc):
+        print("Connected "+str(rc))
+
+    def on_message(self,client,userdata,message):
+        # print("message received ")
+        self.topic = str(message.topic)
+        self.playload = str(message.payload.decode("utf-8"))
+        print("Topic: ", self.topic ,", message received: " ,self.playload)
+        Clock.schedule_once(self.change_screen, 0.1)
+
+    def on_publish(self, client,userdata,mid):
+        print("mid: "+str(mid))
+        
+    def change_screen(self,dt):
+        if self.sm.current == 'connectS':
+            if self.topic == "iotPro/field_connecR" and self.playload == "1":
+                print('go to mainS')
+                self.sm.current = 'mainS'
+        else:
+            print('not in the right Screen')
+        # -------------------- prox1-------------------------
+        if self.sm.current == 'l1sB':
+            if self.topic == "iotPro/prox1" and self.playload == "1":
+                print('go to l1s')
+                # Clock.unschedule()
+                self.sm.current = 'L1S'
+        elif self.sm.current == 'l1dB':
+            if self.topic == "iotPro/prox1" and self.playload == "1":
+                print('go to l1d')
+                # Clock.unschedule()
+                self.sm.current = 'L1D'
+        else:
+            print('not in the right Screen')
+        # -------------------- prox2-------------------------
+        if self.sm.current == 'L1S':
+            if self.topic == "iotPro/prox2" and self.playload == "goal":
+                print('go to l1s')
+                self.sm.current = 'L2S'
+        elif self.sm.current == 'L1D':
+            if self.topic == "iotPro/prox2" and self.playload == "goal":
+                print('go to l1d')
+                self.sm.current = 'L2D'
+        else:
+            print('not in the right Screen')
+
+
 if __name__ == '__main__':
     HMmission_stoptheRescueRobot().run()
