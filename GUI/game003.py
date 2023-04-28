@@ -12,6 +12,7 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.graphics import *
 from kivy.uix.progressbar import ProgressBar
+from kivy.uix.widget import Widget
 
 import paho.mqtt.client as mqtt
 # from kivy.lang.builder import Builder
@@ -618,26 +619,72 @@ class L2_static(Screen):
         print('cancle')
         self.homepopup.dismiss()
 
+class canvas1(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        rotateBut = Button(text = 'Trick',size_hint=(None,None),size=(100,50),pos = (350,50))
+        rotateBut.bind(on_release = self.rotateCB)
+        self.add_widget(rotateBut)
+
+        with self.canvas:
+            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
+            Color(0,1,0,0.8)
+            self.rec1 = Rectangle(size = (92,8),pos = (204,300))
+            self.rec2 = Rectangle(size = (92,8),pos = (348,300))
+            self.rec3 = Rectangle(size = (92,8),pos = (492,300))
+            self.rec4 = Rectangle(size = (92,8),pos = (276,412))
+            self.rec5 = Rectangle(size = (92,8),pos = (420,412))
+
+            self.cir1 = Ellipse(size=(32,32),pos=(234,288))
+            self.cir2 = Ellipse(size=(32,32),pos=(378,288))
+            self.cir3 = Ellipse(size=(32,32),pos=(522,288))
+            self.cir4 = Ellipse(size=(32,32),pos=(306,400))
+            self.cir5 = Ellipse(size=(32,32),pos=(450,400))
+
+        self.angle = 0
+
+    def rotateCB(self,instance):
+        with self.canvas:
+            PushMatrix()
+            self.angle = (self.angle+90)%180
+            self.canvas.remove(self.rec1)
+            self.canvas.remove(self.rec2)
+            self.canvas.remove(self.rec3)
+            self.canvas.remove(self.rec4)
+            self.canvas.remove(self.rec5)
+
+            PushMatrix()
+            Rotate(origin=(250,304),angle=self.angle)
+            self.rec1 = Rectangle(size = (92,8),pos = (204,300))
+            PopMatrix()
+
+            PushMatrix()
+            Rotate(origin=(394,304),angle=self.angle)
+            self.rec2 = Rectangle(size = (92,8),pos = (348,300))
+            PopMatrix()
+
+            PushMatrix()
+            Rotate(origin=(538,304),angle=self.angle)
+            self.rec3 = Rectangle(size = (92,8),pos = (492,300))
+            PopMatrix()
+
+            
+            PushMatrix()
+            Rotate(origin=(322,416),angle=self.angle)
+            self.rec4 = Rectangle(size = (92,8),pos = (276,412))
+            PopMatrix()
+
+            PushMatrix()
+            Rotate(origin=(466,416),angle=self.angle)
+            self.rec5 = Rectangle(size = (92,8),pos = (420,412))
+            PopMatrix()
+
 
 class L2_dynamic(Screen):
     def on_enter(self):
         print('L2 dynamic game start')
         l2_layout = FloatLayout()
-        with self.canvas:
-            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
-            Color(0,1,0,0.8)
-            Rectangle(size = (92,8),pos = (204,300))
-            Rectangle(size = (92,8),pos = (348,300))
-            Rectangle(size = (92,8),pos = (492,300))
-            Rectangle(size = (92,8),pos = (276,412))
-            Rectangle(size = (92,8),pos = (420,412))
-            Color(1,0.8,0.45,1)
-            Ellipse(size=(32,32),pos=(234,288))
-            Ellipse(size=(32,32),pos=(378,288))
-            Ellipse(size=(32,32),pos=(522,288))
-            Ellipse(size=(32,32),pos=(306,400))
-            Ellipse(size=(32,32),pos=(450,400))
-            # Ellipse(size=(32,32),pos=(150,120))
 
         l2Label = Label(text = 'LEVEL2', font_size = 30, pos_hint = {'x':0,'y':0.48})
 
@@ -667,6 +714,8 @@ class L2_dynamic(Screen):
         l2_layout.add_widget(pauseBut)
         l2_layout.add_widget(l2Label)
         l2_layout.add_widget(rotateBut)
+
+        l2_layout.add_widget(canvas1())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
@@ -833,7 +882,7 @@ class HMmission_stoptheRescueRobot(App):
         self.mq.loop_start()
         
         self.mq.publish("iotPro/start","MQTT Start")
-        self.mq.subscribe([("iotPro/field_connecR",0),("iotPro/prox1",0),("iotPro/prox2",0)],)
+        self.mq.subscribe([("iotPro/field_connecR",0),("project01/prox1",0),("project01/prox2",0)],)
         return self.sm
     
     def on_connect(self,client,userdata,flags,rc):
@@ -858,12 +907,12 @@ class HMmission_stoptheRescueRobot(App):
             print('not in the right Screen')
         # -------------------- prox1-------------------------
         if self.sm.current == 'l1sB':
-            if self.topic == "iotPro/prox1" and self.playload == "1":
+            if self.topic == "project01/prox1" and self.playload == "s1":
                 print('go to l1s')
                 # Clock.unschedule()
                 self.sm.current = 'L1S'
         elif self.sm.current == 'l1dB':
-            if self.topic == "iotPro/prox1" and self.playload == "1":
+            if self.topic == "project01/prox1" and self.playload == "s1":
                 print('go to l1d')
                 # Clock.unschedule()
                 self.sm.current = 'L1D'
@@ -871,11 +920,11 @@ class HMmission_stoptheRescueRobot(App):
             print('not in the right Screen')
         # -------------------- prox2-------------------------
         if self.sm.current == 'L1S':
-            if self.topic == "iotPro/prox2" and self.playload == "goal":
+            if self.topic == "project01/prox2" and self.playload == "s2":
                 print('go to l1s')
                 self.sm.current = 'L2S'
         elif self.sm.current == 'L1D':
-            if self.topic == "iotPro/prox2" and self.playload == "goal":
+            if self.topic == "project01/prox2" and self.playload == "s2":
                 print('go to l1d')
                 self.sm.current = 'L2D'
         else:
