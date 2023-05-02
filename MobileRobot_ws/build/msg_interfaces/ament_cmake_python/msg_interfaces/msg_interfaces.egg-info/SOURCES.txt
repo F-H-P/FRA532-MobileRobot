@@ -7,4 +7,5 @@ msg_interfaces.egg-info/top_level.txt
 msg_interfaces/srv/__init__.py
 msg_interfaces/srv/_command_gui.py
 msg_interfaces/srv/_goal_path.py
+msg_interfaces/srv/_local_path.py
 msg_interfaces/srv/_send_point.py

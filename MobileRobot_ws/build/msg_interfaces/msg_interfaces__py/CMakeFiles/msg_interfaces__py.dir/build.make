@@ -72,10 +72,12 @@ msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interf
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_goal_path.py
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_send_point.py
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_command_gui.py
+msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_local_path.py
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/__init__.py
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_goal_path_s.c
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_send_point_s.c
 msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c
+msg_interfaces__py/CMakeFiles/msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_local_path_s.c
 
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/lib/rosidl_generator_py/rosidl_generator_py
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/__init__.py
@@ -93,6 +95,7 @@ rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastr
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/msg_interfaces/srv/GoalPath.idl
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/msg_interfaces/srv/SendPoint.idl
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/msg_interfaces/srv/CommandGUI.idl
+rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/msg_interfaces/srv/LocalPath.idl
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -143,6 +146,9 @@ rosidl_generator_py/msg_interfaces/srv/_send_point.py: rosidl_generator_py/msg_i
 rosidl_generator_py/msg_interfaces/srv/_command_gui.py: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/msg_interfaces/srv/_command_gui.py
 
+rosidl_generator_py/msg_interfaces/srv/_local_path.py: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/msg_interfaces/srv/_local_path.py
+
 rosidl_generator_py/msg_interfaces/srv/__init__.py: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/msg_interfaces/srv/__init__.py
 
@@ -155,6 +161,9 @@ rosidl_generator_py/msg_interfaces/srv/_send_point_s.c: rosidl_generator_py/msg_
 rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c
 
+rosidl_generator_py/msg_interfaces/srv/_local_path_s.c: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/msg_interfaces/srv/_local_path_s.c
+
 msg_interfaces__py: msg_interfaces__py/CMakeFiles/msg_interfaces__py
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_c.c
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
@@ -164,6 +173,8 @@ msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_command_gui.py
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_goal_path.py
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_goal_path_s.c
+msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_local_path.py
+msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_local_path_s.c
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_send_point.py
 msg_interfaces__py: rosidl_generator_py/msg_interfaces/srv/_send_point_s.c
 msg_interfaces__py: msg_interfaces__py/CMakeFiles/msg_interfaces__py.dir/build.make

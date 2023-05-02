@@ -1,0 +1,1 @@
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation/scripts/PotentialField_v2.py

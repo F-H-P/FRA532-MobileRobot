@@ -218,4 +218,7 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_
  /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/command_gui__struct.h \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__struct.h \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/int64__struct.h \
- /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/command_gui__functions.h
+ /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/command_gui__functions.h \
+ /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/local_path__type_support.h \
+ /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/local_path__struct.h \
+ /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_generator_c/msg_interfaces/srv/detail/local_path__functions.h

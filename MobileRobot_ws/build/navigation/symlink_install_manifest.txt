@@ -2,6 +2,7 @@
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/path_tracking.py
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/Behavior_server.py
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/LocalPlanning_PotentialField.py
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/PotentialField_v2.py
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/launch/navigate_with_static_environment.launch.py
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/ament_index/resource_index/package_run_dependencies/navigation
 /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/ament_index/resource_index/parent_prefix_path/navigation

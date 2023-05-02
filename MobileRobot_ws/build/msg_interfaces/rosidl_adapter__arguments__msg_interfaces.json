@@ -3,6 +3,7 @@
   "non_idl_tuples": [
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces:srv/GoalPath.srv",
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces:srv/SendPoint.srv",
-    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces:srv/CommandGUI.srv"
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces:srv/CommandGUI.srv",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces:srv/LocalPath.srv"
   ]
 }

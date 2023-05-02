@@ -5,7 +5,8 @@
   "idl_tuples": [
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/GoalPath.idl",
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/SendPoint.idl",
-    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/CommandGUI.idl"
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/CommandGUI.idl",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/LocalPath.idl"
   ],
   "ros_interface_dependencies": [
     "std_msgs:/opt/ros/humble/share/std_msgs/msg/Bool.idl",
@@ -51,6 +52,7 @@
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/GoalPath.idl",
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/SendPoint.idl",
     "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/CommandGUI.idl",
+    "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/LocalPath.idl",
     "/opt/ros/humble/share/std_msgs/msg/Bool.idl",
     "/opt/ros/humble/share/std_msgs/msg/Byte.idl",
     "/opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl",

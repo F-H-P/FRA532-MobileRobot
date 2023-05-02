@@ -3,12 +3,15 @@ file(REMOVE_RECURSE
   "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/command_gui__type_support.cpp.o.d"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/goal_path__type_support.cpp.o"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/goal_path__type_support.cpp.o.d"
+  "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/local_path__type_support.cpp.o"
+  "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/local_path__type_support.cpp.o.d"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/send_point__type_support.cpp.o"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/send_point__type_support.cpp.o.d"
   "libmsg_interfaces__rosidl_typesupport_cpp.pdb"
   "libmsg_interfaces__rosidl_typesupport_cpp.so"
   "rosidl_typesupport_cpp/msg_interfaces/srv/command_gui__type_support.cpp"
   "rosidl_typesupport_cpp/msg_interfaces/srv/goal_path__type_support.cpp"
+  "rosidl_typesupport_cpp/msg_interfaces/srv/local_path__type_support.cpp"
   "rosidl_typesupport_cpp/msg_interfaces/srv/send_point__type_support.cpp"
 )
 

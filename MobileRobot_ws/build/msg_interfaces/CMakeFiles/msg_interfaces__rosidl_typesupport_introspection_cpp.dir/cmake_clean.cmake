@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/command_gui__type_support.cpp.o.d"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/goal_path__type_support.cpp.o"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/goal_path__type_support.cpp.o.d"
+  "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/local_path__type_support.cpp.o"
+  "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/local_path__type_support.cpp.o.d"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/send_point__type_support.cpp.o"
   "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/send_point__type_support.cpp.o.d"
   "libmsg_interfaces__rosidl_typesupport_introspection_cpp.pdb"
@@ -11,6 +13,8 @@ file(REMOVE_RECURSE
   "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/command_gui__type_support.cpp"
   "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_cpp.hpp"
   "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/goal_path__type_support.cpp"
+  "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_cpp.hpp"
+  "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/local_path__type_support.cpp"
   "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/send_point__rosidl_typesupport_introspection_cpp.hpp"
   "rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/send_point__type_support.cpp"
 )

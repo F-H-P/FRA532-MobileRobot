@@ -28,6 +28,7 @@ install(PROGRAMS
   scripts/path_tracking.py
   scripts/Behavior_server.py
   scripts/LocalPlanning_PotentialField.py
+  scripts/PotentialField_v2.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

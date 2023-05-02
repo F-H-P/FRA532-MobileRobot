@@ -80,6 +80,7 @@ rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesu
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/msg_interfaces/srv/GoalPath.idl
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/msg_interfaces/srv/SendPoint.idl
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/msg_interfaces/srv/CommandGUI.idl
+rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/msg_interfaces/srv/LocalPath.idl
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -130,6 +131,12 @@ rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__rosidl_type
 rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp
 
+rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_fastrtps_c.h: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_fastrtps_c.h
+
+rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp
+
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/flags.make
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/compiler_depend.ts
@@ -172,11 +179,26 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp -o CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.s
 
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/flags.make
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o -MF CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o.d -o CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o -c /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp
+
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp > CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.i
+
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp -o CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.s
+
 # Object files for target msg_interfaces__rosidl_typesupport_fastrtps_c
 msg_interfaces__rosidl_typesupport_fastrtps_c_OBJECTS = \
 "CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o" \
 "CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/send_point__type_support_c.cpp.o" \
-"CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.o"
+"CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.o" \
+"CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o"
 
 # External object files for target msg_interfaces__rosidl_typesupport_fastrtps_c
 msg_interfaces__rosidl_typesupport_fastrtps_c_EXTERNAL_OBJECTS =
@@ -184,6 +206,7 @@ msg_interfaces__rosidl_typesupport_fastrtps_c_EXTERNAL_OBJECTS =
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/send_point__type_support_c.cpp.o
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.o
+libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/build.make
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: libmsg_interfaces__rosidl_generator_c.so
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so
@@ -197,7 +220,7 @@ libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/humble/lib/libbuil
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/humble/lib/librosidl_runtime_c.so
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/humble/lib/librcutils.so
 libmsg_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library libmsg_interfaces__rosidl_typesupport_fastrtps_c.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libmsg_interfaces__rosidl_typesupport_fastrtps_c.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -212,6 +235,8 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_type
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_fastrtps_c.h
+CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/send_point__rosidl_typesupport_fastrtps_c.h
 CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/send_point__type_support_c.cpp
 	cd /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/DependInfo.cmake --color=$(COLOR)

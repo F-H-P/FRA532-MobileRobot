@@ -75,6 +75,9 @@ CMakeFiles/msg_interfaces: rosidl_cmake/srv/SendPoint_Response.msg
 CMakeFiles/msg_interfaces: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/CommandGUI.srv
 CMakeFiles/msg_interfaces: rosidl_cmake/srv/CommandGUI_Request.msg
 CMakeFiles/msg_interfaces: rosidl_cmake/srv/CommandGUI_Response.msg
+CMakeFiles/msg_interfaces: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/LocalPath.srv
+CMakeFiles/msg_interfaces: rosidl_cmake/srv/LocalPath_Request.msg
+CMakeFiles/msg_interfaces: rosidl_cmake/srv/LocalPath_Response.msg
 CMakeFiles/msg_interfaces: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 CMakeFiles/msg_interfaces: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 CMakeFiles/msg_interfaces: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl

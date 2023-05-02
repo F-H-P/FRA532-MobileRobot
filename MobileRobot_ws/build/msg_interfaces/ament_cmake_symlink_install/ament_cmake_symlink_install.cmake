@@ -367,6 +367,9 @@ ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/s
 # install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/CommandGUI.idl" "DESTINATION" "share/msg_interfaces/srv")
 ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/CommandGUI.idl" "DESTINATION" "share/msg_interfaces/srv")
 
+# install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/LocalPath.idl" "DESTINATION" "share/msg_interfaces/srv")
+ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces/srv/LocalPath.idl" "DESTINATION" "share/msg_interfaces/srv")
+
 # install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/GoalPath.srv" "DESTINATION" "share/msg_interfaces/srv")
 ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/GoalPath.srv" "DESTINATION" "share/msg_interfaces/srv")
 
@@ -393,6 +396,15 @@ ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/s
 
 # install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/CommandGUI_Response.msg" "DESTINATION" "share/msg_interfaces/srv")
 ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/CommandGUI_Response.msg" "DESTINATION" "share/msg_interfaces/srv")
+
+# install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/LocalPath.srv" "DESTINATION" "share/msg_interfaces/srv")
+ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces/srv/LocalPath.srv" "DESTINATION" "share/msg_interfaces/srv")
+
+# install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/LocalPath_Request.msg" "DESTINATION" "share/msg_interfaces/srv")
+ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/LocalPath_Request.msg" "DESTINATION" "share/msg_interfaces/srv")
+
+# install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/LocalPath_Response.msg" "DESTINATION" "share/msg_interfaces/srv")
+ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/LocalPath_Response.msg" "DESTINATION" "share/msg_interfaces/srv")
 
 # install(FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/msg_interfaces" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces" FILES "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/msg_interfaces" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

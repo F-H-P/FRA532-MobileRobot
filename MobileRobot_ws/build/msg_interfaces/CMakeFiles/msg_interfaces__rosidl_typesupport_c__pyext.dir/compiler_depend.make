@@ -259,8 +259,13 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/m
   rosidl_generator_c/msg_interfaces/srv/detail/command_gui__struct.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__struct.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/int64__struct.h \
-  rosidl_generator_c/msg_interfaces/srv/detail/command_gui__functions.h
+  rosidl_generator_c/msg_interfaces/srv/detail/command_gui__functions.h \
+  rosidl_generator_c/msg_interfaces/srv/detail/local_path__type_support.h \
+  rosidl_generator_c/msg_interfaces/srv/detail/local_path__struct.h \
+  rosidl_generator_c/msg_interfaces/srv/detail/local_path__functions.h
 
+
+rosidl_generator_c/msg_interfaces/srv/detail/local_path__functions.h:
 
 /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/int64__struct.h:
 
@@ -386,6 +391,8 @@ rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_c.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
+rosidl_generator_c/msg_interfaces/srv/detail/local_path__type_support.h:
+
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /usr/include/x86_64-linux-gnu/python3.10/pyconfig.h:
@@ -455,6 +462,8 @@ rosidl_generator_c/msg_interfaces/srv/detail/send_point__functions.h:
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
+
+rosidl_generator_c/msg_interfaces/srv/detail/local_path__struct.h:
 
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 

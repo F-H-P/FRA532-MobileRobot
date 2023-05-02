@@ -78,6 +78,10 @@ CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/command_
 CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__builder.hpp
 CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__struct.hpp
 CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__traits.hpp
+CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/local_path.hpp
+CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__builder.hpp
+CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__struct.hpp
+CMakeFiles/msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__traits.hpp
 
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/lib/rosidl_generator_cpp/rosidl_generator_cpp
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_cpp/__init__.py
@@ -97,6 +101,7 @@ rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/share/ros
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: rosidl_adapter/msg_interfaces/srv/GoalPath.idl
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: rosidl_adapter/msg_interfaces/srv/SendPoint.idl
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: rosidl_adapter/msg_interfaces/srv/CommandGUI.idl
+rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: rosidl_adapter/msg_interfaces/srv/LocalPath.idl
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -165,6 +170,18 @@ rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__struct.hpp: rosidl_g
 rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__traits.hpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__traits.hpp
 
+rosidl_generator_cpp/msg_interfaces/srv/local_path.hpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/msg_interfaces/srv/local_path.hpp
+
+rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__builder.hpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__builder.hpp
+
+rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__struct.hpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__struct.hpp
+
+rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__traits.hpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__traits.hpp
+
 msg_interfaces__cpp: CMakeFiles/msg_interfaces__cpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/command_gui.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui__builder.hpp
@@ -173,10 +190,14 @@ msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/command_gui_
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__builder.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__struct.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/goal_path__traits.hpp
+msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__builder.hpp
+msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__struct.hpp
+msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/local_path__traits.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/send_point__builder.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/send_point__struct.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/detail/send_point__traits.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/goal_path.hpp
+msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/local_path.hpp
 msg_interfaces__cpp: rosidl_generator_cpp/msg_interfaces/srv/send_point.hpp
 msg_interfaces__cpp: CMakeFiles/msg_interfaces__cpp.dir/build.make
 .PHONY : msg_interfaces__cpp

@@ -80,6 +80,7 @@ rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_t
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: rosidl_adapter/msg_interfaces/srv/GoalPath.idl
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: rosidl_adapter/msg_interfaces/srv/SendPoint.idl
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: rosidl_adapter/msg_interfaces/srv/CommandGUI.idl
+rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: rosidl_adapter/msg_interfaces/srv/LocalPath.idl
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -121,6 +122,9 @@ rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__rosidl_
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_introspection_c.h: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_introspection_c.h
 
+rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_c.h: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_c.h
+
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c
 
@@ -129,6 +133,9 @@ rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__type_su
 
 rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c
+
+rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c
 
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c.o: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/flags.make
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c.o: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c
@@ -172,11 +179,26 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesup
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c -o CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.s
 
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/flags.make
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o -MF CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o.d -o CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o -c /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c
+
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c > CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.i
+
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c -o CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.s
+
 # Object files for target msg_interfaces__rosidl_typesupport_introspection_c
 msg_interfaces__rosidl_typesupport_introspection_c_OBJECTS = \
 "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c.o" \
 "CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__type_support.c.o" \
-"CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.o"
+"CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.o" \
+"CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o"
 
 # External object files for target msg_interfaces__rosidl_typesupport_introspection_c
 msg_interfaces__rosidl_typesupport_introspection_c_EXTERNAL_OBJECTS =
@@ -184,6 +206,7 @@ msg_interfaces__rosidl_typesupport_introspection_c_EXTERNAL_OBJECTS =
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c.o
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__type_support.c.o
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.o
+libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/build.make
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: libmsg_interfaces__rosidl_generator_c.so
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
@@ -194,7 +217,7 @@ libmsg_interfaces__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/li
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/librosidl_runtime_c.so
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/librcutils.so
 libmsg_interfaces__rosidl_typesupport_introspection_c.so: CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C shared library libmsg_interfaces__rosidl_typesupport_introspection_c.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C shared library libmsg_interfaces__rosidl_typesupport_introspection_c.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -209,6 +232,8 @@ CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_c.h
+CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__rosidl_typesupport_introspection_c.h
 CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__type_support.c
 	cd /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/DependInfo.cmake --color=$(COLOR)
