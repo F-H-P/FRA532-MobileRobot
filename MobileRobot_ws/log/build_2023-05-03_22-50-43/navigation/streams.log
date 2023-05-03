@@ -1,0 +1,36 @@
+[0.020s] Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation -- -j12 -l12
+[0.056s] -- Found ament_cmake: 1.3.3 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.217s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.233s] -- Found ament_lint_auto: 0.12.5 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.299s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.300s] -- Added test 'lint_cmake' to check CMake code style
+[0.300s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.301s] -- Added test 'xmllint' to check XML markup files
+[0.303s] -- Configuring done
+[0.310s] -- Generating done
+[0.311s] -- Build files have been written to: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation
+[0.330s] Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation -- -j12 -l12
+[0.355s] Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation
+[0.361s] -- Install configuration: ""
+[0.361s] -- Execute custom install script
+[0.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/GlobalPlanning_A-star.py
+[0.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/path_tracking.py
+[0.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/Behavior_server.py
+[0.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/navigation/LocalPlanning_PotentialField.py
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/launch/navigate_with_static_environment.launch.py
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/ament_index/resource_index/package_run_dependencies/navigation
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/ament_index/resource_index/parent_prefix_path/navigation
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/environment/ament_prefix_path.sh
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/environment/ament_prefix_path.dsv
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/environment/path.sh
+[0.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/environment/path.dsv
+[0.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/local_setup.bash
+[0.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/local_setup.sh
+[0.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/local_setup.zsh
+[0.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/local_setup.dsv
+[0.363s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.dsv
+[0.371s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/ament_index/resource_index/packages/navigation
+[0.371s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/cmake/navigationConfig.cmake
+[0.371s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/cmake/navigationConfig-version.cmake
+[0.371s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.xml
+[0.375s] Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation

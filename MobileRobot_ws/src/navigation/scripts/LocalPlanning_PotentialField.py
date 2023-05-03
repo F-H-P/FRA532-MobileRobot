@@ -4,67 +4,83 @@ import rclpy
 from rclpy.node import Node
 from msg_interfaces.srv import GoalPath
 from std_msgs.msg import Float64MultiArray
-import numpy as np
-import matplotlib.pyplot as plt
-from collections import deque
-
-from nav2_msgs.srv import GetCostmap
-from nav_msgs.srv import GetMap
 
 import math
 from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener 
 
-show_animation = True
-dp = 0.3
+import numpy as np
+from nav2_msgs.srv import GetCostmap
+
+from msg_interfaces.srv import LocalPath
+import time
+
+KP = 5.0
 
 class LocalPlanning(Node):
     def __init__(self):
         super().__init__('local_planning')
-        self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.timer = self.create_timer(0.1,self.timer_callback)
-        self.costmap_client = self.create_client(GetCostmap,"/local_costmap/get_costmap")
-
+        self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.path_x = Float64MultiArray()
         self.path_y = Float64MultiArray()
-        self.costmap_req = GetCostmap.Request()
-        self.costmap_response = GetCostmap.Response()
-        self.map_req = GetMap.Request()
-        self.map_response = GetMap.Response()
+        self.path_req = False
 
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
-
-        self.path_req = False
-        self.costmap_res = False
-        self.arrive = False
-
-        self.costmap_response = self.send_request_costmap()
-        self.costmap = self.costmap_response.map.data
-
-        self.resolution = self.costmap_response.map.metadata.resolution
-        self.size_x = self.costmap_response.map.metadata.size_x #expect in grid
-        self.size_y = self.costmap_response.map.metadata.size_y #expect in grid
-        self.min_x = self.costmap_response.map.metadata.origin.position.x #expect in position
-        self.min_y = self.costmap_response.map.metadata.origin.position.y #expect in position
-
-        self.tx = None
-        self.ty = None
         self.cx = 0.0
         self.cy = 0.0
         self.theta = 0.0
+
+        self.dp = 3.0
+        self.tx = None
+        self.ty = None
         self.ind = 0
+        self.change_target = False
 
-        self.AREA_WIDTH = 30.0
-        self.KP = 5.0
-        self.ETA = 100.0
-        # self.OSCILLATIONS_DETECTION_LENGTH = 3
+        self.costmap_client = self.create_client(GetCostmap,"/local_costmap/get_costmap")
+        self.costmap_req = GetCostmap.Request()
+        self.costmap_response = GetCostmap.Response()
 
-        self.ox = []
-        self.oy = []
+        self.local_path_client = self.create_client(LocalPath,"/local_path")
+        self.local_path_request = LocalPath.Request()
+        self.local_path_x = Float64MultiArray()
+        self.local_path_y = Float64MultiArray()
 
+        self.init_flag = False
+        request_success = False
+        while request_success is False:
+            request_success,self.costmap_response = self.send_request_costmap()
+        
+        self.costmap_old = self.costmap_response.map.data
+        self.size_x = self.costmap_response.map.metadata.size_x
+        self.size_y = self.costmap_response.map.metadata.size_y 
+        self.min_x = self.costmap_response.map.metadata.origin.position.x
+        self.min_y = self.costmap_response.map.metadata.origin.position.y 
+        self.resolution = self.costmap_response.map.metadata.resolution
+        print(self.costmap_old)
+    #------------------------------------------------------------#
+    # set global path    
+    def goal_path_callback(self, request, response):
+        self.path_x = request.x_path.data
+        self.path_y = request.y_path.data
+        self.path_req = True
+        self.init_flag = True
+        print("global path request success!!!!")
+        return response
+    #------------------------------------------------------------#
+    # send local path      
+    def send_request_local_path(self):
+        self.local_path_request.x_path = self.local_path_x
+        self.local_path_request.y_path = self.local_path_y
+        self.local_path_client.call_async(self.local_path_request)
+        print("send local path request success!!!!")
+    #------------------------------------------------------------#
     def timer_callback(self):
+        '''
+        set current position and do find_local_path function when have request from goal path server in every 3 second
+        '''
         toggle = self.listener_post()
         if toggle is True:
             self.cx = self.tf_listener.transform.translation.x
@@ -73,10 +89,10 @@ class LocalPlanning(Node):
                                                     self.tf_listener.transform.rotation.y,
                                                     self.tf_listener.transform.rotation.z,
                                                     self.tf_listener.transform.rotation.w)
-
-            if self.arrive is False and self.path_req is True:
-                self.process()
-
+            if self.path_req is True:
+                self.find_local_path()
+            time.sleep(3)
+            
     def listener_post(self):
         try:
             self.tf_listener = self.tf_buffer.lookup_transform('map','base_link',rclpy.time.Time())
@@ -89,116 +105,130 @@ class LocalPlanning(Node):
             t2 = +1.0 - 2.0 * (y * y + z * z)
             yaw_z = math.atan2(t1, t2)
             return yaw_z # in radians
-
-    def goal_path_callback(self, request, response):
-        self.path_x = request.x_path.data
-        self.path_y = request.y_path.data
-        print("request success!!!!")
-        self.path_req = True
-        return response
-
-    def send_request_costmap(self):
-        self.future = self.costmap_client.call_async(self.costmap_req)
-        rclpy.spin_until_future_complete(self, self.future)
-        print("get costmap response success!!!!")
-        self.costmap_res = True
-        return self.future.result()
-    
-    def process(self):
-        if self.tx is None and self.ty is None:
+    #------------------------------------------------------------#
+    def set_target(self):
+        '''
+        Update target -> self.tx, self.ty
+        '''
+        self.change_target = False
+        if self.tx is None or self.ty is None:
             self.ind = 0
             self.tx = self.path_x[self.ind]
             self.ty = self.path_y[self.ind]
+            print("Do init set target")
         else:
-            d = self.calc_distance(self.tx,self.ty,self.cx,self.cy)
-            if np.linalg.norm(d) < dp:
+            d = np.hypot(self.tx-self.cx, self.ty-self.cy)
+            if np.linalg.norm(d) < self.dp:
                 if self.ind < len(self.path_x)-1:
                     self.ind += 1
                     self.tx = self.path_x[self.ind]
                     self.ty = self.path_y[self.ind]
+                    self.change_target = True
+                    print("change target")
                 else:
-                    self.arrive = True
                     self.tx = None
                     self.ty = None
+                    self.path_req = False
                     print("arrive!!!")
-            else:
-                self.costmap_response = self.send_request_costmap()
-                self.costmap = self.costmap_response.map.data
+    #------------------------------------------------------------#
+    # get local costmap 
+    def send_request_costmap(self):
+        print("Do send request")
+        future = self.costmap_client.call_async(self.costmap_req)
+        try:
+            print("trying")
+            rclpy.spin_until_future_complete(self, future)
+            return True,future.result()
+        except TransformException as ex:
+            return False,None
+    #------------------------------------------------------------#
+    def find_local_path(self):
+        '''
+        1. Do set_target function to update target
+        2. Send local costmap request
+        3. Find local path when target point or local costmap are changed -> self.local_path_x, self.local_path_y
+        4. Send local path request 
+        '''
+        self.set_target()
+        print("set target success")
+        request_success = False
+        while request_success is False:
+            print(request_success)
+            request_success,self.costmap_response = self.send_request_costmap()
 
-                if self.costmap_res is True:
-                    i = 0
-                    for i in range(len(self.costmap)-1):
-                        if self.costmap[i] > 0.0:
-                            px,py = self.calc_grid2position(i)
-                            self.ox.append(px)
-                            self.oy.append(py)
-                            print(px,py)
-                        i +=1
-                    self.potential_field_planning(self.cx, self.cy, self.tx,self.ty, 0.01)
-                    self.costmap_res = False
-                else:
-                    print("No costmap response!!")
-
-    def calc_grid2position(self, index):
-        px = ((index%self.size_x)*self.resolution)+self.min_x
-        py = ((index//self.size_x)*self.resolution)+self.min_y
-        return px,py
-    
-    def calc_potential_field(self, gx, gy, rr): 
-        # minx = min(min(self.ox), sx, gx) - self.AREA_WIDTH / 2.0
-        # miny = min(min(self.oy), sy, gy) - self.AREA_WIDTH / 2.0
-        # maxx = max(max(self.ox), sx, gx) + self.AREA_WIDTH / 2.0
-        # maxy = max(max(self.oy), sy, gy) + self.AREA_WIDTH / 2.0 
-        # xw = int(round((maxx - minx) / self.resolution))
-        # yw = int(round((maxy - miny) / self.resolution))
-
-        size_x,size_y = self.calc_grid2position(len(self.costmap))
-        size_x = size_x-self.min_x
-        size_y = size_y-self.min_y
-        # calc each potential
-        pmap = [[0.0 for i in range(size_x)] for i in range(size_y)]
-
-        for ix in range(size_x):
-            x = ix * self.resolution + self.min_x
-
-            for iy in range(size_y):
-                y = iy * self.resolution + self.min_y
-                ug = self.calc_attractive_potential(x, y, gx, gy)
-                uo = self.calc_repulsive_potential(x, y, rr)
-                uf = ug + uo
-                pmap[ix][iy] = uf
-
-        return pmap
-
-
-    def calc_attractive_potential(self, x, y, gx, gy):
-        return 0.5 * self.KP * np.hypot(x - gx, y - gy)
-
-
-    def calc_repulsive_potential(self, ox, oy, rr):
-        # search nearest obstacle
-        minid = -1
-        dmin = float("inf")
-        for i, _ in enumerate(self.ox):
-            d = np.hypot(ox - self.ox[i], oy - self.oy[i])
-            if dmin >= d:
-                dmin = d
-                minid = i
-
-        # calc repulsive potential
-        dq = np.hypot(ox - self.ox[minid], oy - self.oy[minid])
-
-        if dq <= rr:
-            if dq <= 0.1:
-                dq = 0.1
-
-            return 0.5 * self.ETA * (1.0 / dq - 1.0 / rr) ** 2
+        print("request success")
+        local_costmap_change = False
+        local_costmap_change = self.check_costmap()
+        if local_costmap_change or self.change_target is True:
+            self.local_path_x,self.local_path_y = self.potential_field(self.tx, self.ty, self.min_x, self.min_y, self.size_x, self.size_y)
+            self.send_request_local_path()
+            print("local costmap is change")
         else:
-            return 0.0
+            print("not change!")
 
+    #------------------------------------------------------------#
+    class Node:
+        def __init__(self, x, y, uf):
+            self.x = x
+            self.y = y
+            self.uf = uf
 
-    def get_motion_model(self):
-        # dx, dy
+    def potential_field(self, tx, ty, min_x, min_y, size_x, size_y):
+        ''' 
+        Find local path from potential field algorithm and store point of path
+
+        input: target position, x_min, y_min, size_y
+        output: set of point in local path -> rx, ry
+        '''
+        
+        pmap = self.calc_potential_field(tx, ty, min_x, min_y, size_x, size_y)
+        d = np.hypot(self.cx-tx, self.cy-ty)
+        motion = self.get_motion_model()
+        ix = self.cx-min_x
+        iy = self.cy-min_y
+        rx, ry = [self.cx], [self.cy]
+        while d >= self.resolution:
+            minp = float("inf")
+            px, py = -1, -1
+            i = 0
+            for i,_ in enumerate(motion):
+                inx = int(ix + motion[i][0])
+                iny = int(iy + motion[i][1])
+                node = pmap[inx][iny]
+                if minp > node.uf:
+                    minp = node.uf
+                    px = node.x
+                    py = node.y
+            ix = px-min_x
+            iy = py-min_y
+            d = np.hypot(tx-px, ty-py)
+            rx.append(px)
+            ry.append(py)
+        return rx,ry
+        
+    def calc_potential_field(self, tx, ty, min_x, min_y, size_x, size_y):
+        '''
+        This function used to calculate potential cost of each grid in local area
+
+        input: target position, x_min, y_min, size_y
+        return: potential cost of each grid in local costmap window
+        '''
+        pmap = np.zeros((size_x,size_y))
+        i = 0
+        for i in range(len(self.costmap_response.map.data)):
+            px,py = self.calc_index2position(i,1.0,min_x,min_y,size_y)
+            ug = self.calc_attractive_potential(px,py,tx,ty)
+            uf = ug + self.costmap_response.map.data[i]
+            node = self.Node(px,py,uf)
+            pmap[px-min_x][py-min_y] = node
+        return pmap
+        
+    def calc_attractive_potential(x, y, tx, ty):
+        return 0.5 * KP * np.hypot(x - tx, y - ty)
+    def get_motion_model():
+        '''
+        Generate motion of searching
+        '''
         motion = [[1, 0],
                 [0, 1],
                 [-1, 0],
@@ -207,86 +237,30 @@ class LocalPlanning(Node):
                 [-1, 1],
                 [1, -1],
                 [1, 1]]
-
         return motion
+    #------------------------------------------------------------#
+    def check_costmap(self):
+        '''
+        Check costmap of point in set of current local path
 
+        input: current local costmap
+        output: True/False
+        '''     
+        i = 0
+        result = False
+        for i in range(len(self.costmap_response.map.data)):
+            if self.costmap_old[i] != self.costmap_response.map.data[i]:
+                result = True
+        return result
 
-    # def oscillations_detection(self, previous_ids, ix, iy):
-    #     previous_ids.append((ix, iy))
+    def calc_index2position(self, index, resolution, min_x, min_y,size_y):
+        px = ((index%size_y)*resolution)+min_x
+        py = ((index//size_y)*resolution)+min_y
+        return px,py
+    
+    def calc_grid2index(self, x,y):
+        return (y - self.min_y) * self.x_width + (x - self.min_x)
 
-    #     if (len(previous_ids) > self.OSCILLATIONS_DETECTION_LENGTH):
-    #         previous_ids.popleft()
-
-    #     # check if contains any duplicates by copying into a set
-    #     previous_ids_set = set()
-    #     for index in previous_ids:
-    #         if index in previous_ids_set:
-    #             return True
-    #         else:
-    #             previous_ids_set.add(index)
-    #     return False
-
-
-    def potential_field_planning(self, sx, sy, gx, gy, rr):
-        # calc potential field
-        pmap = self.calc_potential_field(gx, gy, rr)
-
-        # search path
-        d = np.hypot(sx - gx, sy - gy)
-        ix = round((sx - self.min_x) / self.resolution)
-        iy = round((sy - self.min_y) / self.resolution)
-        gix = round((gx - self.min_x) / self.resolution)
-        giy = round((gy - self.min_y) / self.resolution)
-
-        if show_animation:
-            self.draw_heatmap(pmap)
-            # for stopping simulation with the esc key.
-            plt.gcf().canvas.mpl_connect('key_release_event',
-                    lambda event: [exit(0) if event.key == 'escape' else None])
-            plt.plot(ix, iy, "*k")
-            plt.plot(gix, giy, "*m")
-
-        rx, ry = [sx], [sy]
-        motion = self.get_motion_model()
-        previous_ids = deque()
-
-        if d <= dp:
-            minp = float("inf")
-            minix, miniy = -1, -1
-            for i, _ in enumerate(motion):
-                inx = int(ix + motion[i][0])
-                iny = int(iy + motion[i][1])
-                if inx >= len(pmap) or iny >= len(pmap[0]) or inx < 0 or iny < 0:
-                    p = float("inf")  # outside area
-                    print("outside potential!")
-                else:
-                    p = pmap[inx][iny]
-                if minp > p:
-                    minp = p
-                    minix = inx
-                    miniy = iny
-            next_x = minix * self.resolution + self.min_x
-            next_y = miniy * self.resolution + self.min_y
-            print(next_x,next_y)
-            # d = np.hypot(gx - xp, gy - yp)
-            # rx.append(xp)
-            # ry.append(yp)
-
-            # if (self.oscillations_detection(previous_ids, ix, iy)):
-            #     print("Oscillation detected at ({},{})!".format(ix, iy))
-
-            if show_animation:
-                plt.plot(ix, iy, ".r")
-                plt.pause(0.01)
-
-        print("Goal!!")
-
-        return rx, ry
-
-
-    def draw_heatmap(self, data):
-        data = np.array(data).T
-        plt.pcolor(data, vmax=100.0, cmap=plt.cm.Blues)
 
 def main(args=None):
     print(__file__ + " start!!")
