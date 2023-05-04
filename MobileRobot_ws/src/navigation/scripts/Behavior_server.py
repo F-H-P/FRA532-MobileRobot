@@ -21,46 +21,75 @@ class BehaviorServer(Node):
 
         self.cx = 0.0
         self.cy = 0.0
-        self.gx = 3.0
-        self.gy = 1.0
+        self.gx = 0.0
+        self.gy = 0.0
 
         self.init = False
         self.send_toggle = True
+        self.request_toggle = False
         
-    #     self.command_server = self.create_service(CommandGUI,"/command_state",self.command_callback)
-    #     # self.command_client = self.create_client(CommandGUI,"/command_state")
-    #     self.receive_command = String()
+        self.command_server = self.create_service(CommandGUI,"/command_state",self.command_callback)
+        # self.command_client = self.create_client(CommandGUI,"/command_state")
+        self.get_command = String()
 
-    #     self.command_client = self.create_client(CommandGUI,"/command_finnish")        
-    #     # self.command_server = self.create_service(CommandGUI,"/command_finnish",self.command_callback)
-    #     self.send_command = String()
-    #     self.send_command_res = Int64()
-    #     self.send_command_res = self.command_req()
-    #     if self.send_command_res.data == 1:
-    #         pass
+        self.command_client = self.create_client(CommandGUI,"/command_finnish")        
+        # self.command_server = self.create_service(CommandGUI,"/command_finnish",self.command_callback)
+        self.send_command = String()
+        self.send_command_res = Int64()
+        # self.send_command_res = self.command_req()
 
-    #     self.send_command.data = "start"
+    def command_callback(self,request,response):
+        self.get_command = request.command
+        response.res.data = 1
+        self.request_toggle = True
+        return response
 
-    # def command_callback(self,request,response):
-    #     self.receive_command = request.command
-    #     response.res.data = 1
-
-    # def command_req(self):
-    #     future_command = self.command_client.call_async(self.send_command)
-    #     rclpy.spin_until_future_complete(self, future_command)
-    #     print("command_finish response success!!!!")
-    #     return self.future_command.result()
+    def command_req(self):
+        future_command = self.command_client.call_async(self.send_command)
+        rclpy.spin_until_future_complete(self, future_command)
+        print("command_finish response success!!!!")
+        return self.future_command.result()
     
-    # def command2navigate(self):
-    #     i = False
-    #     if i == True:
-    #         self.send_command.data = "start"
-    #         self.send_command_res = self.command_req()
-    #     elif False:
-    #         self.send_command.data = "pause"
+    def command2navigate(self):
+        if self.get_command.data == "start":
+            self.gx = 1.0
+            self.gy = 1.0
+            return True
+        elif self.get_command.data == "pause":
+            self.gx = 0.0
+            self.gy = 0.0
+            return True
+        elif self.get_command.data == "resume":
+            self.gx = 2.0
+            self.gy = 1.0
+            return True
+        elif self.get_command.data == "end":
+            self.gx = 1.0
+            self.gy = 2.0
+            return True
+        elif self.get_command.data == "charge":
+            self.gx = 3.0
+            self.gy = 1.0
+            return True
+        elif self.get_command.data == "level1_success":
+            # change goal to be level2's goal
+            self.gx = 3.0
+            self.gy = 1.0
+            return True
+        elif self.get_command.data == "level2_success":
+            # send request finnish to GUI
+            self.gx = 3.0
+            self.gy = 1.0
+            return False
 
     def timer_callback(self):
-        self.send_point()
+        if self.request_toggle is True:
+            send_able = self.command2navigate()
+            if send_able:
+                self.send_point()
+            else:
+                self.send_command_res = self.command_req()
+                self.request_toggle = False
 
     def listener_post(self):
         try:
@@ -79,6 +108,7 @@ class BehaviorServer(Node):
 
         future = self.set_point_client.call_async(self.set_point_req)
         rclpy.spin_until_future_complete(self, future)
+        self.request_toggle = False
 
     def send_point(self):
         if self.send_toggle:

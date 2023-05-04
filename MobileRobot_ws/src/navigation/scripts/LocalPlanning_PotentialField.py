@@ -138,6 +138,7 @@ class LocalPlanning(Node):
         try:
             print("trying")
             rclpy.spin_until_future_complete(self, future)
+            print(future.result())
             return True,future.result()
         except TransformException as ex:
             return False,None

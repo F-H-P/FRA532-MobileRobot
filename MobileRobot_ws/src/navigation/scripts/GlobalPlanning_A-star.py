@@ -194,7 +194,7 @@ class AStarPlanner(Node):
 
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
-
+        
         return rx, ry
 ################################################################################################################
     def calc_final_path(self, goal_node, closed_set):
@@ -212,12 +212,14 @@ class AStarPlanner(Node):
 
         self.x_path.data = rx
         self.y_path.data = ry
+        rx = []
+        ry = []
 
         print(self.x_path.data)
         print(self.y_path.data)      
         self.send_request_goal_path()
 
-        return rx, ry
+        return self.x_path.data, self.y_path.data
 ################################################################################################################
     @staticmethod
     def calc_heuristic(n1, n2):

@@ -16,7 +16,7 @@ from tf2_ros.transform_listener import TransformListener
 
  
 
-show_animation = True
+show_animation = False
 cmd_vel = Twist()
 cmd_vel.linear.x = 0.0
 cmd_vel.angular.z = 0.0
@@ -28,7 +28,7 @@ omega_max = 1.0
 class PathTracking(Node):
     def __init__(self):
         super().__init__('path_tracking')
-        self.timer = self.create_timer(0.7,self.timer_callback)
+        self.timer = self.create_timer(0.1,self.timer_callback)
         self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.cmd_vel_pub = self.create_publisher(Twist,"/cmd_vel",10)
 
