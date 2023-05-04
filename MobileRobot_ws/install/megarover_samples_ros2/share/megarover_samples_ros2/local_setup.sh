@@ -1,0 +1,1 @@
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2/ament_cmake_environment_hooks/local_setup.sh

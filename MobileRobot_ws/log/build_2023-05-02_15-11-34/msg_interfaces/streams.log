@@ -1,0 +1,276 @@
+[0.020s] Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j12 -l12
+[0.072s] -- Found ament_cmake: 1.3.3 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.207s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.222s] -- Found ament_lint_auto: 0.12.5 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.280s] -- Found std_msgs: 4.2.3 (/opt/ros/humble/share/std_msgs/cmake)
+[0.311s] -- Found rosidl_generator_c: 3.1.4 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.314s] -- Found rosidl_adapter: 3.1.4 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.323s] -- Found rosidl_generator_cpp: 3.1.4 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.336s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.352s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.406s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.745s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.449s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.730s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.779s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.825s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.826s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.826s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.901s] -- Added test 'lint_cmake' to check CMake code style
+[1.902s] -- Added test 'xmllint' to check XML markup files
+[1.909s] -- Configuring done
+[1.954s] -- Generating done
+[1.957s] -- Build files have been written to: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces
+[1.987s] [  1%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.001s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.003s] [  3%] Built target ament_cmake_python_symlink_msg_interfaces
+[2.235s] running egg_info
+[2.235s] writing msg_interfaces.egg-info/PKG-INFO
+[2.235s] writing dependency_links to msg_interfaces.egg-info/dependency_links.txt
+[2.236s] writing top-level names to msg_interfaces.egg-info/top_level.txt
+[2.238s] reading manifest file 'msg_interfaces.egg-info/SOURCES.txt'
+[2.240s] writing manifest file 'msg_interfaces.egg-info/SOURCES.txt'
+[2.275s] [  3%] Built target ament_cmake_python_build_msg_interfaces_egg
+[2.401s] [  3%] Built target msg_interfaces__cpp
+[2.412s] [  7%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[2.412s] [  7%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[2.420s] [  9%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[2.453s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_generator_c[0m
+[2.466s] [ 16%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_c.dir/rosidl_generator_c/msg_interfaces/srv/detail/local_path__functions.c.o[0m
+[2.466s] [ 16%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_c.dir/rosidl_generator_c/msg_interfaces/srv/detail/send_point__functions.c.o[0m
+[2.466s] [ 16%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_c.dir/rosidl_generator_c/msg_interfaces/srv/detail/goal_path__functions.c.o[0m
+[2.466s] [ 16%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_c.dir/rosidl_generator_c/msg_interfaces/srv/detail/command_gui__functions.c.o[0m
+[2.559s] [ 18%] [32m[1mLinking C shared library libmsg_interfaces__rosidl_generator_c.so[0m
+[2.602s] [ 18%] Built target msg_interfaces__rosidl_generator_c
+[2.611s] [ 21%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[2.611s] [ 21%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.611s] [ 23%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[2.740s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_cpp[0m
+[2.756s] [ 30%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/local_path__type_support.cpp.o[0m
+[2.757s] [ 30%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/goal_path__type_support.cpp.o[0m
+[2.757s] [ 30%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/send_point__type_support.cpp.o[0m
+[2.757s] [ 30%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/msg_interfaces/srv/command_gui__type_support.cpp.o[0m
+[2.798s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_introspection_cpp[0m
+[2.817s] [ 38%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/local_path__type_support.cpp.o[0m
+[2.818s] [ 38%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/goal_path__type_support.cpp.o[0m
+[2.818s] [ 38%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/command_gui__type_support.cpp.o[0m
+[2.818s] [ 38%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/msg_interfaces/srv/detail/send_point__type_support.cpp.o[0m
+[3.003s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_fastrtps_cpp[0m
+[3.029s] [ 40%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/msg_interfaces/srv/detail/dds_fastrtps/goal_path__type_support.cpp.o[0m
+[3.064s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_c[0m
+[3.087s] [ 41%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/msg_interfaces/srv/goal_path__type_support.cpp.o[0m
+[3.159s] [ 43%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/msg_interfaces/srv/send_point__type_support.cpp.o[0m
+[3.195s] [ 45%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/msg_interfaces/srv/command_gui__type_support.cpp.o[0m
+[3.213s] [ 47%] [32m[1mLinking CXX shared library libmsg_interfaces__rosidl_typesupport_cpp.so[0m
+[3.221s] [ 50%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/msg_interfaces/srv/local_path__type_support.cpp.o[0m
+[3.221s] [ 50%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/msg_interfaces/srv/detail/dds_fastrtps/send_point__type_support.cpp.o[0m
+[3.229s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_introspection_c[0m
+[3.252s] [ 52%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/goal_path__type_support.c.o[0m
+[3.256s] [ 56%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/msg_interfaces/srv/detail/dds_fastrtps/command_gui__type_support.cpp.o[0m
+[3.256s] [ 56%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/msg_interfaces/srv/detail/dds_fastrtps/local_path__type_support.cpp.o[0m
+[3.274s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_fastrtps_c[0m
+[3.279s] [ 58%] [32m[1mLinking CXX shared library libmsg_interfaces__rosidl_typesupport_c.so[0m
+[3.290s] [ 58%] Built target msg_interfaces__rosidl_typesupport_cpp
+[3.299s] [ 60%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/goal_path__type_support_c.cpp.o[0m
+[3.306s] [ 61%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/send_point__type_support_c.cpp.o[0m
+[3.323s] [ 63%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/send_point__type_support.c.o[0m
+[3.357s] [ 63%] Built target msg_interfaces__rosidl_typesupport_c
+[3.373s] [ 65%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/command_gui__type_support_c.cpp.o[0m
+[3.388s] [ 67%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/command_gui__type_support.c.o[0m
+[3.410s] [ 69%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/msg_interfaces/srv/detail/local_path__type_support.c.o[0m
+[3.441s] [ 70%] [32mBuilding CXX object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/msg_interfaces/srv/detail/local_path__type_support_c.cpp.o[0m
+[3.471s] [ 72%] [32m[1mLinking C shared library libmsg_interfaces__rosidl_typesupport_introspection_c.so[0m
+[3.481s] [ 74%] [32m[1mLinking CXX shared library libmsg_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[3.512s] [ 74%] Built target msg_interfaces__rosidl_typesupport_introspection_c
+[3.625s] [ 74%] Built target msg_interfaces__rosidl_typesupport_introspection_cpp
+[3.791s] [ 76%] [32m[1mLinking CXX shared library libmsg_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[3.832s] [ 78%] [32m[1mLinking CXX shared library libmsg_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[3.895s] [ 78%] Built target msg_interfaces__rosidl_typesupport_fastrtps_c
+[3.930s] [ 78%] Built target msg_interfaces__rosidl_typesupport_fastrtps_cpp
+[3.954s] [ 78%] Built target msg_interfaces
+[3.974s] [ 80%] [34m[1mGenerating Python code for ROS interfaces[0m
+[4.643s] [ 80%] Built target msg_interfaces__py
+[4.654s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_generator_py[0m
+[4.668s] [ 83%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_local_path_s.c.o[0m
+[4.668s] [ 83%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_send_point_s.c.o[0m
+[4.674s] [ 87%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_command_gui_s.c.o[0m
+[4.675s] [ 87%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_generator_py.dir/rosidl_generator_py/msg_interfaces/srv/_goal_path_s.c.o[0m
+[4.789s] [ 89%] [32m[1mLinking C shared library rosidl_generator_py/msg_interfaces/libmsg_interfaces__rosidl_generator_py.so[0m
+[4.826s] [ 89%] Built target msg_interfaces__rosidl_generator_py
+[4.836s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_c__pyext[0m
+[4.836s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_introspection_c__pyext[0m
+[4.836s] [35m[1mConsolidate compiler generated dependencies of target msg_interfaces__rosidl_typesupport_fastrtps_c__pyext[0m
+[4.847s] [ 90%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[4.848s] [ 92%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[4.852s] [ 94%] [32mBuilding C object CMakeFiles/msg_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[4.949s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/msg_interfaces/msg_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[4.953s] [ 98%] [32m[1mLinking C shared library rosidl_generator_py/msg_interfaces/msg_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[4.982s] [100%] [32m[1mLinking C shared library rosidl_generator_py/msg_interfaces/msg_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[4.988s] [100%] Built target msg_interfaces__rosidl_typesupport_introspection_c__pyext
+[5.009s] [100%] Built target msg_interfaces__rosidl_typesupport_c__pyext
+[5.014s] [100%] Built target msg_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[5.032s] Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j12 -l12
+[5.115s] Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces
+[5.129s] -- Install configuration: ""
+[5.130s] -- Execute custom install script
+[5.134s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/ament_index/resource_index/rosidl_interfaces/msg_interfaces
+[5.136s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/msg/rosidl_generator_c__visibility_control.h
+[5.136s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/command_gui.h
+[5.137s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__functions.h
+[5.137s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__struct.h
+[5.137s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__type_support.h
+[5.137s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__functions.h
+[5.137s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__struct.h
+[5.138s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__type_support.h
+[5.138s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__functions.h
+[5.145s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__struct.h
+[5.153s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__type_support.h
+[5.160s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__functions.h
+[5.160s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__struct.h
+[5.161s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__type_support.h
+[5.161s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/goal_path.h
+[5.161s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/local_path.h
+[5.168s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/send_point.h
+[5.168s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/library_path.sh
+[5.169s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/library_path.dsv
+[5.169s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[5.169s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_fastrtps_c.h
+[5.170s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_c.h
+[5.170s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__rosidl_typesupport_fastrtps_c.h
+[5.177s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__rosidl_typesupport_fastrtps_c.h
+[5.178s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/command_gui.hpp
+[5.178s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__builder.hpp
+[5.178s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__struct.hpp
+[5.178s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__traits.hpp
+[5.178s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__builder.hpp
+[5.179s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__struct.hpp
+[5.179s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__traits.hpp
+[5.179s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__builder.hpp
+[5.187s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__struct.hpp
+[5.194s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__traits.hpp
+[5.202s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__builder.hpp
+[5.202s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__struct.hpp
+[5.202s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__traits.hpp
+[5.202s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/goal_path.hpp
+[5.202s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/local_path.hpp
+[5.210s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/send_point.hpp
+[5.211s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[5.211s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_fastrtps_cpp.hpp
+[5.211s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_fastrtps_cpp.hpp
+[5.211s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__rosidl_typesupport_fastrtps_cpp.hpp
+[5.220s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__rosidl_typesupport_fastrtps_cpp.hpp
+[5.220s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[5.220s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_introspection_c.h
+[5.220s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_c.h
+[5.221s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_c.h
+[5.235s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__rosidl_typesupport_introspection_c.h
+[5.235s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/command_gui__rosidl_typesupport_introspection_cpp.hpp
+[5.235s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/goal_path__rosidl_typesupport_introspection_cpp.hpp
+[5.235s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/local_path__rosidl_typesupport_introspection_cpp.hpp
+[5.250s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/include/msg_interfaces/msg_interfaces/srv/detail/send_point__rosidl_typesupport_introspection_cpp.hpp
+[5.250s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/pythonpath.sh
+[5.250s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/pythonpath.dsv
+[5.250s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/__init__.py
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_c.c
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/_msg_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[5.251s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/libmsg_interfaces__rosidl_generator_py.so
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/__init__.py
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_command_gui.py
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_command_gui_s.c
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_goal_path.py
+[5.252s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_goal_path_s.c
+[5.252s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_local_path.py
+[5.267s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_local_path_s.c
+[5.282s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_send_point.py
+[5.282s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_send_point_s.c
+[5.283s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[5.283s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[5.283s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/msg_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[5.283s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/GoalPath.idl
+[5.284s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/SendPoint.idl
+[5.284s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/CommandGUI.idl
+[5.284s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/LocalPath.idl
+[5.299s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/GoalPath.srv
+[5.300s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/GoalPath_Request.msg
+[5.300s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/GoalPath_Response.msg
+[5.300s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/SendPoint.srv
+[5.301s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/SendPoint_Request.msg
+[5.301s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/SendPoint_Response.msg
+[5.301s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/CommandGUI.srv
+[5.301s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/CommandGUI_Request.msg
+[5.302s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/CommandGUI_Response.msg
+[5.302s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/LocalPath.srv
+[5.316s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/LocalPath_Request.msg
+[5.324s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/srv/LocalPath_Response.msg
+[5.340s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/ament_index/resource_index/package_run_dependencies/msg_interfaces
+[5.340s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/ament_index/resource_index/parent_prefix_path/msg_interfaces
+[5.341s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/ament_prefix_path.sh
+[5.341s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/ament_prefix_path.dsv
+[5.342s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/path.sh
+[5.342s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/environment/path.dsv
+[5.343s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/local_setup.bash
+[5.343s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/local_setup.sh
+[5.344s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/local_setup.zsh
+[5.344s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/local_setup.dsv
+[5.344s] -- Symlinking: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.dsv
+[5.360s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/ament_index/resource_index/packages/msg_interfaces
+[5.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/rosidl_cmake-extras.cmake
+[5.361s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[5.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[5.362s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[5.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[5.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[5.363s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[5.364s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfacesConfig.cmake
+[5.364s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfacesConfig-version.cmake
+[5.364s] -- Up-to-date symlink: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.xml
+[5.365s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_generator_c.so
+[5.365s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_generator_c.so" to ""
+[5.366s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_fastrtps_c.so
+[5.366s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[5.366s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[5.367s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[5.367s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_introspection_c.so
+[5.367s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[5.367s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_c.so
+[5.368s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_c.so" to ""
+[5.368s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_introspection_cpp.so
+[5.368s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[5.369s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_cpp.so
+[5.369s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_typesupport_cpp.so" to ""
+[5.428s] Listing '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces'...
+[5.428s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/__init__.py'...
+[5.429s] Listing '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv'...
+[5.429s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/__init__.py'...
+[5.429s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_command_gui.py'...
+[5.429s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_goal_path.py'...
+[5.429s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_local_path.py'...
+[5.429s] Compiling '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/local/lib/python3.10/dist-packages/msg_interfaces/srv/_send_point.py'...
+[5.434s] -- Installing: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_generator_py.so
+[5.434s] -- Set runtime path of "/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/libmsg_interfaces__rosidl_generator_py.so" to ""
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_generator_cExport.cmake
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_generator_cExport-noconfig.cmake
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_generator_cppExport.cmake
+[5.435s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_cExport.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[5.436s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[5.437s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_cppExport.cmake
+[5.437s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/msg_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[5.437s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_generator_pyExport.cmake
+[5.437s] -- Up-to-date: /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/cmake/export_msg_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[5.439s] Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces

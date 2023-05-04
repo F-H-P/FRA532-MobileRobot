@@ -1,0 +1,1 @@
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_cmake/srv/SendPoint_Response.msg

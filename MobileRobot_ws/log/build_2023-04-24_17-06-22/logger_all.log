@@ -1,0 +1,306 @@
+[0.321s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.321s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f1b486cbe50>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f1b48ed5c30>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f1b48ed5c30>>)
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.344s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.344s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['ignore', 'ignore_ament_install']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'ignore'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'ignore_ament_install'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['colcon_pkg']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'colcon_pkg'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['colcon_meta']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'colcon_meta'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['ros']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'ros'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['cmake', 'python']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'cmake'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'python'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extensions ['python_setup_py']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm) by extension 'python_setup_py'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'ignore'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'ignore_ament_install'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['colcon_pkg']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'colcon_pkg'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['colcon_meta']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'colcon_meta'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['ros']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'ros'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['cmake', 'python']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'cmake'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'python'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extensions ['python_setup_py']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/algorithm/__pycache__) by extension 'python_setup_py'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extensions ['ignore', 'ignore_ament_install']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extension 'ignore'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extension 'ignore_ament_install'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extensions ['colcon_pkg']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extension 'colcon_pkg'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extensions ['colcon_meta']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extension 'colcon_meta'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extensions ['ros']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(src/megarover_samples_ros2) by extension 'ros'
+[0.359s] DEBUG:colcon.colcon_core.package_identification:Package 'src/megarover_samples_ros2' with type 'ros.ament_cmake' and name 'megarover_samples_ros2'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extension 'ignore'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extension 'ignore_ament_install'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extensions ['colcon_pkg']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extension 'colcon_pkg'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extensions ['colcon_meta']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extension 'colcon_meta'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extensions ['ros']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/msg_interfaces) by extension 'ros'
+[0.360s] DEBUG:colcon.colcon_core.package_identification:Package 'src/msg_interfaces' with type 'ros.ament_cmake' and name 'msg_interfaces'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extension 'ignore'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extension 'ignore_ament_install'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extensions ['colcon_pkg']
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extension 'colcon_pkg'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extensions ['colcon_meta']
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extension 'colcon_meta'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extensions ['ros']
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(src/navigation) by extension 'ros'
+[0.361s] DEBUG:colcon.colcon_core.package_identification:Package 'src/navigation' with type 'ros.ament_cmake' and name 'navigation'
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.361s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.382s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.382s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.385s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/fhp/FRA532-MobileRobot/MobileRobot_ws/install
+[0.386s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/fhp/ROS2_Directory/Test_ws/install
+[0.388s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 335 installed packages in /opt/ros/humble
+[0.389s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_args' from command line to 'None'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_target' from command line to 'None'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_clean_cache' from command line to 'False'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_clean_first' from command line to 'False'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'cmake_force_configure' from command line to 'False'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'ament_cmake_args' from command line to 'None'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'catkin_cmake_args' from command line to 'None'
+[0.441s] Level 5:colcon.colcon_core.verb:set package 'megarover_samples_ros2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.441s] DEBUG:colcon.colcon_core.verb:Building package 'megarover_samples_ros2' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2', 'merge_install': False, 'path': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/megarover_samples_ros2', 'symlink_install': True, 'test_result_base': None}
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_args' from command line to 'None'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_target' from command line to 'None'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.442s] Level 5:colcon.colcon_core.verb:set package 'msg_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.442s] DEBUG:colcon.colcon_core.verb:Building package 'msg_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces', 'merge_install': False, 'path': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces', 'symlink_install': True, 'test_result_base': None}
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_target' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_clean_first' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'cmake_force_configure' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'ament_cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.443s] DEBUG:colcon.colcon_core.verb:Building package 'navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation', 'merge_install': False, 'path': '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation', 'symlink_install': True, 'test_result_base': None}
+[0.443s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.446s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.446s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/megarover_samples_ros2' with build type 'ament_cmake'
+[0.446s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/megarover_samples_ros2'
+[0.453s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.453s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.453s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.458s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces' with build type 'ament_cmake'
+[0.458s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/msg_interfaces'
+[0.459s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.459s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.464s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation' with build type 'ament_cmake'
+[0.464s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation'
+[0.465s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.465s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.476s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2 -- -j12 -l12
+[0.481s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j12 -l12
+[0.485s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation -- -j12 -l12
+[0.516s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation -- -j12 -l12
+[0.533s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2 -- -j12 -l12
+[0.544s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation
+[0.556s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2
+[0.565s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(navigation)
+[0.567s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/navigation
+[0.577s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation' for CMake module files
+[0.578s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation' for CMake config files
+[0.578s] Level 1:colcon.colcon_core.shell:create_environment_hook('navigation', 'cmake_prefix_path')
+[0.579s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.ps1'
+[0.581s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.dsv'
+[0.581s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.sh'
+[0.582s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib'
+[0.582s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/bin'
+[0.582s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/pkgconfig/navigation.pc'
+[0.582s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/python3.10/site-packages'
+[0.582s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/bin'
+[0.584s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.ps1'
+[0.585s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.dsv'
+[0.585s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.sh'
+[0.585s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.bash'
+[0.586s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.zsh'
+[0.586s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/colcon-core/packages/navigation)
+[0.588s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(megarover_samples_ros2)
+[0.590s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2' for CMake module files
+[0.590s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/megarover_samples_ros2
+[0.591s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2' for CMake config files
+[0.591s] Level 1:colcon.colcon_core.shell:create_environment_hook('megarover_samples_ros2', 'cmake_prefix_path')
+[0.592s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.ps1'
+[0.593s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.dsv'
+[0.593s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.sh'
+[0.594s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib'
+[0.594s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/bin'
+[0.594s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib/pkgconfig/megarover_samples_ros2.pc'
+[0.594s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib/python3.10/site-packages'
+[0.594s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/bin'
+[0.596s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.ps1'
+[0.596s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.dsv'
+[0.596s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.sh'
+[0.597s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.bash'
+[0.597s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.zsh'
+[0.597s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/colcon-core/packages/megarover_samples_ros2)
+[0.607s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(navigation)
+[0.608s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation' for CMake module files
+[0.609s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation' for CMake config files
+[0.609s] Level 1:colcon.colcon_core.shell:create_environment_hook('navigation', 'cmake_prefix_path')
+[0.610s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.ps1'
+[0.611s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.dsv'
+[0.611s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/hook/cmake_prefix_path.sh'
+[0.611s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib'
+[0.611s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/bin'
+[0.611s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/pkgconfig/navigation.pc'
+[0.612s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/lib/python3.10/site-packages'
+[0.612s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/bin'
+[0.613s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.ps1'
+[0.613s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.dsv'
+[0.614s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.sh'
+[0.614s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.bash'
+[0.614s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/navigation/package.zsh'
+[0.614s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/navigation/share/colcon-core/packages/navigation)
+[0.618s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(megarover_samples_ros2)
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2' for CMake module files
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2' for CMake config files
+[0.621s] Level 1:colcon.colcon_core.shell:create_environment_hook('megarover_samples_ros2', 'cmake_prefix_path')
+[0.622s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.ps1'
+[0.622s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.dsv'
+[0.622s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/hook/cmake_prefix_path.sh'
+[0.623s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib'
+[0.623s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/bin'
+[0.623s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib/pkgconfig/megarover_samples_ros2.pc'
+[0.623s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/lib/python3.10/site-packages'
+[0.623s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/bin'
+[0.624s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.ps1'
+[0.625s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.dsv'
+[0.625s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.sh'
+[0.625s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.bash'
+[0.626s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/megarover_samples_ros2/package.zsh'
+[0.626s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/megarover_samples_ros2/share/colcon-core/packages/megarover_samples_ros2)
+[4.657s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j12 -l12
+[4.726s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces
+[4.949s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(msg_interfaces)
+[4.949s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces
+[4.951s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces' for CMake module files
+[4.952s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces' for CMake config files
+[4.952s] Level 1:colcon.colcon_core.shell:create_environment_hook('msg_interfaces', 'cmake_prefix_path')
+[4.953s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.ps1'
+[4.954s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.dsv'
+[4.954s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.sh'
+[4.955s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib'
+[4.955s] Level 1:colcon.colcon_core.shell:create_environment_hook('msg_interfaces', 'ld_library_path_lib')
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.ps1'
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.dsv'
+[4.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.sh'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/bin'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/pkgconfig/msg_interfaces.pc'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/python3.10/site-packages'
+[4.957s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/bin'
+[4.958s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.ps1'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.dsv'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.sh'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.bash'
+[4.959s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.zsh'
+[4.960s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/colcon-core/packages/msg_interfaces)
+[5.030s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(msg_interfaces)
+[5.031s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces' for CMake module files
+[5.032s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces' for CMake config files
+[5.032s] Level 1:colcon.colcon_core.shell:create_environment_hook('msg_interfaces', 'cmake_prefix_path')
+[5.033s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.ps1'
+[5.034s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.dsv'
+[5.034s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/cmake_prefix_path.sh'
+[5.035s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib'
+[5.035s] Level 1:colcon.colcon_core.shell:create_environment_hook('msg_interfaces', 'ld_library_path_lib')
+[5.036s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.ps1'
+[5.036s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.dsv'
+[5.036s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/hook/ld_library_path_lib.sh'
+[5.036s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/bin'
+[5.036s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/pkgconfig/msg_interfaces.pc'
+[5.037s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/lib/python3.10/site-packages'
+[5.037s] Level 1:colcon.colcon_core.environment:checking '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/bin'
+[5.038s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.ps1'
+[5.038s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.dsv'
+[5.039s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.sh'
+[5.039s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.bash'
+[5.039s] INFO:colcon.colcon_core.shell:Creating package script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/msg_interfaces/package.zsh'
+[5.040s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/msg_interfaces/share/colcon-core/packages/msg_interfaces)
+[5.040s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[5.040s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[5.040s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[5.040s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[5.048s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[5.048s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[5.048s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[5.059s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[5.061s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/local_setup.ps1'
+[5.062s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/_local_setup_util_ps1.py'
+[5.064s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/setup.ps1'
+[5.066s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/local_setup.sh'
+[5.067s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/_local_setup_util_sh.py'
+[5.068s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/setup.sh'
+[5.070s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/local_setup.bash'
+[5.070s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/setup.bash'
+[5.071s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/local_setup.zsh'
+[5.072s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/install/setup.zsh'

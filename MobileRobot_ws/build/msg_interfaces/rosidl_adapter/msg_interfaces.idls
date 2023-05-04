@@ -1,0 +1,4 @@
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/GoalPath.idl
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/SendPoint.idl
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/CommandGUI.idl
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces/rosidl_adapter/msg_interfaces:srv/LocalPath.idl
