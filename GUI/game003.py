@@ -381,6 +381,7 @@ class l1_canvasL(Widget):
 
     def stop(self,instance):
         Clock.unschedule(self.clock_event)
+        gameMQ.mq.publish("project01/leftBut",self.angle)
 
 class l1_canvasR(Widget):
     def __init__(self, **kwargs):
@@ -423,6 +424,7 @@ class l1_canvasR(Widget):
 
     def stop(self,instance):
         Clock.unschedule(self.clock_event)
+        gameMQ.mq.publish("project01/rightBut",self.angle)
 
 
 class L1_dynamic(Screen):
@@ -735,6 +737,7 @@ class l2_canvas1(Widget):
         self.angle = 0
 
     def rotateCB(self,instance):
+        gameMQ.mq.publish("project01/l2_trick","trick")
         with self.canvas:
             PushMatrix()
             self.angle = (self.angle+90)%180
