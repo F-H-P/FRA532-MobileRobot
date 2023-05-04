@@ -49,6 +49,7 @@ class popup1_Screen(Screen):
         self.popup.open()
 
     def connect_callback(self,instance):
+        gameMQ.mq.publish("project01/connect","connect")
         self.clear_widgets()
         self.popup.dismiss()
         print("connect button's clicked")
@@ -133,6 +134,7 @@ class popup_playmode(Screen):
     def static_callback(self, instance):
         self.clear_widgets()
         self.popup.dismiss()
+        gameMQ.mq.publish("project01/playmode","static")
         self.manager.current = 'l1sB'
         # print('u r playing in STATIC MODE')
         # self.clear_widgets()
@@ -146,6 +148,7 @@ class popup_playmode(Screen):
     def dynamic_callback(self, instance):
         self.clear_widgets()
         self.popup.dismiss()
+        gameMQ.mq.publish("project01/playmode","dynamic")
         self.manager.current = 'l1dB'
         # print('u r plaing in DYNAMIC MODE')
         # Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
@@ -882,7 +885,7 @@ class HMmission_stoptheRescueRobot(App):
         self.mq.loop_start()
         
         self.mq.publish("iotPro/start","MQTT Start")
-        self.mq.subscribe([("iotPro/field_connecR",0),("project01/prox1",0),("project01/prox2",0)],)
+        self.mq.subscribe([("project01/field_status",0),("project01/prox1",0),("project01/prox2",0)],)
         return self.sm
     
     def on_connect(self,client,userdata,flags,rc):
@@ -900,7 +903,7 @@ class HMmission_stoptheRescueRobot(App):
         
     def change_screen(self,dt):
         if self.sm.current == 'connectS':
-            if self.topic == "iotPro/field_connecR" and self.playload == "1":
+            if self.topic == "project01/field_status" and self.playload == "ready":
                 print('go to mainS')
                 self.sm.current = 'mainS'
         else:
@@ -932,4 +935,6 @@ class HMmission_stoptheRescueRobot(App):
 
 
 if __name__ == '__main__':
-    HMmission_stoptheRescueRobot().run()
+    gameMQ = HMmission_stoptheRescueRobot()
+    gameMQ.run()
+    # HMmission_stoptheRescueRobot().run()
