@@ -19,6 +19,9 @@ import paho.mqtt.client as mqtt
 # from kivymd.app import MDApp
 # Pin
 
+
+value = 100
+
 class openingScreen(Screen):
     def __init__(self, **kw):
         super(openingScreen, self).__init__(**kw)
@@ -339,9 +342,12 @@ class vicpop(Screen):
     def cancleCB(self,instance):
         print('cancle')
         self.homepopup.dismiss()
+
+
 class l1_canvasL(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        
         a2 = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
         a2.bind(on_press=self.cb2,on_release=self.stop)
         self.add_widget(a2)
@@ -359,11 +365,14 @@ class l1_canvasL(Widget):
         print(self.cirL_center)
         self.angle = 0
         self.a = 5
+        self.b = 0
 
     def cb2(self,instance):
         self.clock_event = Clock.schedule_interval(self.animate_rotation, 0.05)
 
     def animate_rotation(self,dt):
+        global value
+        value = value-0.5
         with self.canvas:
             PushMatrix()
             if self.angle == 70:
@@ -381,6 +390,7 @@ class l1_canvasL(Widget):
 
     def stop(self,instance):
         Clock.unschedule(self.clock_event)
+        # if(self.b == )
         gameMQ.mq.publish("project01/leftBut",self.angle)
 
 class l1_canvasR(Widget):
@@ -407,6 +417,8 @@ class l1_canvasR(Widget):
         self.clock_event = Clock.schedule_interval(self.animate_rotation, 0.05)
 
     def animate_rotation(self,dt):
+        global value
+        value = value-0.5
         with self.canvas:
             PushMatrix()
             if self.angle == 70:
@@ -475,6 +487,7 @@ class L1_dynamic(Screen):
         l1_layout.add_widget(l1_canvasR())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
+        self.clock_event2 = Clock.schedule_interval(self.playerV, 0.1)
 
         self.add_widget(l1_layout)
 
@@ -485,13 +498,19 @@ class L1_dynamic(Screen):
 
     def lowerStamina(self,dt):
         self.moriaStamina.value = self.moriaStamina.value - 10
-        # print('moria stamina = ', self.moriaStamina.value)
+        print('moria stamina = ', self.moriaStamina.value)
         if self.moriaStamina.value <= 0:
             print('YOU WIN!!')
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
                 self.clock_event = None
             self.manager.current = 'vicpop'
+
+    def playerV(self,dt):
+        global value
+        self.playerStamina.value = value
+        if self.playerStamina.value <= 0:
+            self.playerStamina.value = 0
 
     # def reachgoal(self,instance):
     #     print(self.goal_var)
@@ -711,6 +730,8 @@ class L2_static(Screen):
         print('cancle')
         self.homepopup.dismiss()
 
+# value = 100
+
 class l2_canvas1(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -738,8 +759,10 @@ class l2_canvas1(Widget):
 
     def rotateCB(self,instance):
         gameMQ.mq.publish("project01/l2_trick","trick")
+        global value
+        value = value - 10
+        print("value",value)
         with self.canvas:
-            PushMatrix()
             self.angle = (self.angle+90)%180
             self.canvas.remove(self.rec1)
             self.canvas.remove(self.rec2)
@@ -774,9 +797,11 @@ class l2_canvas1(Widget):
             PopMatrix()
 
 
+
 class L2_dynamic(Screen):
     def on_enter(self):
         print('L2 dynamic game start')
+        global value
         l2_layout = FloatLayout()
 
         l2Label = Label(text = 'LEVEL2', font_size = 30, pos_hint = {'x':0,'y':0.48})
@@ -788,8 +813,8 @@ class L2_dynamic(Screen):
         playerLabel = Label(text = 'You',pos_hint={'x':-0.45,'y':0.44})
         self.playerStamina.value = 100
 
-        rotateBut = Button(text = 'Trick',size_hint=(None,None),size=(100,50),pos = (350,50))
-        rotateBut.bind(on_release = self.rotateCB)
+        # rotateBut = Button(text = 'Trick',size_hint=(None,None),size=(100,50),pos = (350,50))
+        # rotateBut.bind(on_release = self.rotateCB)
 
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
@@ -806,12 +831,13 @@ class L2_dynamic(Screen):
         l2_layout.add_widget(playerLabel)
         l2_layout.add_widget(pauseBut)
         l2_layout.add_widget(l2Label)
-        l2_layout.add_widget(rotateBut)
+        # l2_layout.add_widget(rotateBut)
 
         l2_layout.add_widget(l2_canvas1())
+        # l2_layout.remove_widget(l2_canvas1())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
-
+        self.clock_event2 = Clock.schedule_interval(self.playerV, 0.1)
 
         self.add_widget(l2_layout)
 
@@ -822,6 +848,7 @@ class L2_dynamic(Screen):
             self.clear_widgets()
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
+                # Clock.unschedule(self.clock_event2)
                 self.clock_event = None
             self.goal_var = 0
         print("L2 ending --> player lose")
@@ -835,8 +862,14 @@ class L2_dynamic(Screen):
             print('YOU WIN!!')
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
+                # Clock.unschedule(self.clock_event2)
                 self.clock_event = None
             self.manager.current = 'vicpop'
+
+    def playerV(self,dt):
+        self.playerStamina.value = value
+        if(value <= 0):
+            self.playerStamina.value = 0
 
 
     def pause_callback(self, *args):
@@ -960,8 +993,9 @@ class HMmission_stoptheRescueRobot(App):
         self.sm.add_widget(L1_dynamic(name='L1D'))
         self.sm.add_widget(L2_static(name='L2S'))
         self.sm.add_widget(L2_dynamic(name='L2D'))
-        self.sm.add_widget(vicpop(name='vicpop'))
+        
         self.sm.add_widget(loserPopup(name='loserpop'))
+        self.sm.add_widget(vicpop(name='vicpop'))
 
         self.sm.add_widget(tryScreen(name='ts'))
 
