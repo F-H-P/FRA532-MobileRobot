@@ -339,19 +339,104 @@ class vicpop(Screen):
     def cancleCB(self,instance):
         print('cancle')
         self.homepopup.dismiss()
-            
+class l1_canvasL(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        a2 = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
+        a2.bind(on_press=self.cb2,on_release=self.stop)
+        self.add_widget(a2)
+
+        self.recL = Rectangle(size = (192,8),pos = (202,264))
+        self.cirL = Ellipse(size=(32,32),pos=(186,252))
+    
+        with self.canvas:
+            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
+            Color(0.6,0,0,0.8)
+            self.cirL = Ellipse(size=(32,32),pos=(186,252))
+            Color(0,0.6,0.3,1)
+            self.recL = Rectangle(size = (192,8),pos = (202,264))
+        self.cirL_center = (self.cirL.pos[0]+self.cirL.size[0]/2,self.cirL.pos[1]+self.cirL.size[1]/2)
+        print(self.cirL_center)
+        self.angle = 0
+        self.a = 5
+
+    def cb2(self,instance):
+        self.clock_event = Clock.schedule_interval(self.animate_rotation, 0.05)
+
+    def animate_rotation(self,dt):
+        with self.canvas:
+            PushMatrix()
+            if self.angle == 70:
+                self.a = -5
+            elif self.angle == 340:
+                self.a = 5
+            self.angle = (self.angle+self.a)%360
+            print(self.angle)
+
+            self.canvas.remove(self.recL)
+            Color(0,0.6,0.3,1)
+            Rotate(origin=self.cirL_center,angle=self.angle)
+            self.recL = Rectangle(size = (192,8),pos = (202,264))
+            PopMatrix()
+
+    def stop(self,instance):
+        Clock.unschedule(self.clock_event)
+
+class l1_canvasR(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        a2 = Button(text = 'aim Right',size_hint=(None,None),size=(100,50),pos = (540,50))
+        a2.bind(on_press=self.cb2,on_release=self.stop)
+        self.add_widget(a2)
+
+        self.recR = Rectangle(size = (192,8),pos = (406,404))
+        self.cirR = Ellipse(size=(32,32),pos=(582,392))
+    
+        with self.canvas:
+            Color(0.6,0,0,0.8)
+            self.cirR = Ellipse(size=(32,32),pos=(582,392))
+            Color(0,0.6,0.3,1)
+            self.recR = Rectangle(size = (192,8),pos = (406,404))
+        self.cirR_center = (self.cirR.pos[0]+self.cirR.size[0]/2,self.cirR.pos[1]+self.cirR.size[1]/2)
+        print(self.cirR_center)
+        self.angle = 0
+        self.a = 5
+
+    def cb2(self,instance):
+        self.clock_event = Clock.schedule_interval(self.animate_rotation, 0.05)
+
+    def animate_rotation(self,dt):
+        with self.canvas:
+            PushMatrix()
+            if self.angle == 70:
+                self.a = -5
+            elif self.angle == 340:
+                self.a = 5
+            self.angle = (self.angle+self.a)%360
+            print(self.angle)
+
+            self.canvas.remove(self.recR)
+            Color(0,0.6,0.3,1)
+            Rotate(origin=self.cirR_center,angle=self.angle)
+            self.recR = Rectangle(size = (192,8),pos = (406,404))
+            PopMatrix()
+
+    def stop(self,instance):
+        Clock.unschedule(self.clock_event)
+
+
 class L1_dynamic(Screen):
     def on_enter(self):
         print('Level 1 Dynamic mode game start')
         l1_layout = FloatLayout()
-        with self.canvas:
-            Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
-            Color(0,1,0,0.8)
-            Rectangle(size = (192,8),pos = (202,264))
-            Rectangle(size = (192,8),pos = (406,404))
-            Color(1,0.8,0.45,1)
-            Ellipse(size=(32,32),pos=(186,252))
-            Ellipse(size=(32,32),pos=(582,392))
+        # with self.canvas:
+        #     Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
+        #     Color(0,1,0,0.8)
+        #     Rectangle(size = (192,8),pos = (202,264))
+        #     Rectangle(size = (192,8),pos = (406,404))
+        #     Color(1,0.8,0.45,1)
+        #     Ellipse(size=(32,32),pos=(186,252))
+        #     Ellipse(size=(32,32),pos=(582,392))
 
         l1Label = Label(text = 'LEVEL1', font_size = 30, pos_hint = {'x':0,'y':0.48})
 
@@ -362,10 +447,10 @@ class L1_dynamic(Screen):
         self.moriaStamina.value = 100
         self.playerStamina.value = 100
 
-        leftaimming = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
-        rightaimming = Button(text = 'aim Right',size_hint=(None,None),size=(100,50),pos = (540,50))
-        leftaimming.bind(state = self.leftaimCB)
-        rightaimming.bind(state = self.rightaimCB)
+        # leftaimming = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
+        # rightaimming = Button(text = 'aim Right',size_hint=(None,None),size=(100,50),pos = (540,50))
+        # leftaimming.bind(state = self.leftaimCB)
+        # rightaimming.bind(state = self.rightaimCB)
 
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
@@ -381,9 +466,11 @@ class L1_dynamic(Screen):
         l1_layout.add_widget(playerLabel)
         l1_layout.add_widget(moriaLabel)
         l1_layout.add_widget(pauseBut)
-        l1_layout.add_widget(leftaimming)
-        l1_layout.add_widget(rightaimming)
+        # l1_layout.add_widget(leftaimming)
+        # l1_layout.add_widget(rightaimming)
         l1_layout.add_widget(l1Label)
+        l1_layout.add_widget(l1_canvasL())
+        l1_layout.add_widget(l1_canvasR())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
@@ -470,42 +557,42 @@ class L1_dynamic(Screen):
         print('cancle')
         self.homepopup.dismiss()
 
-    def leftaimCB(self,button,value):
-        print('aimming left')
-        print('player stamina = ', self.playerStamina.value)
+    # def leftaimCB(self,button,value):
+    #     print('aimming left')
+    #     print('player stamina = ', self.playerStamina.value)
 
-        if self.playerStamina.value <= 0:
-            print("player's stamina is out!!")
-        else:
-            if value == 'down':
-                # Code to be executed when the button is pressed
-                print("left DOWN!")
-            elif value == 'normal':
-                # Code to be executed when the button is released
-                self.playerStamina.value = self.playerStamina.value - 10
-                print("left UP!")
-            elif value == 'disabled':
-                # Code to be executed when the button is disabled
-                print("left disabled!")
+    #     if self.playerStamina.value <= 0:
+    #         print("player's stamina is out!!")
+    #     else:
+    #         if value == 'down':
+    #             # Code to be executed when the button is pressed
+    #             print("left DOWN!")
+    #         elif value == 'normal':
+    #             # Code to be executed when the button is released
+    #             self.playerStamina.value = self.playerStamina.value - 10
+    #             print("left UP!")
+    #         elif value == 'disabled':
+    #             # Code to be executed when the button is disabled
+    #             print("left disabled!")
 
 
-    def rightaimCB(self,button,value):
-        print('aimming right') 
-        print('player stamina = ', self.playerStamina.value)
+    # def rightaimCB(self,button,value):
+    #     print('aimming right') 
+    #     print('player stamina = ', self.playerStamina.value)
 
-        if self.playerStamina.value <= 0:
-            print("player's stamina is out!!")
-        else:
-            if value == 'down':
-                # Code to be executed when the button is pressed
-                print("right DOWN!")
-            elif value == 'normal':
-                # Code to be executed when the button is released
-                self.playerStamina.value = self.playerStamina.value - 10
-                print("right UP!")
-            elif value == 'disabled':
-                # Code to be executed when the button is disabled
-                print("right disabled!")
+    #     if self.playerStamina.value <= 0:
+    #         print("player's stamina is out!!")
+    #     else:
+    #         if value == 'down':
+    #             # Code to be executed when the button is pressed
+    #             print("right DOWN!")
+    #         elif value == 'normal':
+    #             # Code to be executed when the button is released
+    #             self.playerStamina.value = self.playerStamina.value - 10
+    #             print("right UP!")
+    #         elif value == 'disabled':
+    #             # Code to be executed when the button is disabled
+    #             print("right disabled!")
 
 
 class L2_static(Screen):
@@ -622,7 +709,7 @@ class L2_static(Screen):
         print('cancle')
         self.homepopup.dismiss()
 
-class canvas1(Widget):
+class l2_canvas1(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -718,7 +805,7 @@ class L2_dynamic(Screen):
         l2_layout.add_widget(l2Label)
         l2_layout.add_widget(rotateBut)
 
-        l2_layout.add_widget(canvas1())
+        l2_layout.add_widget(l2_canvas1())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
 
