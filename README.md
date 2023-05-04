@@ -13,6 +13,10 @@ Run path tracking:
 ```
 ros2 run navigation path_tracking.py
 ```
+Run local path planner:
+```
+ros2 run navigation LocalPlanning_PotentialField.py
+```
 Run global path planner:
 ```
 ros2 run navigation GlobalPlanning_A-star.py
