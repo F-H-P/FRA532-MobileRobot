@@ -39,7 +39,8 @@ class AStarPlanner(Node):
         self.gx = Float64
         self.gy = Float64
 
-
+        self.get_behavior_request = False
+        
         self.costmap_response = self.send_request_costmap()
         self.costmap = self.costmap_response.map.data
         self.map_response = self.send_request_map()
@@ -61,7 +62,13 @@ class AStarPlanner(Node):
         self.calc_obstacle_map()
 
     def timer_callback(self):
-        pass
+        if self.get_behavior_request == True:
+            rx, ry = self.planning(self.sx, self.sy, self.gx, self.gy)
+            if show_animation:
+                plt.plot(rx, ry, "-r")
+                plt.pause(0.001)
+                plt.show()
+        
 
     def send_request_costmap(self):
         self.future = self.costmap_client.call_async(self.costmap_req)
@@ -94,13 +101,14 @@ class AStarPlanner(Node):
             plt.plot((self.gx*0.05000000074505806)-3.95, (self.gy*0.05000000074505806)-3.8, "xb")
             plt.grid(True)
             plt.axis("equal")
-        rx, ry = self.planning(self.sx, self.sy, self.gx, self.gy)
+        # rx, ry = self.planning(self.sx, self.sy, self.gx, self.gy)
 
-        if show_animation:
-            plt.plot(rx, ry, "-r")
-            plt.pause(0.001)
-            plt.show()
-            
+        # if show_animation:
+        #     plt.plot(rx, ry, "-r")
+        #     plt.pause(0.001)
+        #     plt.show()
+
+        self.get_behavior_request = True
         return response
 
     class Node:
@@ -194,7 +202,7 @@ class AStarPlanner(Node):
 
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
-        
+        self.get_behavior_request = False
         return rx, ry
 ################################################################################################################
     def calc_final_path(self, goal_node, closed_set):

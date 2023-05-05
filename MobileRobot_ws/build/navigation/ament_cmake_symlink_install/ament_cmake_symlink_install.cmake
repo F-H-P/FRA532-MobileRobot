@@ -310,8 +310,8 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
-# install(PROGRAMS "scripts/GlobalPlanning_A-star.py" "scripts/path_tracking.py" "scripts/Behavior_server.py" "scripts/LocalPlanning_PotentialField.py" "DESTINATION" "lib/navigation")
-ament_cmake_symlink_install_programs("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation" PROGRAMS "scripts/GlobalPlanning_A-star.py" "scripts/path_tracking.py" "scripts/Behavior_server.py" "scripts/LocalPlanning_PotentialField.py" "DESTINATION" "lib/navigation")
+# install(PROGRAMS "scripts/GlobalPlanning_A-star.py" "scripts/path_tracking.py" "scripts/Behavior_server.py" "scripts/LocalPlanning_PotentialField.py" "scripts/test.py" "DESTINATION" "lib/navigation")
+ament_cmake_symlink_install_programs("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation" PROGRAMS "scripts/GlobalPlanning_A-star.py" "scripts/path_tracking.py" "scripts/Behavior_server.py" "scripts/LocalPlanning_PotentialField.py" "scripts/test.py" "DESTINATION" "lib/navigation")
 
 # install(DIRECTORY "launch" "DESTINATION" "share/navigation")
 ament_cmake_symlink_install_directory("/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation" DIRECTORY "launch" "DESTINATION" "share/navigation")

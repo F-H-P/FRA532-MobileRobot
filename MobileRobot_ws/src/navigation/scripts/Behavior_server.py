@@ -42,6 +42,8 @@ class BehaviorServer(Node):
         self.get_command = request.command
         response.res.data = 1
         self.request_toggle = True
+        self.send_toggle = True
+        print("get command requset success!!!!")
         return response
 
     def command_req(self):
@@ -64,10 +66,12 @@ class BehaviorServer(Node):
             self.gy = 1.0
             return True
         elif self.get_command.data == "end":
+            # go to start position
             self.gx = 1.0
             self.gy = 2.0
             return True
         elif self.get_command.data == "charge":
+            # set charge position
             self.gx = 3.0
             self.gy = 1.0
             return True
@@ -80,18 +84,21 @@ class BehaviorServer(Node):
             # send request finnish to GUI
             self.gx = 3.0
             self.gy = 1.0
+            self.send_command.data = "finnish_level2"
             return False
-
+        
     def timer_callback(self):
         if self.request_toggle is True:
             send_able = self.command2navigate()
             if send_able:
                 self.send_point()
-            else:
-                self.send_command_res = self.command_req()
-                self.request_toggle = False
+            # else:
+            #     # self.send_command_res = self.command_req()
+            #     # self.request_toggle = False
+            self.request_toggle = False
 
     def listener_post(self):
+        print("Do listener_post")
         try:
             self.tf_listener = self.tf_buffer.lookup_transform('map','base_link',rclpy.time.Time())
             return True
@@ -106,18 +113,21 @@ class BehaviorServer(Node):
 
         print("send point request success!!!!")
 
-        future = self.set_point_client.call_async(self.set_point_req)
-        rclpy.spin_until_future_complete(self, future)
-        self.request_toggle = False
+        self.set_point_client.call_async(self.set_point_req)
+        # rclpy.spin_until_future_complete(self, future)
 
     def send_point(self):
+        print("Do send_point!!")
+        print(self.send_toggle)
         if self.send_toggle:
             toggle = self.listener_post()
             if toggle is True:
                 self.cx = self.tf_listener.transform.translation.x
                 self.cy = self.tf_listener.transform.translation.y
+                print("Do this!!")
                 self.send_request_point() 
                 self.send_toggle = False
+                print("Do send_point")
         else:
             pass
 

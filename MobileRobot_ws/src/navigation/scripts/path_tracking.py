@@ -62,6 +62,7 @@ class PathTracking(Node):
 
             if self.arrive is False and self.path_req is True:
                 self.process()
+                self.arrive = False
                 if show_animation: 
                     plt.cla()
                     plt.gcf().canvas.mpl_connect(
@@ -142,6 +143,7 @@ class PathTracking(Node):
                     self.arrive = True
                     self.tx = None
                     self.ty = None
+                    self.path_req = False
                     print("arrive!!!")
                     print("Error:",d)
             else:
