@@ -14,7 +14,7 @@ from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener 
 
- 
+from msg_interfaces.srv import LocalPath
 
 show_animation = False
 cmd_vel = Twist()
@@ -22,15 +22,16 @@ cmd_vel.linear.x = 0.0
 cmd_vel.angular.z = 0.0
 
 dp = 0.3 # [m]
-velo_max = 0.25
+velo_max = 0.15
 omega_max = 1.0
 
 class PathTracking(Node):
     def __init__(self):
         super().__init__('path_tracking')
         self.timer = self.create_timer(0.1,self.timer_callback)
-        self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
+        # self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.cmd_vel_pub = self.create_publisher(Twist,"/cmd_vel",10)
+        self.local_path_sub = self.create_service(LocalPath,"/local_path",self.local_path_callback)
 
         #get location
         self.tf_buffer = Buffer()
@@ -86,13 +87,19 @@ class PathTracking(Node):
         except TransformException as ex:
             return False
 
-    def goal_path_callback(self, request, response):
+    # def goal_path_callback(self, request, response):
+    #     self.path_x = request.x_path.data
+    #     self.path_y = request.y_path.data
+    #     print("request success!!!!")
+    #     self.path_req = True
+    #     return response
+    
+    def local_path_callback(self,request,response):
         self.path_x = request.x_path.data
         self.path_y = request.y_path.data
-        print("request success!!!!")
+        print("local path request success!!!!")
         self.path_req = True
         return response
-    
 
     def euler_from_quaternion(self,x, y, z, w):#get location
             t1 = +2.0 * (w * z + x * y)
