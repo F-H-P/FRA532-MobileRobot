@@ -12,6 +12,7 @@ from std_msgs.msg import String,Int64
 class BehaviorServer(Node):
     def __init__(self):
         super().__init__('behavior_server')
+        self.get_logger().info('Behavior server start')
         self.timer = self.create_timer(0.1,self.timer_callback)
         self.set_point_client = self.create_client(SendPoint,"/set_point")
         self.set_point_req = SendPoint.Request()
@@ -43,13 +44,15 @@ class BehaviorServer(Node):
         response.res.data = 1
         self.request_toggle = True
         self.send_toggle = True
-        print("get command requset success!!!!")
+        # print("get command requset success!!!!")
+        self.get_logger().info('Behavior server: get command requset success!!!!')
         return response
 
     def command_req(self):
         future_command = self.command_client.call_async(self.send_command)
         rclpy.spin_until_future_complete(self, future_command)
-        print("command_finish response success!!!!")
+        # print("command_finish response success!!!!")
+        self.get_logger().info('Behavior server: command_finish response success!!!!')
         return self.future_command.result()
     
     def command2navigate(self):
@@ -67,8 +70,8 @@ class BehaviorServer(Node):
             return True
         elif self.get_command.data == "end":
             # go to start position
-            self.gx = 1.0
-            self.gy = 2.0
+            self.gx = 0.8
+            self.gy = -0.8
             return True
         elif self.get_command.data == "charge":
             # set charge position
@@ -86,6 +89,12 @@ class BehaviorServer(Node):
             self.gy = 1.0
             self.send_command.data = "finnish_level2"
             return False
+        
+        elif self.get_command.data == "max_distance":
+            # set charge position
+            self.gx = 3.5
+            self.gy = 5.0
+            return True
         
     def timer_callback(self):
         if self.request_toggle is True:

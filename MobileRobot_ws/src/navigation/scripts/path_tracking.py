@@ -15,19 +15,21 @@ from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener 
 
 from msg_interfaces.srv import LocalPath
+import time
 
 show_animation = False
 cmd_vel = Twist()
 cmd_vel.linear.x = 0.0
 cmd_vel.angular.z = 0.0
 
-dp = 0.3 # [m]
+dp = 0.15 # [m]
 velo_max = 0.15
 omega_max = 1.0
 
 class PathTracking(Node):
     def __init__(self):
         super().__init__('path_tracking')
+        self.get_logger().info('Path_tracking start')
         self.timer = self.create_timer(0.1,self.timer_callback)
         # self.goal_path_response = self.create_service(GoalPath,"/goal_path",self.goal_path_callback)
         self.cmd_vel_pub = self.create_publisher(Twist,"/cmd_vel",10)
@@ -75,7 +77,7 @@ class PathTracking(Node):
                     plt.plot(self.path_x[self.ind], self.path_y[self.ind], "xg", label="target")
                     plt.axis("equal")
                     plt.grid(True)
-                    plt.title("delta theta[rad]:" + str(self.d_theta)[:4])
+                    plt.title("delta position[m]:" + str(dp))
                     plt.pause(0.001)
 
             self.cmd_vel_pub.publish(cmd_vel)
@@ -90,7 +92,8 @@ class PathTracking(Node):
     # def goal_path_callback(self, request, response):
     #     self.path_x = request.x_path.data
     #     self.path_y = request.y_path.data
-    #     print("request success!!!!")
+    #     # print("request success!!!!")
+    #     self.get_logger().info('get path request success!!!!')
     #     self.path_req = True
     #     return response
     
@@ -133,6 +136,7 @@ class PathTracking(Node):
 
     
     def process(self):
+        time_start = time.time()
         if self.tx is None and self.ty is None:
             self.ind = 0
             self.tx = self.path_x[self.ind]
@@ -151,8 +155,10 @@ class PathTracking(Node):
                     self.tx = None
                     self.ty = None
                     self.path_req = False
-                    print("arrive!!!")
-                    print("Error:",d)
+                    # print("arrive!!!")
+                    # print("Error:",d)
+                    self.get_logger().info('arrive!!!')
+                    # self.get_logger().info('Error:',d)
             else:
                 cmd_vel.linear.x = velo_max
 
@@ -161,6 +167,9 @@ class PathTracking(Node):
             cmd_vel.angular.z = np.arctan2(np.sin(theta_new - self.theta),np.cos(theta_new - self.theta))
         elif self.arrive is True:
             cmd_vel.angular.z = 0.0
+        
+        time_end = time.time()
+        # print("Runtime:", time_end-time_start)
     
 def main(args=None):
     print(__file__ + " start tracking!!")

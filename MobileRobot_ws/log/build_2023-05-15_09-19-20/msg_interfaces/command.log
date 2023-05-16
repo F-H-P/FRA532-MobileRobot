@@ -1,0 +1,4 @@
+Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j1 -l1
+Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces -- -j1 -l1
+Invoking command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces
+Invoked command in '/home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/fhp/FRA532-MobileRobot/MobileRobot_ws/build/msg_interfaces

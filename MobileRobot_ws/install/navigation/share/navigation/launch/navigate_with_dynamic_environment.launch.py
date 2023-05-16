@@ -1,0 +1,1 @@
+/home/fhp/FRA532-MobileRobot/MobileRobot_ws/src/navigation/launch/navigate_with_dynamic_environment.launch.py

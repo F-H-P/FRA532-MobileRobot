@@ -12,6 +12,11 @@ from std_msgs.msg import Float64MultiArray,Float64
 
 from msg_interfaces.srv import GoalPath
 from msg_interfaces.srv import SendPoint
+
+import time
+from nav_msgs.msg import Path
+from rclpy.clock import Clock
+from geometry_msgs.msg import PoseStamped
  
 show_animation = False
 
@@ -20,6 +25,7 @@ class AStarPlanner(Node):
 
     def __init__(self):
         super().__init__('a_star_planner')
+        self.get_logger().info('A star Global Planner start')
         self.costmap_client = self.create_client(GetCostmap, '/global_costmap/get_costmap')
         self.timer = self.create_timer(0.11,self.timer_callback)
         self.map_client = self.create_client(GetMap,"/map_server/map")
@@ -53,13 +59,22 @@ class AStarPlanner(Node):
         self.y_width = self.map_response.map.info.height
         # self.min_x = self.map_response.map.info.origin.position.x
         # self.min_y = self.map_response.map.info.origin.position.y
-        self.min_x = 0
+        self.min_x = 0        
+        self.path_pub = self.create_publisher(Path,"/local_path",10)
+        self.local_path = Path()
+        # self.local_path.header.frame_id = "map"
+        self.pose = PoseStamped()
         self.min_y = 0
         self.max_x = self.min_x + self.x_width - 1
         self.max_y = self.min_y + self.y_width - 1
         self.obstacle_map = None
         self.motion = self.get_motion_model()
         self.calc_obstacle_map()
+
+        self.path_pub = self.create_publisher(Path,"/local_path",10)
+        self.local_path = Path()
+        # self.local_path.header.frame_id = "map"
+        self.pose = PoseStamped()
 
     def timer_callback(self):
         if self.get_behavior_request == True:
@@ -73,13 +88,15 @@ class AStarPlanner(Node):
     def send_request_costmap(self):
         self.future = self.costmap_client.call_async(self.costmap_req)
         rclpy.spin_until_future_complete(self, self.future)
-        print("get costmap response success!!!!")
+        # print("get costmap response success!!!!")
+        self.get_logger().info('get costmap response success!!!!')
         return self.future.result()
     
     def send_request_map(self):
         self.future_map = self.map_client.call_async(self.map_req)
         rclpy.spin_until_future_complete(self, self.future_map)
-        print("get map response success!!!!")
+        # print("get map response success!!!!")
+        self.get_logger().info('get map response success!!!!')
         return self.future_map.result()
     
     def send_request_goal_path(self):
@@ -87,6 +104,7 @@ class AStarPlanner(Node):
         self.goal_path_req.y_path = self.y_path
         self.goal_path_cilent.call_async(self.goal_path_req)
         print("send request success!!!!")
+        self.get_logger().info('send path request success!!!!')
         return None
     
     def set_point_callback(self,request,response):
@@ -134,6 +152,7 @@ class AStarPlanner(Node):
             rx: x position list of the final path
             ry: y position list of the final path
         """
+        time_start = time.time()
 
         start_node = self.Node(self.calc_xy_index(sx, self.min_x),
                                self.calc_xy_index(sy, self.min_y), 0.0, -1)
@@ -143,6 +162,8 @@ class AStarPlanner(Node):
         open_set, closed_set = dict(), dict()
         open_set[self.calc_grid_index(start_node.x,start_node.y)] = start_node
 
+        n = 0
+        time_max = 0.0000000000
         while True:
             if len(open_set) == 0:
                 print("Open set is empty..")
@@ -175,9 +196,9 @@ class AStarPlanner(Node):
             del open_set[c_id]
             # Add it to the closed set
             closed_set[c_id] = current
-
             # expand_grid search grid based on motion model
             for i, _ in enumerate(self.motion): #!to move to another point
+                time_start_search = time.time()
                 node = self.Node(current.x + self.motion[i][0],
                                  current.y + self.motion[i][1],
                                  current.cost, 
@@ -200,9 +221,21 @@ class AStarPlanner(Node):
                         # This path is the best until now. record it
                         open_set[n_id] = node
 
+                time_stop_search = time.time()
+
+                if (time_stop_search - time_start_search) > time_max:
+                    time_max = time_stop_search - time_start_search
+                n = n+1
+                
+        print("Maximum runtime of searching :", time_max," seconds")
+        print("Number of point: ", n)
+
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
         self.get_behavior_request = False
+
+        time_end = time.time()
+        print("Runtime of searching global path:", time_end - time_start," seconds")
         return rx, ry
 ################################################################################################################
     def calc_final_path(self, goal_node, closed_set):
@@ -223,8 +256,10 @@ class AStarPlanner(Node):
         rx = []
         ry = []
 
-        print(self.x_path.data)
-        print(self.y_path.data)      
+        # print(self.x_path.data)
+        # print(self.y_path.data)  
+        # self.get_logger().info(self.x_path.data)    
+        # self.get_logger().info(self.y_path.data)   
         self.send_request_goal_path()
 
         return self.x_path.data, self.y_path.data
@@ -296,6 +331,23 @@ class AStarPlanner(Node):
         return motion
 
 ################################################################################################################
+    def publish_localpath(self,rx,ry):
+        time_stamp = Clock().now()
+        self.local_path.header.frame_id = "base_link"
+        self.local_path.header.stamp = time_stamp.to_msg()
+        i = 0
+        print("len(rx):",len(rx))
+        for i in range(len(rx)-1):
+            self.pose.pose.position.x = rx[i]
+            self.pose.pose.position.y = ry[i]
+            self.pose.pose.orientation.x = 0.0
+            self.pose.pose.orientation.y = 0.0
+            self.pose.pose.orientation.z = 0.0
+            self.pose.pose.orientation.w = 0.0
+            self.pose.header.frame_id = "base_link"
+            self.pose.header.stamp = time_stamp.to_msg()
+            self.local_path.poses.append(self.pose)
+
 def main(args=None):
     print(__file__ + " start!!")
     rclpy.init(args=args)
