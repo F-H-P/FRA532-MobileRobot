@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 import numpy as np
+import yaml
+from yaml.loader import SafeLoader
 import matplotlib.pyplot as plt
 from localization.icp import iterative_closest_point
 from localization.icp import fit_p_to_q
@@ -38,10 +40,10 @@ description: A laser scan object storing sensor's configuration which consists o
 '''
 class Lidar():
     def __init__(self):
-        self.max_range = 10.0 #[m]
+        self.max_range = 3.5 #[m]
         self.min_range = 0.0
-        self.total_sample = 1000
-        self.N_sample = 250
+        self.total_sample = 360
+        self.N_sample = 180
         self.sample_per_angle = 50
         self.detection_range = 2*np.pi
 
@@ -59,27 +61,41 @@ description: A map object storing map information and configurations which consi
     map width and height in pixels
 - origin: numpy array
     reference map origin position in row, col of the image array data
-- globalFrame_origin_in_in_mapScale_ref_map: numpy array
+- odom_in_map_scale_ref_map_origin: numpy array
     global frame position w.r.t map origin reference with map frame (map frame is map scale frame at map origin)
 - actual width, height: int
     map width and height in meters
 '''
 class Map():
-    def __init__(self, raw_data, actual_map_width, actual_map_height):
+    def __init__(self, raw_data, yaml_path):
         self.raw_pgm_data = raw_data
         self.width = 0
         self.height = 0
         self.max_val = 0
         self.norm_pgm_data = 0
         
-        self.origin = np.array([0, 0])
-        self.globalFrame_origin_in_in_mapScale_ref_map = np.array([0.0, 0.0])
+        self.map_origin = np.array([0, 0])
+        self.odom_in_map_scale_ref_map_origin = np.array([0.0, 0.0])
+        self.map_origin_to_odom = np.array([2.02*20, 0.51*20])
         
-        self.scale = 0
-        self.actual_width = actual_map_width
-        self.actual_height = actual_map_height
-
+        self.scale = 0.0
+        self.actual_width = 0.0
+        self.actual_height = 0.0
+        
         self.mapInit()
+        self.read_config(yaml_path)
+        
+    def read_config(self, path):
+        with open(path) as f:
+            data = yaml.load(f, Loader=SafeLoader)
+            self.scale = 1/data["resolution"]
+            self.actual_width = self.width/self.scale
+            self.actual_height = self.height/self.scale
+            self.map_origin[0] = -1 * data["origin"][0] * self.scale
+            self.map_origin[1] = self.height + data["origin"][1] * self.scale
+
+            self.odom_in_map_scale_ref_map_origin[0] = self.map_origin[0] + self.map_origin_to_odom[0]
+            self.odom_in_map_scale_ref_map_origin[1] = self.map_origin[1] - self.map_origin_to_odom[1]
 
     def mapInit(self):
         if(len(self.raw_pgm_data) == 4):
@@ -87,10 +103,7 @@ class Map():
             self.height = self.raw_pgm_data[1]
             self.max_val = self.raw_pgm_data[2]
             self.norm_pgm_data = self.raw_pgm_data[3]/self.raw_pgm_data[2]
-            self.scale = self.width/self.actual_width
-
-    def setOrigin(self, x, y):
-        self.globalFrame_origin_in_in_mapScale_ref_map = np.array([x, y])
+            # self.scale = self.width/self.actual_width
 
 '''
 ParticleFilter()
@@ -102,15 +115,17 @@ parameters:
 description: A particle filter object storing particle filter configurations and function of the particle filter.
 '''
 class ParticleFilter():
-    def __init__(self, map_file_path, particleNum, initial_state=None):
+    def __init__(self, map_file_path, map_yaml_path, particleNum, initial_state=None):
         #reading pgm file and initialize map parameters
         self.map_raw_data = self.pgmMap_read(map_file_path)
         self.map = Map(
             self.map_raw_data,
-            8.6, 
-            (self.map_raw_data[1]/self.map_raw_data[0])*8.6
+            map_yaml_path
         )
-        self.map.setOrigin(3.95 * self.map.scale, self.map_raw_data[1] - 3.4*self.map.scale)
+
+        print(self.map.map_origin)
+        print(self.map.width)
+        print(self.map.height)
 
         #initilize sample
         self.samples = [Particle() for i in range(int(particleNum))]
@@ -147,11 +162,13 @@ class ParticleFilter():
             print("sample {}".format(n))
             # robot position w.r.t. global frame
             robotPosition = np.array([self.samples[n].state[0], self.samples[n].state[1]])
+            print(robotPosition)
             # change from real scale to map scale 
             robotPosition_in_mapScale = robotPosition*self.map.scale
             print(robotPosition_in_mapScale)
             # change the reference frame from global frame to map frame
-            robotPosition_in_mapScale_ref_map_frame = self.map.globalFrame_origin_in_in_mapScale_ref_map + robotPosition_in_mapScale
+            robotPosition_in_mapScale_ref_map_frame = self.map.odom_in_map_scale_ref_map_origin + robotPosition_in_mapScale
+            print(robotPosition_in_mapScale_ref_map_frame)
             
             #simulate the data of the lidar
             data = []
@@ -163,7 +180,7 @@ class ParticleFilter():
                     x = int(x2 * i + x1 * (1 - i)) #column
                     y = int(y2 * i + y1 * (1 - i)) #row
                     if 0 < x < self.map.width and 0 < y < self.map.height:
-                        if self.map.norm_pgm_data[y][x] < 0.5: ## y is row and x is col
+                        if self.map.norm_pgm_data[y][x] < 0.65: ## y is row and x is col
                             data.append([x - x1, y - y1])
                             break
 
@@ -185,9 +202,7 @@ class ParticleFilter():
             #update particle's weight
             self.samples[n].weight = round(np.mean(distance), 2)
 
-        #resampling the particles to make the state converge
-        self.resampling()
-
+        #resampling the partinew_sample
     def pgmMap_read(self, filename):
         """  This function reads Portable GrayMap (PGM) image files and returns
         a numpy array. Image needs to have P2 or P5 header number.
@@ -215,11 +230,15 @@ class ParticleFilter():
     description: generate uniform random sample by numpy.ramdom.uniform and assign to each particle
     '''
     def generate_random_sample(self):
-        rand_num_w = np.random.uniform(0 - (self.map.globalFrame_origin_in_in_mapScale_ref_map[0]/self.map.scale), self.map.actual_width - (self.map.globalFrame_origin_in_in_mapScale_ref_map[0]/self.map.scale), len(self.samples))
-        rand_num_h = np.random.uniform(0 - (self.map.globalFrame_origin_in_in_mapScale_ref_map[1]/self.map.scale), self.map.actual_height - (self.map.globalFrame_origin_in_in_mapScale_ref_map[1]/self.map.scale), len(self.samples))
+        rand_num_w = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), self.map.actual_width - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), len(self.samples))
+        rand_num_h = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), self.map.actual_height - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), len(self.samples))
+        print(self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale)
+        print(self.map.actual_width)
+        
         for n in range(0,len(self.samples)):
             self.samples[n].state[0] = rand_num_w[n]
             self.samples[n].state[1] = rand_num_h[n]
+
 
     def convert_rawLidarData_to_pointCloud(self):
         ref = np.linspace(0, self.lidar.detection_range, self.lidar.N_sample, False)
@@ -246,17 +265,22 @@ class ParticleFilter():
         norm_weight = np.array(weight)/total_weight
         print(norm_weight)
 
-        current_sample = [self.samples[n] for n in range(len(self.samples)) if norm_weight[n] > 0.5]
+        current_sample = [self.samples[n] for n in range(len(self.samples)) if norm_weight[n] < 0.03]
+        print([self.samples[n].weight for n in range(len(self.samples)) if norm_weight[n] > 0.01])
+        print("n sample:", len(current_sample))
         buffer = 0.0
         cumulative_weight = []
 
         for sample in current_sample:
             buffer += sample.weight
             cumulative_weight.append(buffer)
+        
+        print("cumulative weight: ", cumulative_weight)
 
         for n in range(len(self.samples) - len(current_sample)):
-            idx = bisect.bisect_left(cumulative_weight, np.random.uniform(0, 1))
+            idx = bisect.bisect_left(cumulative_weight, np.random.uniform(0, max(cumulative_weight)))
             new_sample = Particle()
+            print("idx: ", idx)
             new_sample.state[0] = current_sample[idx].state[0]
             new_sample.state[1] = current_sample[idx].state[1]
             new_sample.state[2] = self.robot_state[2]

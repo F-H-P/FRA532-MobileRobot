@@ -5,6 +5,7 @@ from rclpy.node import Node
 
 import numpy as np
 from sensor_msgs.msg import LaserScan
+import time
 
 class LaserSub(Node):
     def __init__(self):
@@ -14,9 +15,14 @@ class LaserSub(Node):
         self.start_angle = 0.0
         self.end_angle = 0.0
         self.data = 0.0
+        self.timestamp = 0.0
 
 
     def laserScan_callback(self, msg):
+        execution_time = time.time()- self.timestamp
+        self.timestamp = time.time()
+        self.get_logger().info(str(execution_time))
+        self.get_logger().info(str("------------------------------------------------------------"))
         self.start_angle = msg.angle_min
         self.end_angle = msg.angle_max
         self.data = np.array(msg.ranges)
