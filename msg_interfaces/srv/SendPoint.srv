@@ -1,0 +1,5 @@
+std_msgs/Float64 start_x
+std_msgs/Float64 start_y
+std_msgs/Float64 goal_x
+std_msgs/Float64 goal_y
+---

@@ -5,7 +5,6 @@ import yaml
 from yaml.loader import SafeLoader
 import matplotlib.pyplot as plt
 from localization.icp import iterative_closest_point
-from localization.icp import fit_p_to_q
 import bisect
 
 '''
@@ -21,6 +20,7 @@ class Particle():
     def __init__(self):
         self.state = np.array([0.0, 0.0, 0.0])
         self.weight = 0.0
+        self.red_flag = 0
 
 '''
 Lidar() 
@@ -75,8 +75,8 @@ class Map():
         self.norm_pgm_data = 0
         
         self.map_origin = np.array([0, 0])
-        self.odom_in_map_scale_ref_map_origin = np.array([0.0, 0.0])
-        self.map_origin_to_odom = np.array([2.02*20, 0.51*20])
+        self.odom_in_map_scale_ref_map_origin = np.array([0.0, 0.0]) ##map origin in this case is image staring index
+        self.map_origin_to_odom = np.array([-0.5 * 20, -0.61 * 20])
         
         self.scale = 0.0
         self.actual_width = 0.0
@@ -139,7 +139,7 @@ class ParticleFilter():
         self.target_point_clouds = np.zeros([self.lidar.N_sample, 2])
         
         #initilize robot state
-        self.robot_state = np.zeros(3, dtype=float)
+        self.robot_state = np.zeros(6, dtype=float)
         if initial_state != None:
             self.robot_state = initial_state
 
@@ -158,49 +158,65 @@ class ParticleFilter():
     4. resampling
     '''
     def localize(self):
+        plt.plot(0, 0, "go", markersize = 10)
+        plt.scatter(self.target_point_clouds.T[0], self.target_point_clouds.T[1])
+        plt.show()
+        
         for n in range(len(self.samples)):
             print("sample {}".format(n))
             # robot position w.r.t. global frame
             robotPosition = np.array([self.samples[n].state[0], self.samples[n].state[1]])
-            print(robotPosition)
             # change from real scale to map scale 
             robotPosition_in_mapScale = robotPosition*self.map.scale
-            print(robotPosition_in_mapScale)
             # change the reference frame from global frame to map frame
-            robotPosition_in_mapScale_ref_map_frame = self.map.odom_in_map_scale_ref_map_origin + robotPosition_in_mapScale
-            print(robotPosition_in_mapScale_ref_map_frame)
+            robotPosition_in_mapScale_ref_map_frame = np.array([0.0, 0.0])
+            robotPosition_in_mapScale_ref_map_frame[0] = self.map.odom_in_map_scale_ref_map_origin[0] + robotPosition_in_mapScale[0]
+            robotPosition_in_mapScale_ref_map_frame[1] = self.map.odom_in_map_scale_ref_map_origin[1] - robotPosition_in_mapScale[1]
             
             #simulate the data of the lidar
             data = []
             x1, y1 = robotPosition_in_mapScale_ref_map_frame[0], robotPosition_in_mapScale_ref_map_frame[1]
             for angle in np.linspace(0, self.lidar.detection_range, self.lidar.N_sample, False):
                 x2, y2 = (x1 + self.lidar.max_range*np.cos(self.samples[n].state[2] + angle)*self.map.scale), (y1 - self.lidar.max_range*np.sin(self.samples[n].state[2] + angle)*self.map.scale)
+                data.append([0.0, 0.0])
                 for k in range(0, self.lidar.sample_per_angle):
                     i = k/self.lidar.sample_per_angle
                     x = int(x2 * i + x1 * (1 - i)) #column
                     y = int(y2 * i + y1 * (1 - i)) #row
                     if 0 < x < self.map.width and 0 < y < self.map.height:
                         if self.map.norm_pgm_data[y][x] < 0.65: ## y is row and x is col
-                            data.append([x - x1, y - y1])
+                            data.pop()
+                            data.append([x - x1, -1*(y - y1)])
                             break
 
             #test first
-            lidar_data = np.array(data).T
-            print(lidar_data.shape)
+            
+            real_data, sim_data = self.preprocessLidarData(self.target_point_clouds, data)
+
+            # print("number of sim data", len(sim_data))
+            # print("number of real data", len(real_data))
+            
+            lidar_data = np.array(sim_data).T
             # plt.imshow(self.map.norm_pgm_data, cmap="gray")
-            plt.plot(0, 0, "go", markersize = 10)
-            plt.scatter(lidar_data[0], lidar_data[1])
-            plt.show()
+            # plt.plot(0, 0, "go", markersize = 10)
+            # plt.scatter(lidar_data[0], lidar_data[1])
+            # plt.scatter(self.target_point_clouds.T[0], self.target_point_clouds.T[1])
+            # plt.show()
+
 
             low_x = np.min(lidar_data[0])
             low_y = np.min(lidar_data[1])
             high_x = np.max(lidar_data[0])
             high_y = np.max(lidar_data[1])
             #lidar point matching
-            T, distance, p_new = iterative_closest_point(np.array(data), self.target_point_clouds, low_x, high_x, low_y, high_y, 5, 0.001)
+            T, R_hat, t_hat, distance, p_new = iterative_closest_point(np.array(sim_data), real_data, low_x, high_x, low_y, high_y, 10, 0.001)
             
             #update particle's weight
-            self.samples[n].weight = round(np.mean(distance), 2)
+            euclidean_dist = np.sqrt(t_hat[0]**2 + t_hat[1]**2)
+            self.samples[n].weight = euclidean_dist
+
+            print("t_hat: ", t_hat)
+            print("weight: ", euclidean_dist)
 
         #resampling the partinew_sample
     def pgmMap_read(self, filename):
@@ -230,14 +246,27 @@ class ParticleFilter():
     description: generate uniform random sample by numpy.ramdom.uniform and assign to each particle
     '''
     def generate_random_sample(self):
-        rand_num_w = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), self.map.actual_width - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), len(self.samples))
-        rand_num_h = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), self.map.actual_height - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), len(self.samples))
-        print(self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale)
-        print(self.map.actual_width)
+        # rand_num_w = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), self.map.actual_width - (self.map.odom_in_map_scale_ref_map_origin[0]/self.map.scale), len(self.samples))
+        # rand_num_h = np.random.uniform(0 - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), self.map.actual_height - (self.map.odom_in_map_scale_ref_map_origin[1]/self.map.scale), len(self.samples))
+        rand_num_w = np.random.uniform(0, 2.44, len(self.samples))
+        rand_num_h = np.random.uniform(0, 1.22, len(self.samples))
+        rand_num_dTheta = np.random.uniform(0, 2*np.pi, len(self.samples))
         
         for n in range(0,len(self.samples)):
             self.samples[n].state[0] = rand_num_w[n]
             self.samples[n].state[1] = rand_num_h[n]
+            self.samples[n].state[2] = rand_num_dTheta[n]
+    
+    def generate_random_sample_with_known_state(self, state, xy_tol, theta_tol):
+        rand_num_w = np.random.uniform(state[0] - xy_tol, state[0] + xy_tol, len(self.samples))
+        rand_num_h = np.random.uniform(state[1] - xy_tol, state[1] + xy_tol, len(self.samples))
+        rand_num_dTheta = np.random.uniform(-1*theta_tol, theta_tol, len(self.samples))
+        
+        for n in range(0,len(self.samples)):
+            self.samples[n].state[0] = rand_num_w[n]
+            self.samples[n].state[1] = rand_num_h[n]
+            self.samples[n].state[2] = rand_num_dTheta[n]
+
 
 
     def convert_rawLidarData_to_pointCloud(self):
@@ -245,10 +274,10 @@ class ParticleFilter():
         idx = 0
         im = len(self.raw_lidar_data)/self.lidar.N_sample #iteration multiplier
         for idx in range(len(ref)):
-            # self.target_point_clouds[idx][0] =(-1 * self.raw_lidar_data[int(im)*idx] * np.sin(self.robot_state[2] - ref[idx]))*self.map.scale
-            # self.target_point_clouds[idx][1] =(self.raw_lidar_data[int(im)*idx] * np.cos(self.robot_state[2] - ref[idx]))*self.map.scale
-            self.target_point_clouds[idx][0] =(self.raw_lidar_data[int(im)*idx] * np.cos(self.robot_state[2] + ref[idx]))*self.map.scale
-            self.target_point_clouds[idx][1] =(self.raw_lidar_data[int(im)*idx] * np.sin(self.robot_state[2] + ref[idx]))*self.map.scale
+            # self.target_point_clouds[idx][0] =(-1 * self.raw_lidar_data[int(im)*idx] * np.sin(self.robot_state[3] - ref[idx]))*self.map.scale
+            # self.target_point_clouds[idx][1] =(self.raw_lidar_data[int(im)*idx] * np.cos(self.robot_state[3] - ref[idx]))*self.map.scale
+            self.target_point_clouds[idx][0] =(self.raw_lidar_data[int(im)*idx] * np.cos(self.robot_state[3] + ref[idx]))*self.map.scale
+            self.target_point_clouds[idx][1] =(self.raw_lidar_data[int(im)*idx] * np.sin(self.robot_state[3] + ref[idx]))*self.map.scale
 
     '''
     resampling() function
@@ -263,11 +292,10 @@ class ParticleFilter():
         weight = [self.samples[n].weight for n in range(len(self.samples))]
         total_weight = sum(weight)
         norm_weight = np.array(weight)/total_weight
-        print(norm_weight)
+        print("particles norm weight: ", norm_weight)
 
-        current_sample = [self.samples[n] for n in range(len(self.samples)) if norm_weight[n] < 0.03]
-        print([self.samples[n].weight for n in range(len(self.samples)) if norm_weight[n] > 0.01])
-        print("n sample:", len(current_sample))
+        current_sample = [self.samples[n] for n in range(len(self.samples)) if norm_weight[n] < 0.03 and self.samples[n].red_flag == 0]
+        print("number of sample:", len(current_sample))
         buffer = 0.0
         cumulative_weight = []
 
@@ -275,7 +303,9 @@ class ParticleFilter():
             buffer += sample.weight
             cumulative_weight.append(buffer)
         
-        print("cumulative weight: ", cumulative_weight)
+        print("particles cumulative weight: ", cumulative_weight)
+
+        rand_num_dTheta = np.random.uniform(0, 2*np.pi, len(self.samples))
 
         for n in range(len(self.samples) - len(current_sample)):
             idx = bisect.bisect_left(cumulative_weight, np.random.uniform(0, max(cumulative_weight)))
@@ -283,14 +313,106 @@ class ParticleFilter():
             print("idx: ", idx)
             new_sample.state[0] = current_sample[idx].state[0]
             new_sample.state[1] = current_sample[idx].state[1]
-            new_sample.state[2] = self.robot_state[2]
+            new_sample.state[2] = current_sample[idx].state[2] + rand_num_dTheta[n]
 
             current_sample.append(new_sample)
 
         self.samples = current_sample
+    
+    def resampling2(self, target_num):
+        weight = [self.samples[n].weight for n in range(len(self.samples))]
+        total_weight = sum(weight)
+        norm_weight = np.array(weight)/total_weight
+        print("particles norm weight: ", norm_weight)
+        print("total particles norm weight: ", sum(norm_weight))
+
+        buff = list(set(np.sort(norm_weight)))
+        min_idx = [0 for i in range(target_num)]
+        min_idx[0] = norm_weight.tolist().index(buff[0])
+        min_idx[1] = norm_weight.tolist().index(buff[1])
+
+        current_sample = [self.samples[n] for n in range(len(self.samples)) if norm_weight[n] < 0.03 and self.samples[n].red_flag == 0]
+        new_sample_n = len(self.samples) - len(current_sample)
+
+        
+        for i in range(target_num):
+            rand_num_w = np.random.uniform(self.samples[min_idx[i]].state[0] - 0.05, self.samples[min_idx[i]].state[0] + 0.05, int(new_sample_n/target_num))
+            rand_num_h = np.random.uniform(self.samples[min_idx[i]].state[1] - 0.05, self.samples[min_idx[i]].state[1] + 0.05, int(new_sample_n/target_num))
+            rand_num_dTheta = np.random.uniform(-1*0.1, 0.1, int(new_sample_n/target_num))
+        
+            for n in range(int(new_sample_n/target_num)):
+                new_sample = Particle()
+                new_sample.state[0] = rand_num_w[n]
+                new_sample.state[1] = rand_num_h[n]
+                new_sample.state[2] = self.samples[min_idx[i]].state[2] + rand_num_dTheta[n]
+
+                current_sample.append(new_sample)
+
+        print(len(current_sample))
+        self.samples = current_sample
 
 
     def update_state(self, update_val):
+        self.robot_state += update_val
         for n in range(len(self.samples)):
-            self.samples[n].state += update_val
+            self.samples[n].state[0] += update_val[0]*np.cos(self.samples[n].state[2])
+            self.samples[n].state[1] += update_val[0]*np.sin(self.samples[n].state[2])
+            self.samples[n].state[2] += update_val[2]
+
+            if(self.samples[n].state[0] < 0 or self.samples[n].state[0] > 2.44 or self.samples[n].state[1] < 0 or self.samples[n].state[1] > 1.22):
+                self.samples[n].red_flag = 1
+
+    def preprocessLidarData(self, real_data, sim_data):
+        zero1 = np.where(real_data == [0.0,0.0])
+        zero2 = np.where(np.array(sim_data) == [0.0, 0.0])
+
+        # zero_idx = []
+        # total_length = len(zero1[0]) + len(zero2[0])
+        # for i in range(total_length):
+        #     if i < len(zero1[0]):
+        #         zero_idx.append(zero1[0][i])
+        #     else:
+        #         zero_idx.append(zero2[0][total_length - i - 1])
+
+        # zero_idx = list(set(zero_idx))
+
+        # # print("zero idx", zero_idx)
+        # print("drop out member", len(zero_idx))
+
+        # real_data = real_data.tolist()
+
+        # for n, count in enumerate(zero_idx):
+        #     real_data.pop(n - count)
+        #     sim_data.pop(n - count)
+
+        zero_1idx = []
+        zero_2idx = []
+
+        zero_1idx = list(set(list(zero1[0])))
+        zero_2idx = list(set(list(zero2[0])))
+
+        print("drop out member1: ", zero_1idx)
+        print("drop out member1_n: ", len(zero_1idx))
+
+        print("drop out member2: ", zero_2idx)
+        print("drop out member2_n: ", len(zero_2idx))
+
+        zero_1idx.sort(reverse=True)
+        zero_2idx.sort(reverse=True)
+
+        real_data = real_data.tolist()
+
+        for n in zero_1idx:
+            real_data.pop(n)
+
+        for n in zero_2idx:
+            sim_data.pop(n)
+
+        real_data = np.array(real_data)
+
+        print("number of detected data", len(real_data))
+        print("number of simulated data", len(sim_data))
+        
+        return real_data, sim_data
+            
 

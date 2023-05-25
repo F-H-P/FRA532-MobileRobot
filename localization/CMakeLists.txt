@@ -29,6 +29,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/ekf_node.py
   scripts/lidar_sub.py
+  scripts/LocalizationNode.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

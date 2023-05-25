@@ -64,9 +64,9 @@ def iterative_closest_point(p, q, low_x, low_y, high_x, high_y, max_iter = 50, t
 
 	prev_error = 0
 
-	plt.scatter(p[:, 0], p[:, 1], marker = 'o')
-	plt.scatter(q[:, 0], q[:, 1], marker = '^')
-	plt.show()
+	# plt.scatter(p[:, 0], p[:, 1], marker = 'o')
+	# plt.scatter(q[:, 0], q[:, 1], marker = '^')
+	# plt.show()
 
 	for i in range(max_iter):
 
@@ -103,4 +103,9 @@ def iterative_closest_point(p, q, low_x, low_y, high_x, high_y, max_iter = 50, t
 
 	p_new = p_hom.T[:,:d]
 
-	return T, distances, p_new
+	# if round(np.mean(distances), 2) > 1.5:
+	# plt.scatter(p[:, 0], p[:, 1], marker = 'o')
+	# plt.scatter(q[:, 0], q[:, 1], marker = '^')
+	# plt.show()
+
+	return T, R_hat, t_hat, distances, p_new

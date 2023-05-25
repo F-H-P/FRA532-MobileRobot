@@ -1,37 +1,20 @@
-#!/usr/bin/python3
-
-import rclpy
-from rclpy.node import Node
-
 import numpy as np
-from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu
 
-class EKFNode(Node):
-    def __init__(self):
-        super().__init__('ekf_node')
-        self.execution_rate = 2 #Hz
-        self.dt = 1/self.execution_rate
-        self.timer = self.create_timer(self.dt, self.timer_callback)
-
-        self.imu_input = self.create_subscription(Odometry, '/imu', self.imu_callback, 10)
+class EKFNode():
+    def __init__(self, x0, y0, x_dot0, y_dot0, theta_dot0, theta, w, v, dt):
+        self.dt = dt
         
+        #EKF variable
         #robot geomatric parameters
         # #turtlebot 3 burger
         self.d = 0.066 #wheel diameter
         self.l = 0.160 #wheel separation
 
-        #megarover
-        # self.d = 0.152
-        # self.l = 0.28398
-        
         #EKF parameter initilization
         self.robot_state = np.array([0, 0, 0, 0 ,0 ,0], dtype=float).T
         self.robot_prev_state = np.array([0, 0, 0, 0 ,0 ,0], dtype=float).T
         self.Q = np.identity(6)
         self.R = np.identity(3)
-
-        self.stateInit(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0001)
 
         self.A = np.identity(6)
         self.B = np.array([[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]], dtype=float)
@@ -39,32 +22,9 @@ class EKFNode(Node):
         self.D = np.array([[0, 0], [0, 0], [0, 0]], dtype=float)
         self.u = np.array([0, 0], dtype=float).T
         self.P = np.identity(6)
+        self.z = np.array([0.0, 0.0, 0.0]).T
 
-        #additional variables'
-        self.prev_x_r_dot = 0
-        self.prev_x = 0
-        self.actual_pose_x = 0
-        self.z = np.array([0, 0, 0], dtype=float).T
-        self.timestamp = 0
-    def timer_callback(self):
-        #sudo measurement
-        v_p = (self.actual_pose_x - self.prev_x)/self.dt
-        self.z[0] = (v_p - self.prev_x_r_dot)/self.dt
-        self.z[1] = 0.0
-        # print("dx", (self.actual_pose_x- self.prev_x)/self.dt)
-        # print("dv", (v_p - self.prev_x_r_dot)/self.dt)
-
-        self.prev_x = self.actual_pose_x
-        self.prev_x_r_dot = v_p
-
-        self.get_logger().info(str(self.u))
-
-        estimate_output = self.EKF(self.robot_state, self.robot_prev_state, self.z, self.u)
-
-        self.robot_prev_state = self.robot_state
-        self.robot_state, self.P = estimate_output
-
-        self.get_logger().info(str(self.robot_state))
+        self.stateInit(x0, y0, x_dot0, y_dot0, theta_dot0, theta, w, v)
     
     """
     Extended Kalman Filter Function
@@ -73,23 +33,23 @@ class EKFNode(Node):
             u (sysyem input)
     output: x_e (estimated next state)
     """
-    def EKF(self, x, x_1, y, u):
+    def estimate(self, x, x_1, y, u):
         #predict
         x_p = self.DiffdriveStateTransition(x, u)
-        # y_p = self.IMUmeasurement(x_1, u)
-        # P_p = self.A @ self.P @ self.A.T + self.Q
+        y_p = self.IMUmeasurement(x_1, u)
+        P_p = self.A @ self.P @ self.A.T + self.Q
 
         # #update
-        # K = P_p @ self.C.T @ np.linalg.inv(self.C @ P_p @ self.C.T + self.R)
-        # x_e = x_p + K @ (y - y_p)
+        K = P_p @ self.C.T @ np.linalg.inv(self.C @ P_p @ self.C.T + self.R)
+        x_e = x_p + K @ (y - y_p)
 
-        # print("K", K)
+        print("measurement_error: ", y - y_p)
+        
+        P_e = (np.identity(6) - K @ self.C) @ P_p
 
-        # P_e = (np.identity(6) - K @ self.C) @ P_p
+        return x_e, P_e
 
-        # return x_e, P_e
-
-        return x_p, np.identity(6)
+        # return x_p, np.identity(6)
 
     """
     Differential drive state transition function
@@ -144,24 +104,3 @@ class EKFNode(Node):
         self.robot_state[5] = theta_dot0
         self.Q = w*np.identity(6)
         self.R = v*np.identity(3)
-
-    def imu_callback(self, msg):
-        x_r_dot = msg.twist.twist.linear.x
-        theta_r_dot = msg.twist.twist.angular.z
-
-        self.u[0] = (2/self.d)*x_r_dot + (-1 * self.l/self.d)*theta_r_dot
-        self.u[1] = (2/self.d)*x_r_dot + (self.l/self.d)*theta_r_dot
-
-        self.actual_pose_x = msg.pose.pose.position.x
-        self.z[2] = theta_r_dot
-    
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = EKFNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-
-if __name__=='__main__':
-    main()
