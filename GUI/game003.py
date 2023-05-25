@@ -15,12 +15,38 @@ from kivy.uix.progressbar import ProgressBar
 from kivy.uix.widget import Widget
 
 import paho.mqtt.client as mqtt
-# from kivy.lang.builder import Builder
-# from kivymd.app import MDApp
-# Pin
 
+from typing import List
+import rclpy
+from rclpy.context import Context
+from rclpy.node import Node
+from msg_interface.srv import CommandGUI
+from rclpy.parameter import Parameter
+from std_msgs.msg import String
+from std_msgs.msg import Int64
+
+import subprocess
+
+def start_ros_node():
+    serviceServer = ['python3', '/home/pinhulk/mobilerobot/project/src/mbrproject001/scripts/serviceNode001.py']
+    process = subprocess.Popen(serviceServer)
 
 value = 100
+
+
+class sendCommand(Node):
+    def __init__(self):
+        super().__init__('sendCommand')
+        self.command_client = self.create_client(CommandGUI,"/command_state")
+        self.send_command = CommandGUI.Request()
+        self.com = String()
+
+    def send_request(self,com):
+        print("send_request")
+        self.send_command.command.data = com
+        self.future = self.command_client.call_async(self.send_command)
+        rclpy.spin_until_future_complete(self, self.future)
+        return self.future.result()
 
 class openingScreen(Screen):
     def __init__(self, **kw):
@@ -33,7 +59,6 @@ class openingScreen(Screen):
         Window.bind(on_mouse_down=self.on_click)
 
     def on_click(self, window, mouse_x, mouse_y, *args):
-        # create pop-up box with message
         Window.unbind(on_mouse_down=self.on_click)
         self.clear_widgets()
         print("window's clicked")
@@ -53,6 +78,7 @@ class popup1_Screen(Screen):
 
     def connect_callback(self,instance):
         gameMQ.mq.publish("project01/connect","connect")
+        gameMQ.sendCom.send_request("connect")
         self.clear_widgets()
         self.popup.dismiss()
         print("connect button's clicked")
@@ -63,10 +89,6 @@ class connectingScreen(Screen):
         Text = "[size=60]Connecting...[/size]"
         self.connect = Label(text=Text, markup=True)
         self.add_widget(self.connect)
-    #     Clock.schedule_once(self.change_screen, 3)  # Change screen after 5 seconds
-    
-    # def change_screen(self, dt):
-    #     self.manager.current = 'mainS'
 
 class connectFailed(Screen):
     def on_enter(self):
@@ -87,6 +109,8 @@ class connectFailed(Screen):
 
 class mainScreen(Screen):
     def on_enter(self):
+        with open('/home/pinhulk/mobilerobot/project/src/mbrproject001/files/goalFlag.txt','w') as file:
+                file.write(str(0))
         print('this is the mainscreen of the game')
         mainLayout = FloatLayout()
         Text = "[size=20]A HENCHMAN's MISSION:[/size]\n[size=40]STOP THE RESCUE ROBOT![/size]"
@@ -139,33 +163,12 @@ class popup_playmode(Screen):
         self.popup.dismiss()
         gameMQ.mq.publish("project01/playmode","static")
         self.manager.current = 'l1sB'
-        # print('u r playing in STATIC MODE')
-        # self.clear_widgets()
-        # self.popup.dismiss()
-        # Text = "[size=60]LEVEL 1[/size]\n[size=11](static)[/size]"
-        # self.connect = Label(text=Text, markup=True)
-        # self.add_widget(self.connect)
-        
-        # Clock.schedule_once(self.static_game, 3)  # Change screen after 5 seconds
 
     def dynamic_callback(self, instance):
         self.clear_widgets()
         self.popup.dismiss()
         gameMQ.mq.publish("project01/playmode","dynamic")
         self.manager.current = 'l1dB'
-        # print('u r plaing in DYNAMIC MODE')
-        # Text = "[size=60]LEVEL 1[/size]\n[size=11](dynamic)[/size]"
-        # self.connect = Label(text=Text, markup=True)
-        # self.add_widget(self.connect)
-        # Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
-    
-    # def static_game(self, dt):
-    #     print('go to game LEVEL 1 static')
-    #     self.manager.current = 'L1S'
-
-    # def dynamic_game(self, dt):
-    #     print('go to game LEVEL 1 dynamic')
-    #     self.manager.current = 'L1D'
 
     def closePop(self, instance):
         print('pop-up closed')
@@ -242,11 +245,11 @@ class L1_static(Screen):
 
     def on_leave(self):
         if self.clock_event:  # if clock event is scheduled
-            self.clock_event.cancel()  # cancel it
+            Clock.unschedule(self.clock_event)  # cancel it
         self.clock_event = None 
         
     def lowerStamina(self,dt):
-        self.moriaStamina.value = self.moriaStamina.value - 30
+        self.moriaStamina.value = self.moriaStamina.value - 10
         print('moria stamina = ', self.moriaStamina.value)
         if self.moriaStamina.value <= 0:
             print('YOU WIN!!')
@@ -262,6 +265,7 @@ class L1_static(Screen):
 
     def pause_callback(self, *args):
         print('pause')
+        gameMQ.sendCom.send_request("pause")
         if self.clock_event:
             Clock.unschedule(self.clock_event)
             self.clock_event = None
@@ -278,6 +282,7 @@ class L1_static(Screen):
     
     def resume_callback(self, instance):
         print('resume dai jaaa')
+        gameMQ.sendCom.send_request("resume")
         self.pausepopup.dismiss()
         if not self.clock_event:
             self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
@@ -298,6 +303,8 @@ class L1_static(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.pausepopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -335,6 +342,8 @@ class vicpop(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.vicpopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -390,7 +399,6 @@ class l1_canvasL(Widget):
 
     def stop(self,instance):
         Clock.unschedule(self.clock_event)
-        # if(self.b == )
         gameMQ.mq.publish("project01/leftBut",self.angle)
 
 class l1_canvasR(Widget):
@@ -443,14 +451,6 @@ class L1_dynamic(Screen):
     def on_enter(self):
         print('Level 1 Dynamic mode game start')
         l1_layout = FloatLayout()
-        # with self.canvas:
-        #     Rectangle(size = (488,420),pos = (150,120)) # size /10 *4
-        #     Color(0,1,0,0.8)
-        #     Rectangle(size = (192,8),pos = (202,264))
-        #     Rectangle(size = (192,8),pos = (406,404))
-        #     Color(1,0.8,0.45,1)
-        #     Ellipse(size=(32,32),pos=(186,252))
-        #     Ellipse(size=(32,32),pos=(582,392))
 
         l1Label = Label(text = 'LEVEL1', font_size = 30, pos_hint = {'x':0,'y':0.48})
 
@@ -461,27 +461,14 @@ class L1_dynamic(Screen):
         self.moriaStamina.value = 100
         self.playerStamina.value = 100
 
-        # leftaimming = Button(text = 'aim Left',size_hint=(None,None),size=(100,50),pos = (150,50))
-        # rightaimming = Button(text = 'aim Right',size_hint=(None,None),size=(100,50),pos = (540,50))
-        # leftaimming.bind(state = self.leftaimCB)
-        # rightaimming.bind(state = self.rightaimCB)
-
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
-
-        # self.goal_var = 0
-        # print(self.goal_var)
-        # testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
-        # testBut.bind(on_release = self.reachgoal)
-        # l1_layout.add_widget(testBut)
 
         l1_layout.add_widget(self.moriaStamina)
         l1_layout.add_widget(self.playerStamina)
         l1_layout.add_widget(playerLabel)
         l1_layout.add_widget(moriaLabel)
         l1_layout.add_widget(pauseBut)
-        # l1_layout.add_widget(leftaimming)
-        # l1_layout.add_widget(rightaimming)
         l1_layout.add_widget(l1Label)
         l1_layout.add_widget(l1_canvasL())
         l1_layout.add_widget(l1_canvasR())
@@ -493,8 +480,12 @@ class L1_dynamic(Screen):
 
     def on_leave(self):
         if self.clock_event:  # if clock event is scheduled
-            self.clock_event.cancel()  # cancel it
-        self.clock_event = None 
+            Clock.unschedule(self.clock_event)  # cancel it
+        self.clock_event = None
+
+        if self.clock_event2:  # if clock event is scheduled
+            Clock.unschedule(self.clock_event2)  # cancel it
+        self.clock_event2 = None 
 
     def lowerStamina(self,dt):
         self.moriaStamina.value = self.moriaStamina.value - 10
@@ -511,21 +502,7 @@ class L1_dynamic(Screen):
         self.playerStamina.value = value
         if self.playerStamina.value <= 0:
             self.playerStamina.value = 0
-
-    # def reachgoal(self,instance):
-    #     print(self.goal_var)
-    #     self.goal_var = 1
-    #     if self.goal_var == 1:
-    #         self.clear_widgets()
-    #         if self.clock_event:
-    #             Clock.unschedule(self.clock_event)
-    #             self.clock_event = None
-    #         self.canvas.clear()
-    #         Text = "[size=60]LEVEL 2[/size]\n[size=11](dynamic)[/size]"
-    #         self.connect = Label(text=Text, markup=True)
-    #         self.add_widget(self.connect)
-    #         self.goal_var = 0
-    #         Clock.schedule_once(self.dynamic_game, 3)  # Change screen after 5 seconds
+            gameMQ.mq.publish("project01/stamina","out")
 
     def dynamic_game(self,dt):
         print("L1 ending")
@@ -534,6 +511,7 @@ class L1_dynamic(Screen):
 
     def pause_callback(self, *args):
         print('pause')
+        gameMQ.sendCom.send_request("pause")
         if self.clock_event:
             Clock.unschedule(self.clock_event)
             self.clock_event = None
@@ -550,6 +528,7 @@ class L1_dynamic(Screen):
     
     def resume_callback(self, instance):
         print('resume dai jaaa')
+        gameMQ.sendCom.send_request("resume")
         self.pausepopup.dismiss()
         if not self.clock_event:
             self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
@@ -570,6 +549,8 @@ class L1_dynamic(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.pausepopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -577,44 +558,6 @@ class L1_dynamic(Screen):
     def cancleCB(self,instance):
         print('cancle')
         self.homepopup.dismiss()
-
-    # def leftaimCB(self,button,value):
-    #     print('aimming left')
-    #     print('player stamina = ', self.playerStamina.value)
-
-    #     if self.playerStamina.value <= 0:
-    #         print("player's stamina is out!!")
-    #     else:
-    #         if value == 'down':
-    #             # Code to be executed when the button is pressed
-    #             print("left DOWN!")
-    #         elif value == 'normal':
-    #             # Code to be executed when the button is released
-    #             self.playerStamina.value = self.playerStamina.value - 10
-    #             print("left UP!")
-    #         elif value == 'disabled':
-    #             # Code to be executed when the button is disabled
-    #             print("left disabled!")
-
-
-    # def rightaimCB(self,button,value):
-    #     print('aimming right') 
-    #     print('player stamina = ', self.playerStamina.value)
-
-    #     if self.playerStamina.value <= 0:
-    #         print("player's stamina is out!!")
-    #     else:
-    #         if value == 'down':
-    #             # Code to be executed when the button is pressed
-    #             print("right DOWN!")
-    #         elif value == 'normal':
-    #             # Code to be executed when the button is released
-    #             self.playerStamina.value = self.playerStamina.value - 10
-    #             print("right UP!")
-    #         elif value == 'disabled':
-    #             # Code to be executed when the button is disabled
-    #             print("right disabled!")
-
 
 class L2_static(Screen):
     def on_enter(self):
@@ -633,7 +576,6 @@ class L2_static(Screen):
             Ellipse(size=(32,32),pos=(522,288))
             Ellipse(size=(32,32),pos=(306,400))
             Ellipse(size=(32,32),pos=(450,400))
-            # Ellipse(size=(32,32),pos=(150,120))
 
         l2Label = Label(text = 'LEVEL2', font_size = 30, pos_hint = {'x':0,'y':0.48})
 
@@ -644,37 +586,36 @@ class L2_static(Screen):
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
 
-        self.goal_var = 0
-        print(self.goal_var)
-        testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
-        testBut.bind(on_release = self.reachgoal)
-        l2_layout.add_widget(testBut)
-
         l2_layout.add_widget(self.moriaStamina)
         l2_layout.add_widget(moriaLabel)
         l2_layout.add_widget(pauseBut)
         l2_layout.add_widget(l2Label)
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
+        self.clock_event2 = Clock.schedule_interval(self.checkgoal, 0.01)
 
 
         self.add_widget(l2_layout)
-
-    def reachgoal(self,instance):
-        print(self.goal_var)
-        self.goal_var = 1
-        if self.goal_var == 1:
+    
+    def checkgoal(self,dt):
+        with open('/home/pinhulk/mobilerobot/project/src/mbrproject001/files/goalFlag.txt','r') as file:
+            self.goalflag = file.read()
+            print("goalflag",type(self.goalflag))
+        if self.goalflag == "1":
             self.clear_widgets()
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
                 self.clock_event = None
-            self.goal_var = 0
-        print("L2 ending --> player lose")
-        self.manager.current = 'loserpop'
-
+            if self.clock_event2:
+                Clock.unschedule(self.clock_event2)
+                self.clock_event = None
+            print("L2 ending --> player lose")
+            self.manager.current = 'loserpop'
+        else:
+            print("00000")
 
     def lowerStamina(self,dt):
-        self.moriaStamina.value = self.moriaStamina.value - 30
+        self.moriaStamina.value = self.moriaStamina.value - 10
         print('moria stamina = ', self.moriaStamina.value)
         if self.moriaStamina.value <= 0:
             print('YOU WIN!!')
@@ -686,6 +627,7 @@ class L2_static(Screen):
 
     def pause_callback(self, *args):
         print('pause')
+        gameMQ.sendCom.send_request("pause")
         if self.clock_event:
             Clock.unschedule(self.clock_event)
             self.clock_event = None
@@ -702,6 +644,7 @@ class L2_static(Screen):
     
     def resume_callback(self, instance):
         print('resume dai jaaa')
+        gameMQ.sendCom.send_request("resume")
         self.pausepopup.dismiss()
         if not self.clock_event:
             self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
@@ -722,6 +665,8 @@ class L2_static(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.pausepopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -729,8 +674,6 @@ class L2_static(Screen):
     def cancleCB(self,instance):
         print('cancle')
         self.homepopup.dismiss()
-
-# value = 100
 
 class l2_canvas1(Widget):
     def __init__(self, **kwargs):
@@ -813,17 +756,11 @@ class L2_dynamic(Screen):
         playerLabel = Label(text = 'You',pos_hint={'x':-0.45,'y':0.44})
         self.playerStamina.value = 100
 
-        # rotateBut = Button(text = 'Trick',size_hint=(None,None),size=(100,50),pos = (350,50))
-        # rotateBut.bind(on_release = self.rotateCB)
-
         pauseBut = Button(text ='| |',font_size = 40,size_hint=(None, None), size=(50, 50),pos_hint={'x':0.82,'y':0.85})
         pauseBut.bind(on_release = self.pause_callback)
 
         self.goal_var = 0
         print(self.goal_var)
-        testBut = Button(text = 'goal', size_hint=(None,None), size=(50,30),pos_hint={'x':0.93,'y':0})
-        testBut.bind(on_release = self.reachgoal)
-        l2_layout.add_widget(testBut)
 
         l2_layout.add_widget(self.moriaStamina)
         l2_layout.add_widget(moriaLabel)
@@ -831,38 +768,44 @@ class L2_dynamic(Screen):
         l2_layout.add_widget(playerLabel)
         l2_layout.add_widget(pauseBut)
         l2_layout.add_widget(l2Label)
-        # l2_layout.add_widget(rotateBut)
 
         l2_layout.add_widget(l2_canvas1())
-        # l2_layout.remove_widget(l2_canvas1())
 
         self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
         self.clock_event2 = Clock.schedule_interval(self.playerV, 0.1)
 
         self.add_widget(l2_layout)
+        self.clock_event3 = Clock.schedule_interval(self.checkgoal, 0.01)
 
-    def reachgoal(self,instance):
-        print(self.goal_var)
-        self.goal_var = 1
-        if self.goal_var == 1:
+
+
+    def checkgoal(self,dt):
+        with open('/home/pinhulk/mobilerobot/project/src/mbrproject001/files/goalFlag.txt','r') as file:
+            self.goalflag = file.read()
+            print("goalflag",type(self.goalflag))
+        if self.goalflag == "1":
             self.clear_widgets()
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
-                # Clock.unschedule(self.clock_event2)
                 self.clock_event = None
-            self.goal_var = 0
-        print("L2 ending --> player lose")
-        self.manager.current = 'loserpop'
-
+            if self.clock_event2:
+                Clock.unschedule(self.clock_event2)
+                self.clock_event = None
+            if self.clock_event3:
+                Clock.unschedule(self.clock_event3)
+                self.clock_event = None
+            print("L2 ending --> player lose")
+            self.manager.current = 'loserpop'
+        else:
+            print("00000")
 
     def lowerStamina(self,dt):
-        self.moriaStamina.value = self.moriaStamina.value - 30
+        self.moriaStamina.value = self.moriaStamina.value - 10
         print('moria stamina = ', self.moriaStamina.value)
         if self.moriaStamina.value <= 0:
             print('YOU WIN!!')
             if self.clock_event:
                 Clock.unschedule(self.clock_event)
-                # Clock.unschedule(self.clock_event2)
                 self.clock_event = None
             self.manager.current = 'vicpop'
 
@@ -870,10 +813,12 @@ class L2_dynamic(Screen):
         self.playerStamina.value = value
         if(value <= 0):
             self.playerStamina.value = 0
+            gameMQ.mq.publish("project01/stamina","out")
 
 
     def pause_callback(self, *args):
         print('pause')
+        gameMQ.sendCom.send_request("pause")
         if self.clock_event:
             Clock.unschedule(self.clock_event)
             self.clock_event = None
@@ -899,6 +844,7 @@ class L2_dynamic(Screen):
 
     def resume_callback(self, instance):
         print('resume dai jaaa')
+        gameMQ.sendCom.send_request("resume")
         self.pausepopup.dismiss()
         if not self.clock_event:
             self.clock_event = Clock.schedule_interval(self.lowerStamina, 1.5)
@@ -919,6 +865,8 @@ class L2_dynamic(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.pausepopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -957,6 +905,8 @@ class loserPopup(Screen):
 
     def gotomain(self,instance):
         print('go to main')
+        gameMQ.sendCom.send_request("end")
+        gameMQ.mq.publish("project01/home","home")
         self.vicpopup.dismiss()
         self.homepopup.dismiss()
         self.manager.current = 'mainS'
@@ -978,7 +928,12 @@ class HMmission_stoptheRescueRobot(App):
         self.mq = mqtt.Client(client_id="", clean_session=True, userdata=None)
         self.topic = ""
         self.playload = ""
+        with open('/home/pinhulk/mobilerobot/project/src/mbrproject001/files/goalFlag.txt','w') as file:
+                file.write(str(0))
     def build(self):
+        rclpy.init()
+        self.sendCom = sendCommand()
+
         self.sm = ScreenManager()
 
         self.sm.add_widget(openingScreen(name='openS'))
@@ -1005,18 +960,24 @@ class HMmission_stoptheRescueRobot(App):
         self.mq.on_connect = self.on_connect
         self.mq.on_message = self.on_message
         self.mq.on_publish = self.on_publish
-        self.mq.connect('10.61.7.25',1883)
+        self.mq.connect('10.61.7.208',1883)
         self.mq.loop_start()
         
         self.mq.publish("iotPro/start","MQTT Start")
         self.mq.subscribe([("project01/field_status",0),("project01/prox1",0),("project01/prox2",0)],)
         return self.sm
     
+    def start_ros_node(self,*args):
+        start_ros_node()
+    
+    def on_stop(self):
+        self.sendCom.destroy_node()
+        rclpy.shutdown()
+    
     def on_connect(self,client,userdata,flags,rc):
         print("Connected "+str(rc))
 
     def on_message(self,client,userdata,message):
-        # print("message received ")
         self.topic = str(message.topic)
         self.playload = str(message.payload.decode("utf-8"))
         print("Topic: ", self.topic ,", message received: " ,self.playload)
@@ -1036,12 +997,12 @@ class HMmission_stoptheRescueRobot(App):
         if self.sm.current == 'l1sB':
             if self.topic == "project01/prox1" and self.playload == "s1":
                 print('go to l1s')
-                # Clock.unschedule()
+                self.sendCom.send_request("start_l1")
                 self.sm.current = 'L1S'
         elif self.sm.current == 'l1dB':
             if self.topic == "project01/prox1" and self.playload == "s1":
                 print('go to l1d')
-                # Clock.unschedule()
+                self.sendCom.send_request("start_l1")
                 self.sm.current = 'L1D'
         else:
             print('not in the right Screen')
@@ -1049,10 +1010,12 @@ class HMmission_stoptheRescueRobot(App):
         if self.sm.current == 'L1S':
             if self.topic == "project01/prox2" and self.playload == "s2":
                 print('go to l1s')
+                self.sendCom.send_request("start_l2")
                 self.sm.current = 'L2S'
         elif self.sm.current == 'L1D':
             if self.topic == "project01/prox2" and self.playload == "s2":
                 print('go to l1d')
+                self.sendCom.send_request("start_l2")
                 self.sm.current = 'L2D'
         else:
             print('not in the right Screen')
@@ -1061,4 +1024,3 @@ class HMmission_stoptheRescueRobot(App):
 if __name__ == '__main__':
     gameMQ = HMmission_stoptheRescueRobot()
     gameMQ.run()
-    # HMmission_stoptheRescueRobot().run()
